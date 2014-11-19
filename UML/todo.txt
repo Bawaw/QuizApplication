@@ -1,0 +1,36 @@
+
+
+Opmerkingen:
+
+* ID geven aan vraag, kan gebruikt worden als primary key 
+Is misschien ook handig om te gebruiken bij tussentabel tussen
+vraag,score en specifieke feedback
+
+* QuestionSelectionFactory, misschien ongelukkige naam, gezien het geen factory is.
+
+* Controller misschien hernoemen
+
+* Bij Evaluation, een methode maken die een object teruggeven waarin de score zit en de foute vragen
+
+* Bij Evaluation, een ArrayList bijhouden van Map.Entries, met als key, de vraag en als value, de door de user gekozen oplossing
+
+* Maken we verschil tussen standaardfeedback (feedback bij cat) en feedback bij een vraag?
+  -> Misschien best wel, wanneer we in de ui feedback koppelen aan een category, willen we enkel de "standaardfeedbacken" tte zien krijgen
+
+
+
+TODO:
+
+* Alle DBHandling tijdelijk verwijderen uit UML
+
+* score per vraag per category
+
+* standaardfeedback per category
+
+* feedback per vraag per category
+
+* klasses verder uitbreiden met hun methodes/attributen
+
+* Misschien nog enums en factories vergeten?
+
+* een answer pool maken (Misschien doen we best een aantal antwoorden per category?)

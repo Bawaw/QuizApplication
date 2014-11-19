@@ -34,3 +34,8 @@ TODO:
 * Misschien nog enums en factories vergeten?
 
 * een answer pool maken (Misschien doen we best een aantal antwoorden per category?)
+
+
+
+Link naar software UML:
+http://www.visual-paradigm.com/download/community.jsp

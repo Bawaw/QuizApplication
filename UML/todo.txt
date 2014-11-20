@@ -6,34 +6,35 @@ Opmerkingen:
 Is misschien ook handig om te gebruiken bij tussentabel tussen
 vraag,score en specifieke feedback
 
-* QuestionSelectionFactory, misschien ongelukkige naam, gezien het geen factory is.
+* QuestionSelectionFactory, misschien ongelukkige naam, gezien het geen factory is.V
 
-* Controller misschien hernoemen
+* Controller misschien hernoemen V
 
-* Bij Evaluation, een methode maken die een object teruggeven waarin de score zit en de foute vragen
+* Bij Evaluation, een methode maken die een object teruggeven waarin de score zit en de foute vragen V 
 
-* Bij Evaluation, een ArrayList bijhouden van Map.Entries, met als key, de vraag en als value, de door de user gekozen oplossing
+* Bij Evaluation, een ArrayList bijhouden van Map.Entries, met als key, de vraag en als value, de door de user gekozen oplossing V
 
-* Maken we verschil tussen standaardfeedback (feedback bij cat) en feedback bij een vraag?
+* Maken we verschil tussen standaardfeedback (feedback bij cat) en feedback bij een vraag? (ik zou gewoon alle feedback standaard feedback maken en laten selecteren uit een lijstje)
   -> Misschien best wel, wanneer we in de ui feedback koppelen aan een category, willen we enkel de "standaardfeedbacken" tte zien krijgen
 
 
 
 TODO:
 
-* Alle DBHandling tijdelijk verwijderen uit UML
+* Alle DBHandling tijdelijk verwijderen uit UML V
 
-* score per vraag per category
+* score per vraag per category (dit kan je berekenen aangezien je question gelinkt is aan een category en aan je antwoord) V
 
-* standaardfeedback per category
+* standaardfeedback per category (via arrayList) V
 
-* feedback per vraag per category
+* feedback per vraag per category voorstel: questionpool: Map<Category,ArrayList<Map<Question,ArrayList<Feedback>>>>
+zo zal elke vraag gekoppelt zijn aan een lijst van feedbacks en zal deze automatisch per category worden bijgehouden omdat een vraag meerdere keren in de map zit voor al zijn categorien
 
 * klasses verder uitbreiden met hun methodes/attributen
 
 * Misschien nog enums en factories vergeten?
 
-* een answer pool maken (Misschien doen we best een aantal antwoorden per category?)
+* een answer pool maken (Misschien doen we best een aantal antwoorden per category?) (opnieuw zou ik gewoon voor de standaard antwoorden gaan het is zo al overkill) V
 
 
 

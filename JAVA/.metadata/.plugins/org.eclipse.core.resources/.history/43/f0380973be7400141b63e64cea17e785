@@ -1,0 +1,24 @@
+package domain;
+
+public class Answer {
+	private String answer;
+	private int timesPicked;
+	
+	
+	
+	public String getAnswer() {
+		return answer;
+	}
+	private void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public int getTimesPicked() {
+		return timesPicked;
+	}
+	private void setTimesPicked(int timesPicked) {
+		this.timesPicked = timesPicked;
+	}
+	
+	
+	
+}

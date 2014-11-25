@@ -1,0 +1,17 @@
+package domain;
+
+import java.util.ArrayList;
+
+public abstract class Question {
+	private String question;
+	private ArrayList<Answer> options;
+	private Answer answer;
+	
+	
+	public Question() {
+		
+	}
+	
+	
+
+}

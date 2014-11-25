@@ -1,0 +1,17 @@
+package domain;
+
+public class WeightedScoreCalculator extends TestHandler implements
+		ScoreBehaviour {
+
+	public WeightedScoreCalculator(Evaluation test) throws DomainException {
+		super(test);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public int calculateScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

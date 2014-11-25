@@ -1,0 +1,67 @@
+package domain;
+
+public class Exercise {
+	private int score;
+	private Question question;
+	private Category category;
+	private Feedback feedback;
+	
+	public Exercise(Question question,Category category,Feedback feedback,int score) throws DomainException {
+		this.setQuestion(question);
+		this.setScore(score);
+		this.setCategory(category);
+		this.setFeedback(feedback);
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	private void setScore(int score) throws DomainException {
+		if(score<0){
+			throw new DomainException("Score cannot be negative");
+		}
+		this.score = score;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	private void setQuestion(Question question) throws DomainException {
+		if(question==null){
+			throw new DomainException("question cannot be null");
+		}
+		this.question = question;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	private void setCategory(Category category) throws DomainException {
+		if(category==null){
+			throw new DomainException("category cannot be null");
+		}
+		this.category = category;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	private void setFeedback(Feedback feedback) throws DomainException {
+		if(feedback==null){
+			throw new DomainException("feedback cannot be null");
+		}
+		
+		if(!this.getCategory().hasFeedback(feedback)){
+			throw new DomainException("Category doesn't have that feedback");
+		}
+		this.feedback = feedback;
+	}
+	
+	
+	
+
+}

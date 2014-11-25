@@ -1,0 +1,41 @@
+package domain;
+
+import java.util.Date;
+
+public class Participation {
+	private Date date;
+	private int score;
+	
+	public Participation(int score) {
+		this.setDate(new Date());
+		this.setScore(score);
+	}
+
+
+	
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) throws DomainException {
+		if (score<0){
+			throw new DomainException("Score can not be negative");
+		}
+		this.score = score;
+	}
+	
+	
+	
+}

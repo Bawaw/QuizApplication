@@ -1,0 +1,9 @@
+package domain;
+
+public class QuestionSelectionFactory {
+
+	public QuestionSelectionFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

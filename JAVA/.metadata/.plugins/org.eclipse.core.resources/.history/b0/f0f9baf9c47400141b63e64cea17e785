@@ -1,0 +1,14 @@
+package domain;
+
+public class QuestionSelectionbehaviour {
+
+	public QuestionSelectionbehaviour() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void selectQuestions(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

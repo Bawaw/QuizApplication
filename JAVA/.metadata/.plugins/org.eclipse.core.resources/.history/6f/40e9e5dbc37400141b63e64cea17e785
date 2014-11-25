@@ -1,0 +1,18 @@
+package domain;
+
+public class QuestionSelectionFactory {
+	private QuestionSelectionFactory singleton;
+	
+	
+	public static QuestionSelectionFactory getInstance(){
+		if(singleton == null){
+			singleton=new QuestionSelectionFactory();
+		}
+		return QuestionSelectionFactory;
+	}
+	
+	private QuestionSelectionFactory() {
+
+	}
+
+}

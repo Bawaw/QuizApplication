@@ -1,0 +1,13 @@
+package domain;
+
+import java.util.HashSet;
+
+public class MultipleChoiceQuestion extends Question {
+
+	public MultipleChoiceQuestion(String question, Answer rightAnswer,
+			HashSet<Answer> option, int time) throws DomainException {
+		super(question, rightAnswer, option, time);
+		// TODO Auto-generated constructor stub
+	}
+
+}

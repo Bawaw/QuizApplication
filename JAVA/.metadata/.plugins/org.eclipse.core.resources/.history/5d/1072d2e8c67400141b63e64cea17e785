@@ -1,0 +1,15 @@
+package domain;
+
+import java.util.HashSet;
+
+public class AnswerPool {
+	private static AnswerPool singleton;
+	private HashSet<Answer> answers=new HashSet<Answer>();
+	//We willen geen dubbele antwoorden opslaan, vandaar hashset
+	
+	
+	private AnswerPool() {
+	
+	}
+
+}

@@ -1,0 +1,9 @@
+package domain;
+
+public class Participation {
+
+	public Participation() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

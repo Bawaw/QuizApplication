@@ -78,5 +78,8 @@ public class Category {
 		}
 	}
 
+	public boolean hasFeedback(Feedback feedback){
+		return this.getFeedbacks().contains(feedback);
+	}
 	
 }

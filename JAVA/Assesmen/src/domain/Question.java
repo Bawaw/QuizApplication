@@ -45,13 +45,7 @@ public abstract class Question {
 		this.options = options;
 	}
 
-	public void addAnswer(Answer a) throws DomainException{
-		if(!this.getOptions().contains(a) && this.getOptions().size()+1>5){
-			throw new DomainException("Only 5 options allowed");
-		}	
-		a.increaseTimesPicked();
-		this.getOptions().add(a);
-	}
+
 	
 	
 	public Answer getRightAnswer() {

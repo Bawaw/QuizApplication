@@ -1,0 +1,14 @@
+package domain;
+
+import java.util.HashSet;
+
+public class YesNoQuestion extends Question {
+
+	
+	public YesNoQuestion(String question, Answer rightAnswer, int time) throws DomainException {
+		HashSet<Answer> answers = new HashSet<Answer>();
+		super(question, rightAnswer, option, time);
+		
+	}
+
+}

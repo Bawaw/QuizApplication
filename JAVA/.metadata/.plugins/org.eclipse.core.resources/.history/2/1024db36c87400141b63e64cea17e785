@@ -1,0 +1,13 @@
+package domain;
+
+public class Exercise {
+	private int score;
+	private Question question;
+	private Category category;
+	private Feedback feedback;
+	
+	public Exercise(Question question,Category category,Feedback feedback,int score) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

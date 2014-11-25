@@ -1,0 +1,10 @@
+package domain;
+
+public class MaxScoreCalculator extends TestHandler {
+
+	public MaxScoreCalculator(Evaluation test) throws DomainException {
+		super(test);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,11 @@
+package domain;
+
+public class AnswerPool {
+	private 
+	
+	
+	private AnswerPool() {
+	
+	}
+
+}

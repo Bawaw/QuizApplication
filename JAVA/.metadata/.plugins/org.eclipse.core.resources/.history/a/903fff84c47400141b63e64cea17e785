@@ -1,0 +1,33 @@
+package domain;
+
+public class QuestionSelectionFactory {
+	private static QuestionSelectionFactory singleton;
+	private QuestionSelectionbehaviour questionSelectionbehaviour;
+	
+	public static QuestionSelectionFactory getInstance(QuestionSelectionbehaviour qsb){
+		if(singleton == null){
+			singleton=new QuestionSelectionFactory(qsb);
+		}
+		return singleton;
+	}
+	
+	private QuestionSelectionFactory(QuestionSelectionbehaviour qsb) {
+		this.setQuestionSelectionbehaviour(qsb);
+	}
+	
+
+	
+	
+	public QuestionSelectionbehaviour getQuestionSelectionbehaviour() {
+		return questionSelectionbehaviour;
+	}
+
+	private void setQuestionSelectionbehaviour(QuestionSelectionbehaviour questionSelectionbehaviour) {
+		this.questionSelectionbehaviour = questionSelectionbehaviour;
+	}
+	
+	
+	
+
+
+}

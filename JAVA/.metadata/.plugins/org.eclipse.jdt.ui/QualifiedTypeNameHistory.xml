@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="domain.Answer"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="domain.ScoreBehaviour"/>
+<fullyQualifiedTypeName name="domain.Question"/>
+<fullyQualifiedTypeName name="domain.ExercisePool"/>
+<fullyQualifiedTypeName name="domain.QuestionType"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="domain.AnswerPool"/>
+<fullyQualifiedTypeName name="domain.DomainException"/>
+</qualifiedTypeNameHistroy>

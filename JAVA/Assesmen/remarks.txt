@@ -1,0 +1,16 @@
+*AnswerPool: !not synced!, singleton prevents you from running the applications 2 at the same time
+*Exercise // TODO Moet dit wel? Wat als we de feedback in category verwijderen. Dan kan die category toch nog vragen hebben met die feedback!
+		ik denk niet dat het de bedoeling is dat je feedback kan behouden die niet in category staat dus ik zou checken en oplossen met observer? (of overkill? werken met id's?) voorlopig gewoon verder zonder category verwijderen?
+		probleem doet zich ook voor bij het verwijderen van een vraag etc 
+*exercisepoolhandler: nut? 
+			zie HashSet<Exercise>(getExercisePool().getExercisePool().subList
+
+*QuestionsByType hoe te doen met enum? 2ifs? return class in enum?
+*Evaluation time allowed = sum of all times? / calculate total time allowed
+		handle feedback
+		score locaal handelen of in controller?
+		generate Result
+
+*FacadeActionManager config handler
+
+ADD CATEGORY category does not exist without a pointer

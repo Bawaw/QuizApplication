@@ -1,0 +1,12 @@
+package domain;
+
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
+public abstract class Evaluation {
+	ArrayList<Entry<Exercise,Answer>> exercises;
+	public Evaluation() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,6 +1,9 @@
 package domain;
 
+import java.io.ObjectInputStream.GetField;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 
 public class QuestionsByType extends ExercisePoolHandler implements QuestionSelectionbehaviour {
 	private QuestionType questionType;
@@ -10,9 +13,6 @@ public class QuestionsByType extends ExercisePoolHandler implements QuestionSele
 		this.setQuestionType(questionType);
 	}
 
-	
-	
-	
 	public QuestionType getQuestionType() {
 		return questionType;
 	}
@@ -20,12 +20,33 @@ public class QuestionsByType extends ExercisePoolHandler implements QuestionSele
 	public void setQuestionType(QuestionType questionType) {
 		this.questionType = questionType;
 	}
-
-
+	
 	@Override
-	public HashSet<Question> selectQuestions(int amount) {
-		// TODO IMPLEMENTATION
-		return null;
+	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
+		if(getExercisePool().getExercisePool().size() < amount)
+			throw new DomainException("You need atleast: " + amount + " questions before you can create an evaluation");
+		
+		Random r = new Random();
+		HashSet<Exercise> retSet = new HashSet<Exercise>();
+		ArrayList<Exercise> typeList = new ArrayList<Exercise>();
+		
+		for (Exercise exercise : getExercisePool().getExercisePool()) {
+			if(exercise.getQuestion() instanceof getQuestionType()){ //hoe oplossen? 2ifs? return in enum?
+				typeList.add(exercise);
+			}
+		}
+		
+		for (int i = 0; i < amount; i++){
+			boolean valid = false;
+			for (int j = 0; j < QuestionSelectionbehaviour.iterations && !valid; j++) {
+				int index = r.nextInt(getExercisePool().getExercisePool().size()); //not sure if works since internal clock 
+				if(!retSet.contains(typeList.get(index))){
+					retSet.add(typeList.get(index));
+					valid = true;
+				}
+			}	
+		}
+		return retSet;
 	}
 
 }

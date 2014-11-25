@@ -6,7 +6,7 @@ public abstract class Question {
 	private String question;
 	private HashSet<Answer> options;
 	private Answer rightAnswer;
-	private int time;
+	private int time; 
 	
 	public Question(String question,Answer rightAnswer,HashSet<Answer> option,int time) throws DomainException {
 		this.setQuestion(question);

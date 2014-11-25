@@ -1,0 +1,14 @@
+package domain;
+
+public class FacadeActionManager {
+	FeedbackPool feedbackPool;
+	ParticipationPool participations;
+	ExercisePool exercisePool;
+	AnswerPool answerPool;
+	int timer;
+	//config handler
+	public FacadeActionManager() {
+		
+	}
+
+}

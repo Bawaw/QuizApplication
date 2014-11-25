@@ -1,0 +1,10 @@
+package domain;
+
+public class FacadeActionManager {
+	FeedbackPool feedbackPool;
+	ParticipationPool participations;
+	public FacadeActionManager() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,49 @@
+package domain;
+
+import java.io.ObjectInputStream.GetField;
+import java.util.HashSet;
+import java.util.Random;
+
+public class QuestionsByType extends ExercisePoolHandler implements QuestionSelectionbehaviour {
+	private QuestionType questionType;
+
+	public QuestionsByType(ExercisePool exercisePool,QuestionType questionType) throws DomainException {
+		super(exercisePool);
+		this.setQuestionType(questionType);
+	}
+
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(QuestionType questionType) {
+		this.questionType = questionType;
+	}
+	
+	@Override
+	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
+		if(getExercisePool().getExercisePool().size() < amount)
+			throw new DomainException("You need atleast: " + amount + " questions before you can create an evaluation");
+		
+		Random r = new Random();
+		HashSet<Exercise> retSet = new HashSet<Exercise>();
+		HashSet<Exercise> typeSet = new HashSet<Exercise>();
+		
+		for (Exercise exercise : getExercisePool().getExercisePool()) {
+			if(exercise.getQuestion() instanceof getQuestionType()){ //hoe oplossen? 2ifs? return in enum?
+				typeSet.add(exercise);
+			}
+		}
+		
+		int index = r.nextInt(getExercisePool().getExercisePool().size());
+		for (int i = 0; i < amount; i++){
+			while () {
+				type type = (type) .nextElement();
+				
+			}
+			
+		}
+		return retSet;
+	}
+
+}

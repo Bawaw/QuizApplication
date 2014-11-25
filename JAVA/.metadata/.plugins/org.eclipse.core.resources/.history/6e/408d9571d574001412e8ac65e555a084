@@ -1,0 +1,17 @@
+package domain;
+
+import java.util.ArrayList;
+
+public class ExercisePool {
+	ArrayList<Exercise> exercises;
+
+	public ExercisePool() {
+		exercises = new ArrayList<Exercise>();
+	}
+	
+	public void editQuestion(Question oldQuestion, Question newQuestion) throws DomainException{
+		if(oldQuestion == null || newQuestion == null)
+			throw new DomainException("value can not be null");
+	}
+
+}

@@ -1,0 +1,9 @@
+package domain;
+
+public class FacadeActionManager {
+
+	public FacadeActionManager() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

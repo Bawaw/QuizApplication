@@ -1,0 +1,18 @@
+package domain;
+
+import java.util.HashSet;
+
+public class LeastAskedQuestions extends ExercisePoolHandler implements
+		QuestionSelectionbehaviour {
+
+	public LeastAskedQuestions(ExercisePool exercisePool)throws DomainException {
+		super(exercisePool);
+	}
+	
+	@Override
+	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
+		if(getExercisePool().getExercisePool().size() >= LeastAskedQuestions.questions)
+		return new HashSet<Exercise>(getExercisePool().getExercisePool().subList(getExercisePool().getExercisePool().size() - LeastAskedQuestions.questions, getExercisePool().getExercisePool().size()));
+	}
+
+}

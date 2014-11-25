@@ -1,0 +1,8 @@
+package domain;
+
+import java.util.HashSet;
+
+public interface QuestionSelectionbehaviour {
+	public HashSet<Exercise> selectQuestions(int amount) throws DomainException;
+
+}

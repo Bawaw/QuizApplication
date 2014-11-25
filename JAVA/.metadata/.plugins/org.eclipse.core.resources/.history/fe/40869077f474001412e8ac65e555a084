@@ -1,0 +1,9 @@
+package domain;
+
+public class ParticipationPool {
+	ArrayList<Participation> participationPool;
+	public ParticipationPool() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

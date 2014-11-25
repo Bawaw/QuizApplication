@@ -1,0 +1,19 @@
+package domain;
+
+import java.util.ArrayList;
+
+public class ParticipationPool {
+	ArrayList<Participation> participationPool;
+	public ParticipationPool(ArrayList<Participation> participationPool) {
+		
+	}
+	public ArrayList<Participation> getParticipationPool() {
+		return participationPool;
+	}
+	public void setParticipationPool(ArrayList<Participation> participationPool) {
+		this.participationPool = participationPool;
+	}
+	
+	
+
+}

@@ -1,0 +1,18 @@
+package domain;
+
+import java.util.ArrayList;
+
+public class ExercisePool {
+	ArrayList<Exercise> exercises;
+
+	public ExercisePool() {
+		exercises = new ArrayList<Exercise>();
+	}
+	
+	public void editExercise(Exercise oldExercise, Exercise newExercise) throws DomainException{
+		if(oldExercise == null || newExercise == null)
+			throw new DomainException("value can not be null");
+		exercises.
+	}
+
+}

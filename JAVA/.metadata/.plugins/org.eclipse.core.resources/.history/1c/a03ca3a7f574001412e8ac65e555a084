@@ -1,0 +1,17 @@
+package domain;
+
+public class FacadeActionManager {
+	FeedbackPool feedbackPool;
+	ParticipationPool participations;
+	ExercisePool exercisePool;
+	AnswerPool answerPool;
+	Evaluation activeEvalutaion;
+	QuestionSelectionFactory questionSelectionFactory;
+	int timer;
+	//config handler
+	
+	public FacadeActionManager() {
+		
+	}
+
+}

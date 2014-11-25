@@ -1,0 +1,19 @@
+package domain;
+
+import java.util.HashSet;
+
+public class LeastAskedQuestions extends ExercisePoolHandler implements
+		QuestionSelectionbehaviour {
+
+	public LeastAskedQuestions(ExercisePool exercisePool)throws DomainException {
+		super(exercisePool);
+	}
+	
+	@Override
+	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
+		if(getExercisePool().getExercisePool().size() < amount)
+			throw new DomainException("You need atleast: " + amount + " questions before you can create an evaluation");
+		return new HashSet<Exercise>(getExercisePool().getExercisePool().subList(getExercisePool().getExercisePool().size() - amount, getExercisePool().getExercisePool().size()));
+	}
+
+}

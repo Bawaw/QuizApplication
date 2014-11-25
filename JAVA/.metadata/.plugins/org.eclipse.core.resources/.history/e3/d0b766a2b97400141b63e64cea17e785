@@ -1,0 +1,58 @@
+package domain;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Category {
+	private String name;
+	private String description;
+	private ArrayList<Feedback> feedbacks;
+	
+	
+	
+	public Category(String name,ArrayList<Feedback> feedbacks) throws DomainException{
+		this.setFeedbacks(feedbacks);
+		this.setName(name);
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	private void setName(String name) throws DomainException {
+		if(name==null || name.equals("")){
+			throw new DomainException("Invalid name");
+		}
+		this.name = name;
+	}
+
+
+
+	public ArrayList<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+
+
+	private void setFeedbacks(ArrayList<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+	
+	
+	@Override
+	public boolean equals(Object o){
+		boolean output=false;
+		if(o instanceof Category){
+			Category category=(Category)o;
+			output=this.getName().equals(category.getName());
+		}
+		return output;
+	}
+	
+	
+
+	
+}

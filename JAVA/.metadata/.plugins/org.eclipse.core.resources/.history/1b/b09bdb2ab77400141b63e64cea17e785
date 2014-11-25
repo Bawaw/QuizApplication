@@ -1,0 +1,9 @@
+package domain;
+
+import java.util.HashSet;
+
+public class Category {
+	private String name;
+	private HashSet<Feedback> feedbacks;
+	
+}

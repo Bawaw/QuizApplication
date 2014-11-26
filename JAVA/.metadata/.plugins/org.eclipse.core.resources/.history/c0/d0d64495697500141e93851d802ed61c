@@ -1,0 +1,9 @@
+package domain;
+
+public class CategoryPool {
+	ArrayList<Category> categoryPool;
+	public CategoryPool() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

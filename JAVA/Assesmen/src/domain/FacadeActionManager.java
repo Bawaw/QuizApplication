@@ -7,11 +7,21 @@ public class FacadeActionManager {
 	AnswerPool answerPool;
 	Evaluation activeEvalutaion;
 	QuestionSelectionFactory questionSelectionFactory;
+	CategoryPool categoryPool;
 	int timer;
-	//config handler
-	
+
+	// config handler
+
 	public FacadeActionManager() {
-		
+
+	}
+
+	public CategoryPool getCategoryPool() {
+		return categoryPool;
+	}
+
+	public void setCategoryPool(CategoryPool categoryPool) {
+		this.categoryPool = categoryPool;
 	}
 
 	public FeedbackPool getFeedbackPool() {
@@ -70,7 +80,5 @@ public class FacadeActionManager {
 	private void setTimer(int timer) {
 		this.timer = timer;
 	}
-	
-	
 
 }

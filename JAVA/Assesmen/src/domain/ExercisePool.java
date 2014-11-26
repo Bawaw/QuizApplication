@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
@@ -54,6 +55,19 @@ public class ExercisePool {
 		return returnList;
 	}
 	
+	public ArrayList<Exercise> getExerciseByQuestion(String question){
+		ArrayList<Exercise> retList = new ArrayList<Exercise>();
+		for(Exercise ex: getExercisePool()){
+			if(ex.getQuestion().equals(question))
+			retList.add(ex);
+		}
+		return retList;
+	}
+	
+	public void sortList(){
+		Collections.sort(this.getExercisePool());
+	}
+	
 	private int getIndexExercise(Exercise ex) throws DomainException{
 		int output=-1;
 		boolean found=false;
@@ -68,5 +82,9 @@ public class ExercisePool {
 		}
 		return output;
 	}
+	
+	public HashSet<Exercise> getUniqueExerciseSet(){
+		return new HashSet<Exercise>(getExercisePool());
+	} 
 	
 }

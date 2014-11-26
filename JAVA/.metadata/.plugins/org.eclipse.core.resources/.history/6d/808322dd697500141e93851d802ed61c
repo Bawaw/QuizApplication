@@ -1,0 +1,32 @@
+package domain;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class CategoryPool {
+	HashSet<Category> categoryPool;
+
+	public CategoryPool() {
+		categoryPool = new HashSet<Category>();
+	}
+	
+
+	public HashSet<Answer> getCategoryPool() {
+		return categoryPool;
+	}
+
+	private void setCategoryPool(HashSet<Category> categoryPool) {
+		this.answers = answers;
+	}
+
+	public void AddAnswer(Answer answer){
+		if (!answers.contains(answer))
+			this.getAnswers().add(answer);
+	}
+
+	public void removeAnswer(Answer answer){
+		if (answers.contains(answer))
+			this.getAnswers().remove(answer);
+	}
+
+}

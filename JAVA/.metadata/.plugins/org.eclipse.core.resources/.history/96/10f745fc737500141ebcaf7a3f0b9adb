@@ -1,0 +1,12 @@
+package domain;
+
+import domain.enums.ScoreBehaviourType;
+
+public class ScoreBehaviourFactory {
+	ScoreBehaviourType scorebehaviourType;
+	Evaluation evaluation;
+	public ScoreBehaviourFactory(scoreBehaviourType scorebehaviourType,Evaluation evaluation) {
+		// TODO Auto-generated constructo
+	}
+
+}

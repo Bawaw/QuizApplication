@@ -17,7 +17,7 @@ public abstract class Evaluation {
 			ScoreBehaviourType scoreBehaviourType) throws DomainException {
 		setExercises(exercises);
 		setIndexCurrentExercise(0);
-		setScoreBehaviour(scoreBehaviourType);
+		setScoreBehaviour(scoreBehaviourType)
 		setTimeAllowed();
 	}
 
@@ -25,8 +25,8 @@ public abstract class Evaluation {
 		return scoreBehaviour;
 	}
 
-	public void setScoreBehaviour(ScoreBehaviourType scoreBehaviourType) {
-		this.scoreBehaviour = scoreBehaviourType;
+	public void setScoreBehaviour(ScoreBehaviour scoreBehaviour) {
+		this.scoreBehaviour = scoreBehaviour;
 	}
 
 	public boolean hasNextQuestion() {

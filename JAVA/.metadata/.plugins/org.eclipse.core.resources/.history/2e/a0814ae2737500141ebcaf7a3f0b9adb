@@ -1,0 +1,10 @@
+package domain;
+
+public class ScoreBehaviourFactory {
+	ScoreBehaviourType scorebehaviourType;
+	Evaluation evaluation;
+	public ScoreBehaviourFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

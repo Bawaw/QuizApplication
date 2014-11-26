@@ -11,7 +11,7 @@ public abstract class Evaluation {
 	ArrayList<Entry<Exercise, Answer>> exercises;
 	int indexCurrentExercise;
 	int timeAllowed;
-	ScoreBehaviour scoreBehaviour;
+	ScoreBehaviourType scoreBehaviour;
 
 	public Evaluation(ArrayList<Entry<Exercise, Answer>> exercises,
 			ScoreBehaviourType scoreBehaviourType) throws DomainException {

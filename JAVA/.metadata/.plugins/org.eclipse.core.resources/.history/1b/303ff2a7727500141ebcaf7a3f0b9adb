@@ -2,7 +2,7 @@ package domain.enums;
 
 public enum ScoreBehaviourType {
 	MaxScoreCalculator("domain.MaxScoreCalculator"),
-	ErrorCorrectionCalculator("domain.ErrorCorrectionCalculator"),
+	ErrorCorrectionCalculator("FullQualifiedDomainName"),
 	TimeWeightedScoreCalculator("FullQualifiedDomainName");
 	
 private String FQDN;

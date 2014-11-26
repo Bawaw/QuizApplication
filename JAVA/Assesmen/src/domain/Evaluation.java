@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
+//TODO we hebben hier ook een time remaining nodig denk ik
+
 public abstract class Evaluation {
 	ArrayList<Entry<Exercise, Answer>> exercises;
 	int indexCurrentExercise;
@@ -13,7 +15,7 @@ public abstract class Evaluation {
 			throws DomainException {
 		setExercises(exercises);
 		setIndexCurrentExercise(0);
-		setTimeAllowed(0); // time allowed = sum of all times?
+		setTimeAllowed(0); // time allowed = sum of all times? Ik vermoed van wel.
 	}
 
 	public ScoreBehaviour getScoreBehaviour() {
@@ -71,6 +73,8 @@ public abstract class Evaluation {
 		this.indexCurrentExercise = indexCurrentExercise;
 	}
 
+	
+	
 	public int getTimeAllowed() {
 		return timeAllowed;
 	}
@@ -86,7 +90,9 @@ public abstract class Evaluation {
 	}
 	
 	public int calculateScore(){
-		return scoreBehaviour.calculateScore(); //lokaal handelen (params mee geven) of in controller? 
+		return scoreBehaviour.calculateScore(); //lokaal handelen (params mee geven) of in controller? Ik zou vanuit de controller 
+												// op de test roepen: checkTest(), en de test genereert dan een objectje met daarin
+												// de score, de feedback, het aantal juiste vragen op bepaalde category etc.
 	}
 	
 	//generateResult

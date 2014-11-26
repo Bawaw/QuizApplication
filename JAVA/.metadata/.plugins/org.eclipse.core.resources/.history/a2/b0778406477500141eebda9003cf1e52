@@ -1,0 +1,29 @@
+package domain;
+
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
+public class MaxScoreCalculator  extends TestHandler implements ScoreBehaviour{
+
+	
+	
+	public MaxScoreCalculator(Evaluation test) throws DomainException {
+		super(test);
+	}
+
+	
+	
+	
+	
+	@Override
+	public int calculateScore() {
+		//TODO write implementation!
+		ArrayList<Entry<Exercise, Answer>> exercises=super.getTest().getExercises();
+		
+		
+		return 0;
+	}
+	
+	
+
+}

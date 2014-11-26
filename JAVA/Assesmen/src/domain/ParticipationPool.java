@@ -17,8 +17,8 @@ public class ParticipationPool {
 		this.participationPool = participationPool;
 	}
 	
-	private void addParticipationPool(Participation participation){
-		if(participationPool.contains(participation))
+	public void addParticipation(Participation participation){
+		if(!participationPool.contains(participation))
 			participationPool.add(participation);
 	}
 

@@ -20,7 +20,7 @@ public class Exercise implements Comparable<Exercise> {
 	}
 
 	public void setScore(int score) throws DomainException {
-		if (score < 0) {
+		if (score <= 0) {
 			throw new DomainException("Score cannot be negative");
 		}
 		this.score = score;

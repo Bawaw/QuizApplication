@@ -16,12 +16,12 @@
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionbehaviour"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="domain.ScoreBehaviour"/>
-<fullyQualifiedTypeName name="domain.Participation"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="domain.ParticipationPool"/>
 <fullyQualifiedTypeName name="domain.ExercisePool"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionFactory"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="domain.Participation"/>
 </qualifiedTypeNameHistroy>

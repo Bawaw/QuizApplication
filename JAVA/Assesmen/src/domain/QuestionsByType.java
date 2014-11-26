@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+import domain.enums.QuestionType;
+
 public class QuestionsByType extends ExercisePoolHandler implements QuestionSelectionbehaviour {
 	private QuestionType questionType;
 
@@ -31,8 +33,8 @@ public class QuestionsByType extends ExercisePoolHandler implements QuestionSele
 		ArrayList<Exercise> typeList = new ArrayList<Exercise>();
 		
 		for (Exercise exercise : getExercisePool().getExercisePool()) {
-			if(exercise.getQuestion() instanceof getQuestionType()){ //hoe oplossen? 2ifs? return in enum?
-				typeList.add(exercise);
+			if(exercise.getQuestion() instanceof getQuestionType()){ //hoe oplossen? 2ifs? return in enum? 
+				typeList.add(exercise);								//Misschien zoiets als dit? http://stackoverflow.com/questions/949352/is-there-something-like-instanceofclass-c-in-java)
 			}
 		}
 		

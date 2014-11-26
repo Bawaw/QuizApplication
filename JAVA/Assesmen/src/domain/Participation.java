@@ -44,5 +44,15 @@ public class Participation {
 	private void setErrors(ArrayList<Entry<String, Integer>> errors) {
 		this.errors = errors;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		boolean output=false;
+		if(o instanceof Participation){
+			Participation p=(Participation)o;
+			output=this.getDate().equals(p.getDate()) && this.getScore()==p.getScore() && this.getErrors().equals(p.getErrors());
+		}
+		return output;
+	}
 
 }

@@ -1,0 +1,17 @@
+package domain;
+
+import domain.enums.ScoreBehaviourType;
+
+public class ScoreBehaviourFactory {
+	ScoreBehaviourType scorebehaviourType;
+	Evaluation evaluation;
+	ScoreBehaviour scoreBehaviour;
+
+	public static ScoreBehaviour create()
+	{
+	
+	public void setScoreBehaviour(){
+		
+	}
+
+}

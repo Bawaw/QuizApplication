@@ -1,0 +1,26 @@
+package domain;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import domain.enums.ScoreBehaviourType;
+
+public class ScoreBehaviourFactory {
+
+	public static ScoreBehaviour create(Evaluation evaluation,
+			ScoreBehaviourType scorebehaviourtype) {
+		ScoreBehaviour scoreBehaviour = null;
+
+		try {
+			Class<?> c = Class.forName(scorebehaviourtype.getFQDN());
+			Constructor<?> constructor = c.getConstructor(evaluation.getClass());
+
+			scoreBehaviour = (ScoreBehaviour) constructor
+					.newInstance(evaluation);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return scoreBehaviour;
+	}
+}

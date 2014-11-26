@@ -18,7 +18,7 @@ public class Category {
 		return name;
 	}
 
-	private void setName(String name) throws DomainException {
+	public void setName(String name) throws DomainException {
 		if (name == null || name.equals("")) {
 			throw new DomainException("Invalid name");
 		}

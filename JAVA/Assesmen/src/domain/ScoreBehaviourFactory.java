@@ -1,31 +1,23 @@
 package domain;
 
+import java.lang.reflect.Constructor;
+
 import domain.enums.ScoreBehaviourType;
 
 public class ScoreBehaviourFactory {
-	ScoreBehaviourType scorebehaviourType;
-	Evaluation evaluation;
 
-	public ScoreBehaviourFactory(ScoreBehaviourType scorebehaviourType,
-			Evaluation evaluation) {
-		setScorebehaviourType(scorebehaviourType);
-		setEvaluation(evaluation);
+	public static ScoreBehaviour create(Evaluation evaluation,
+			ScoreBehaviourType scorebehaviourtype) throws DomainException {
+		ScoreBehaviour scoreBehaviour = null;
+
+		try {
+			Class<?> c = Class.forName(scorebehaviourtype.getFQDN());
+			Constructor<?> constructor = c.getConstructor(evaluation.getClass());
+			scoreBehaviour = (ScoreBehaviour) constructor
+					.newInstance(evaluation);
+		} catch (Exception e) {
+			throw new DomainException("fACTORY ERROR",e);
+		}
+		return scoreBehaviour;
 	}
-
-	public ScoreBehaviourType getScorebehaviourType() {
-		return scorebehaviourType;
-	}
-
-	public void setScorebehaviourType(ScoreBehaviourType scorebehaviourType) {
-		this.scorebehaviourType = scorebehaviourType;
-	}
-
-	public Evaluation getEvaluation() {
-		return evaluation;
-	}
-
-	public void setEvaluation(Evaluation evaluation) {
-		this.evaluation = evaluation;
-	}
-
 }

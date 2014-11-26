@@ -1,0 +1,17 @@
+package domain;
+
+import java.lang.reflect.Constructor;
+
+import domain.enums.ScoreBehaviourType;
+
+public class ScoreBehaviourFactory {
+
+	public static ScoreBehaviour create(Evaluation evaluation, ScoreBehaviourType scorebehaviourtype){
+			try{
+				Class<?> c = Class.forName(scorebehaviourtype.getFQDN());
+				Constructor<?> constructor = c.getConstructor(evaluation.getClass());
+				ScoreBehaviour scoreBehaviour = (ScoreBehaviour)constructor.newInstance(evaluation);
+			}
+			return ScoreBehaviour;
+	}
+}

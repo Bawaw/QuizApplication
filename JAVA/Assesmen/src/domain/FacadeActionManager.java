@@ -15,6 +15,10 @@ public class FacadeActionManager {
 	public FacadeActionManager() {
 
 	}
+	
+	public void addCategory(Category category){
+		getCategoryPool().AddAnswer(category);
+	}
 
 	public CategoryPool getCategoryPool() {
 		return categoryPool;

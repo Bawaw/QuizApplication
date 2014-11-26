@@ -5,8 +5,6 @@ import java.util.Map.Entry;
 
 import domain.enums.ScoreBehaviourType;
 
-//TODO we hebben hier ook een time remaining nodig denk ik
-
 public abstract class Evaluation {
 	ArrayList<Entry<Exercise, Answer>> exercises;
 	int indexCurrentExercise;
@@ -25,8 +23,8 @@ public abstract class Evaluation {
 		return scoreBehaviour;
 	}
 
-	public void setScoreBehaviour(ScoreBehaviourType scoreBehaviourType) {
-		this.scoreBehaviour = scoreBehaviourType;
+	public void setScoreBehaviour(ScoreBehaviourType scoreBehaviourType) throws DomainException {
+		this.scoreBehaviour = ScoreBehaviourFactory.create(this,scoreBehaviourType);
 	}
 
 	public boolean hasNextQuestion() {

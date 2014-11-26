@@ -2,9 +2,10 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class ExercisePool {
-	ArrayList<Exercise> exercises;
+	private ArrayList<Exercise> exercises;
 
 	public ExercisePool() {
 		exercises = new ArrayList<Exercise>();
@@ -14,23 +15,22 @@ public class ExercisePool {
 	public void editExercise(Exercise oldExercise,Exercise newExercise) throws DomainException{
 		if(newExercise == null)
 			throw new DomainException("value can not be null");
-		exercises.remove(oldExercise);
-		exercises.add(newExercise);
+		removeExercise(oldExercise);
+		addExercise(newExercise);
 		Collections.sort(exercises);
 	}
 	
 	public void addExercise(Exercise exercise) throws DomainException{
 		if(exercise == null)
 			throw new DomainException("value can not be null");
-		if(exercises.contains(exercise))
-			throw new DomainException("already exists");
 		exercises.add(exercise);
 		Collections.sort(exercises);
 	}
 	
-	//problem
-	public boolean removeExercise(Exercise exercise){
-		return exercises.remove(exercise);
+	
+	public void removeExercise(Exercise exercise) throws DomainException{
+		int index=this.getIndexExercise(exercise);
+		this.exercises.remove(index);
 	}
 	
 	public ArrayList<Exercise> getExercisePool(){
@@ -46,11 +46,27 @@ public class ExercisePool {
 		return returnList;
 	}
 	
-	public ArrayList<Category> getCategories(){
-		ArrayList<Category> returnList = new ArrayList<Category>();
+	public HashSet<Category> getCategories(){
+		HashSet<Category> returnList = new HashSet<Category>();
 		for (Exercise exercise : getExercisePool()) {
 				returnList.add(exercise.getCategory());
 		}
 		return returnList;
 	}
+	
+	private int getIndexExercise(Exercise ex) throws DomainException{
+		int output=-1;
+		boolean found=false;
+		for(int i=0;i<exercises.size() && !found ; i++){
+			if(ex.uniqueEquals(exercises.get(i))){
+				output=i;
+				found=true;
+			}
+		}
+		if(output==-1){
+			throw new DomainException("Exercise not found");
+		}
+		return output;
+	}
+	
 }

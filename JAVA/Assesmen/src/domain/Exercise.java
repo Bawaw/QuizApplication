@@ -92,7 +92,16 @@ public class Exercise implements Comparable<Exercise> {
 
 	@Override
 	public int compareTo(Exercise o) {
-		return getTimesPicked() - o.getTimesPicked();
+		return o.getTimesPicked() - o.getTimesPicked();
 	}
 
+	
+	public boolean uniqueEquals(Object o){
+		boolean output = false;
+		if (o instanceof Exercise) {
+			Exercise ex = (Exercise) o;
+			output = this.getQuestion().equals(ex.getQuestion()) && this.getCategory().equals(ex.getCategory());
+		}
+		return output;
+	}
 }

@@ -11,17 +11,18 @@
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="domain.Exercise"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionbehaviour"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="domain.ScoreBehaviour"/>
 <fullyQualifiedTypeName name="domain.ParticipationPool"/>
 <fullyQualifiedTypeName name="domain.ExercisePool"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionFactory"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="domain.Participation"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="domain.Exercise"/>
+<fullyQualifiedTypeName name="domain.DomainException"/>
 </qualifiedTypeNameHistroy>

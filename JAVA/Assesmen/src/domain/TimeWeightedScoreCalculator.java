@@ -29,9 +29,9 @@ public class TimeWeightedScoreCalculator extends TestHandler implements
 			}
 		}
 		
-		if(   super.getTest().timeRemaining()>(super.getTest().getTimeAllowed() / 2)){
+		/*if(   super.getTest().timeRemaining()>(super.getTest().getTimeAllowed() / 2)){
 			userscore=userscore+2;
-		}
+		}*/
 	
 		
 		int result=Math.min((userscore/totalScore)*super.getScoreOn(),super.getScoreOn());

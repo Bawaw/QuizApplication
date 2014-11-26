@@ -11,8 +11,8 @@ public class LeastAskedQuestions extends ExercisePoolHandler implements
 	
 	@Override
 	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
-		if(getExercisePool().getExercisePool().size() < amount)
-			throw new DomainException("You need atleast: " + amount + " questions before you can create an evaluation");
+		if(getExercisePool().getUniqueExerciseSet().size() < amount)
+			throw new DomainException("You need atleast: " + amount + " unique questions before you can create an evaluation");
 		HashSet<Exercise> retSet = new HashSet<Exercise>(getExercisePool().getExercisePool().subList(getExercisePool().getExercisePool().size() - amount, getExercisePool().getExercisePool().size()));
 		for (Exercise exercise : retSet) {
 			exercise.increaseTimesPicked();

@@ -13,8 +13,8 @@ public class RandomQuestions extends ExercisePoolHandler implements
 
 	@Override
 	public HashSet<Exercise> selectQuestions(int amount) throws DomainException {
-		if(getExercisePool().getExercisePool().size() < amount)
-			throw new DomainException("You need atleast: " + amount + " questions before you can create an evaluation");
+		if(getExercisePool().getUniqueExerciseSet().size() < amount)
+			throw new DomainException("You need atleast: " + amount + " unique questions before you can create an evaluation");
 		Random r = new Random();
 		HashSet<Exercise> retSet = new HashSet<Exercise>();
 

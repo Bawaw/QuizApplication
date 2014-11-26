@@ -1,8 +1,10 @@
 package domain.enums;
 
+import domain.Question;
+
 public enum QuestionType {
-	YesNoQuestions("FullQualifiedDomainName"),
-	MultipleChoiceQuestions("FullQualifiedDomainName");
+	YesNoQuestions("domain.YesNoQuestion"),
+	MultipleChoiceQuestions("domain.MultipleChoiceQuestion");
 	
 	private String FQDN;
 	

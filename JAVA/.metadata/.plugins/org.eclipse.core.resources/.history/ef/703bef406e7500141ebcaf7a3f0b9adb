@@ -1,0 +1,26 @@
+package domain.enums;
+
+import domain.Question;
+
+public enum QuestionType {
+	YesNoQuestions(Class<YesNoQuestion>,"domain.YesNoQuestion"),
+	MultipleChoiceQuestions(Class<YesNoQuestion>,"domain.MultipleChoiceQuestion");
+	
+	private String FQDN;
+	
+	private QuestionType(Class<Question> clas ,String FQDN){
+		this.setFQDN(FQDN);
+	}
+
+	public String getFQDN() {
+		return FQDN;
+	}
+
+	private void setFQDN(String fQDN) {
+		FQDN = fQDN;
+	}
+	
+	
+	
+}
+

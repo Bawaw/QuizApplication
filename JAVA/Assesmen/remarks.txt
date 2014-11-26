@@ -4,8 +4,6 @@
 		probleem doet zich ook voor bij het verwijderen van een vraag etc 
 *exercisepoolhandler: nut? 
 			zie HashSet<Exercise>(getExercisePool().getExercisePool().subList
-
-*QuestionsByType hoe te doen met enum? 2ifs? return class in enum?
 *Evaluation time allowed = sum of all times? / calculate total time allowed
 		handle feedback
 		score locaal handelen of in controller?

@@ -1,0 +1,22 @@
+package domain;
+
+import java.util.ArrayList;
+
+public class ExercisePoolHandler {
+	private ArrayList<Exercise> exercises;
+	//nut?
+	public ExercisePoolHandler(ArrayList<Exercise> exercises) throws DomainException{
+		this.setExercises(exercises);
+	}
+
+	public ArrayList<Exercise> getExercises() {
+		return exercises;
+	}
+
+	private void setExercises(ArrayList<Exercise> exercises) throws DomainException {
+		if(exercises == null){
+			throw new DomainException("Exercises cannot be null!");
+		}
+		this.exercises = exercises;
+	}
+}

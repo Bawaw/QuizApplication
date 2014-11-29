@@ -1,0 +1,45 @@
+package config;
+
+import java.util.Properties;
+
+import domain.strategy.score.MaxScoreCalculator;
+import domain.strategy.score.ScoreBehaviour;
+
+public class InitConfigHandler {
+	private Properties table;
+	
+	
+	public InitConfigHandler() {
+		this.setTable(new Properties());
+	}
+
+	
+	
+	public Properties getTable() {
+		return table;
+	}
+
+	private void setTable(Properties table) {
+		this.table = table;
+	}
+	
+	
+	public String getScoreBehaviour(){
+		
+	}
+
+	public void saveScoreBehaviour(String scoreBehaviour){
+		
+	}
+	
+	
+	
+	
+	public int getDefaultEvaluationSize(){
+		return 0;
+	}
+	
+	public void saveDefaultEvaluationSize(int size){
+		
+	}
+}

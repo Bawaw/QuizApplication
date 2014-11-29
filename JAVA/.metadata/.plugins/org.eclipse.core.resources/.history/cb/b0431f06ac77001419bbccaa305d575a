@@ -1,0 +1,20 @@
+package config;
+
+public class InitConfigHandler {
+	private Properties table;
+	
+	public InitConfigHandler() {
+		
+	}
+
+	public Properties getTable() {
+		return table;
+	}
+
+	private void setTable(Properties table) {
+		this.table = table;
+	}
+
+	
+	
+}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import domain.enums.ScoreBehaviourType;
+import domain.factory.ScoreBehaviourFactory;
+import domain.strategy.score.ScoreBehaviour;
 
 public abstract class Evaluation {
 	ArrayList<Entry<Exercise, Answer>> exercises;

@@ -1,0 +1,37 @@
+package domain.factory;
+
+import java.lang.reflect.Constructor;
+
+import domain.DomainException;
+import domain.Evaluation;
+import domain.ExercisePool;
+import domain.enums.QuestionSelectionBehaviourType;
+import domain.enums.ScoreBehaviourType;
+import domain.strategy.questionSelection.QuestionSelectionbehaviour;
+import domain.strategy.score.ScoreBehaviour;
+
+public class QuestionSelectAlgFactory {
+
+	public static QuestionSelectionbehaviour createStandard(Evaluation evaluation) throws DomainException{
+		ScoreBehaviourType scorebehaviourtype=null;
+		return ScoreBehaviourFactory.create(evaluation, scorebehaviourtype);
+	}
+	
+	
+	
+	public static QuestionSelectionbehaviour create(ExercisePool exercisePool,
+			QuestionSelectionBehaviourType questionSelectionBehaviourType) throws DomainException {
+		QuestionSelectionBehaviour questionSelectionBehaviour = null;
+
+		try {
+			Class<?> c = Class.forName(scorebehaviourtype.getFQDN());
+			Constructor<?> constructor = c.getConstructor(evaluation.getClass());
+			scoreBehaviour = (ScoreBehaviour) constructor
+					.newInstance(evaluation);
+		} catch (Exception e) {
+			throw new DomainException("fACTORY ERROR",e);
+		}
+		return questionSelectionBehaviour;
+	}
+
+}

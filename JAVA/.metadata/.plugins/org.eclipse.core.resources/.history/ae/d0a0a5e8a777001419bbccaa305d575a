@@ -1,0 +1,18 @@
+package domain;
+
+
+public class MaxScoreCalculator  extends ScoreBehaviour{
+
+	
+	
+	public MaxScoreCalculator(Evaluation test) throws DomainException {
+		super(test);
+	}
+
+	@Override
+	public int scoreWhenCorrect(Exercise ex) {
+		return ex.getScore();
+	}
+
+	
+}

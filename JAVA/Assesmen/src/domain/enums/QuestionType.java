@@ -1,6 +1,5 @@
 package domain.enums;
 
-import domain.Question;
 
 public enum QuestionType {
 	YesNoQuestions("domain.YesNoQuestion"),

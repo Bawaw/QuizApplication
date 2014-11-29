@@ -1,0 +1,9 @@
+package domain.factory;
+
+public class QuestionSelectAlgFactory {
+
+	public QuestionSelectAlgFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

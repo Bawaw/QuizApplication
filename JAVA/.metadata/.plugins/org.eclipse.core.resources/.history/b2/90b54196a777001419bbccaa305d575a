@@ -1,0 +1,16 @@
+package domain;
+
+
+public class MaxScoreCalculator  extends ScoreBehaviour{
+
+	
+	
+	public MaxScoreCalculator(Evaluation test) throws DomainException {
+		super(test);
+	}
+
+	
+	
+	
+
+}

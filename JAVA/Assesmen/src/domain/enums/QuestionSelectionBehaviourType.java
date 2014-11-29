@@ -1,9 +1,9 @@
 package domain.enums;
 
 public enum QuestionSelectionBehaviourType {
-	LeastAskedQuestions("FullQualifiedDomainName"),
-	RandomQuestions("FullQualifiedDomainName"),
-	QuestionsByType("FullQualifiedDomainName");
+	LeastAskedQuestions("domain.strategy.questionSelection.LeastAskedQuestions"),
+	RandomQuestions("domain.strategy.questionSelection.RandomQuestions"),
+	QuestionsByType("domain.strategy.questionSelection.QuestionsByType");
 	
 	private String FQDN;
 	

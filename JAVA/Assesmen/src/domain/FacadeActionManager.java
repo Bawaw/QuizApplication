@@ -1,5 +1,7 @@
 package domain;
 
+import domain.strategy.questionSelection.QuestionSelectionFactory;
+
 public class FacadeActionManager {
 	FeedbackPool feedbackPool;
 	ParticipationPool participations;

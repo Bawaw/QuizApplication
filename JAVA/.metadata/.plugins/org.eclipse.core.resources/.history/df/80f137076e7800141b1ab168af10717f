@@ -1,0 +1,9 @@
+package domain.factory;
+
+public class QuestionFactory {
+
+	public QuestionFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

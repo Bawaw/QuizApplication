@@ -1,0 +1,25 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+
+import domain.FacadeActionManager;
+
+public class QuestionOverviewAction extends AbstractTestAction {
+
+	public QuestionOverviewAction(FacadeActionManager service) {
+		super(service);
+		// TODO Auto-generated constructor stub
+	}
+
+	public QuestionOverviewAction(FacadeActionManager service, String caption) {
+		super(service, caption);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

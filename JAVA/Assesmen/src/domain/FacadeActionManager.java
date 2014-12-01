@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 import domain.strategy.questionSelection.QuestionSelectionFactory;
 
 public class FacadeActionManager {
@@ -15,11 +17,25 @@ public class FacadeActionManager {
 	// config handler
 
 	public FacadeActionManager() {
+		exercisePool = new ExercisePool();
+		categoryPool = new CategoryPool();
+	}
+	
+	//public void edit("vraagstelling",[] cat,[] feedbavk,score[]){
+		//ArrayList<Exercise> questions=exercisePool.getExerciseByQuestion(vraagstelling);	
+	//}
+	
 
+	public void removeExercise(Exercise exercise){
+		
 	}
 	
 	public void addCategory(Category category){
-		getCategoryPool().AddAnswer(category);
+		categoryPool.AddCategory(category);
+	}
+	
+	public ArrayList<Category> getCategoryList(){
+		return new ArrayList<Category>(getCategoryPool().getCategoryPool());
 	}
 
 	public CategoryPool getCategoryPool() {

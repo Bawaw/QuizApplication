@@ -7,6 +7,9 @@ public class Category {
 	private String description;
 	private ArrayList<Feedback> feedbacks;
 
+	public Category() {
+		
+	}
 	public Category(String name, String description,
 			ArrayList<Feedback> feedbacks) throws DomainException {
 		this.setFeedbacks(feedbacks);

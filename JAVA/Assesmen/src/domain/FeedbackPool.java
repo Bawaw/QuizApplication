@@ -5,9 +5,8 @@ import java.util.HashSet;
 public class FeedbackPool {
 private HashSet<Feedback> feedbacks;
 
-	public FeedbackPool(HashSet<Feedback> feedbacks) {
+	public FeedbackPool() {
 		feedbacks = new HashSet<Feedback>();
-		setFeedbacks(feedbacks);
 	}
 	
 	public HashSet<Feedback> getAllStandardFeedbacks(){

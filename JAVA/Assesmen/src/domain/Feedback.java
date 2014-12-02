@@ -1,5 +1,7 @@
 package domain;
 
+import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
+
 public class Feedback {
 	private String text;
 	
@@ -16,6 +18,10 @@ public class Feedback {
 			throw new DomainException("Invalid feedbacktext");
 		}
 		this.text = text;
+	}
+	
+	public String toString(){
+		return getText();
 	}
 	
 	

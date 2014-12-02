@@ -8,18 +8,6 @@ public class CategoryPool {
 
 	public CategoryPool() {
 		categoryPool = new HashSet<Category>();
-
-		// temp
-		try {
-			Category temp = new Category();
-			temp.setName("test");
-			temp.setDescription("description test");
-			AddCategory(temp);
-		} catch (DomainException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 
 	public HashSet<Category> getCategoryPool() {

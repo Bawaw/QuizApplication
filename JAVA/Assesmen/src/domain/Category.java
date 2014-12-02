@@ -8,7 +8,7 @@ public class Category {
 	private ArrayList<Feedback> feedbacks;
 
 	public Category() {
-		
+		feedbacks = new ArrayList<Feedback>();
 	}
 	public Category(String name, String description,
 			ArrayList<Feedback> feedbacks) throws DomainException {
@@ -43,7 +43,7 @@ public class Category {
 		return feedbacks;
 	}
 
-	private void setFeedbacks(ArrayList<Feedback> feedbacks) {
+	public void setFeedbacks(ArrayList<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
 

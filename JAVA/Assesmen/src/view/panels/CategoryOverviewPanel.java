@@ -33,8 +33,7 @@ public class CategoryOverviewPanel extends JPanel {
 		initConstraints();
 		int row = 0;
 		initListTitle(row);
-		row++;
-		initList(row, editAction);
+		initList(++row, editAction);
 		row += 10;
 		//initButtons(row, newAction);
 	}

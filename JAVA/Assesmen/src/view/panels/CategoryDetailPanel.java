@@ -4,19 +4,23 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import domain.Category;
 import domain.DomainException;
+import domain.Feedback;
 
 
 public class CategoryDetailPanel extends JPanel {
@@ -24,24 +28,23 @@ public class CategoryDetailPanel extends JPanel {
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private JButton btnOK, btnCancel;
 	private JTextField titleField, descriptionField; 
-	private JComboBox<Category> categoryField;
+	private JList feedbackField;
 	private Category category;
 	private List<Category> categories;
+	private List<Feedback> feedbacks;
 	
 	public CategoryDetailPanel(Action action) {
 		setCategory(category);
 		setCategories(categories);
+		setFeedbacks(feedbacks);
 		
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int rij = 0;
-		initTitle(rij);
-		rij++;
-		initDescription(rij);
-		rij++;
-		initMainCategory(rij);
-		rij++;
-		initButtons(rij, action);
+		initTitle(++rij);
+		initDescription(++rij);
+		initStandardFeedback(++rij);
+		initButtons(++rij, action);
 	}
 
 	protected void initTitle(int rij) {
@@ -62,13 +65,13 @@ public class CategoryDetailPanel extends JPanel {
 		addToPanel(descriptionField);
 	}
 
-	protected void initMainCategory(int rij) {
+	protected void initStandardFeedback(int rij) {
 		changeConstraints(1, 1, 0, rij);
-		addToPanel(new JLabel("Main Category: "));
+		addToPanel(new JLabel("Feedback: "));
 
 		changeConstraints(1, 1, 1, rij);
-		categoryField = new JComboBox<Category>();
-		addToPanel(categoryField);
+		feedbackField = new JList();
+		addToPanel(feedbackField);
 	}
 
 	protected void initButtons(int rij, Action action) {
@@ -124,6 +127,7 @@ public class CategoryDetailPanel extends JPanel {
 		try {
 			getCategory().setName(titleField.getText());
 			getCategory().setDescription(descriptionField.getText());
+			getCategory().setFeedbacks((ArrayList<Feedback>) feedbackField.getSelectedValuesList());
 		} catch (DomainException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -140,12 +144,29 @@ public class CategoryDetailPanel extends JPanel {
 		this.categories = categories;
 		update();
 	}
+	
+	public List<Feedback> getFeedbacks(){
+		return feedbacks;
+	}
+	
+	public void setFeedbacks(List<Feedback> feedbacks){
+		this.feedbacks = feedbacks;
+		update();
+	}
 
 	private void update() {
-		if (getCategories() != null) {
-			Vector<Category> cats = new Vector<Category>(getCategories());
-			DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
-			categoryField.setModel(categoriesModel);
+		//if (getCategories() != null) {
+			//Vector<Category> cats = new Vector<Category>(getCategories());
+			//DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
+			//feedbackField.setModel(categoriesModel);
+		//}
+		
+		if (getFeedbacks() != null) {
+			DefaultListModel<Feedback> feedModel = new DefaultListModel<Feedback>();
+			for (Feedback f : getFeedbacks()) {
+				feedModel.addElement(f);
+			}
+			feedbackField.setModel(feedModel);
 		}
 
 		if (getCategory() != null) {

@@ -19,22 +19,39 @@ public class FacadeActionManager {
 	public FacadeActionManager() {
 		exercisePool = new ExercisePool();
 		categoryPool = new CategoryPool();
-	}
-	
-	//public void edit("vraagstelling",[] cat,[] feedbavk,score[]){
-		//ArrayList<Exercise> questions=exercisePool.getExerciseByQuestion(vraagstelling);	
-	//}
-	
-
-	public void removeExercise(Exercise exercise){
+		feedbackPool = new FeedbackPool();
 		
+		// temp
+		try {
+			Category temp = new Category();
+			Feedback feed = new Feedback("Swing is so 1996");
+			Feedback feed2 = new Feedback("blabla");
+			temp.setName("test");
+			temp.setDescription("description test");
+			feedbackPool.addFeedback(feed);
+			feedbackPool.addFeedback(feed2);
+			temp.addFeedback(feed);
+			temp.addFeedback(feed2);
+			categoryPool.AddCategory(temp);
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public void addCategory(Category category){
+
+	// public void edit("vraagstelling",[] cat,[] feedbavk,score[]){
+	// ArrayList<Exercise>
+	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
+	// }
+
+	public void removeExercise(Exercise exercise) {
+
+	}
+
+	public void addCategory(Category category) {
 		categoryPool.AddCategory(category);
 	}
-	
-	public ArrayList<Category> getCategoryList(){
+
+	public ArrayList<Category> getCategoryList() {
 		return new ArrayList<Category>(getCategoryPool().getCategoryPool());
 	}
 

@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="domain.QuestionType"/>
 <fullyQualifiedTypeName name="domain.AnswerPool"/>
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
-<fullyQualifiedTypeName name="domain.Feedback"/>
 <fullyQualifiedTypeName name="domain.Question"/>
 <fullyQualifiedTypeName name="java.lang.Comparable"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -32,11 +31,19 @@
 <fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="domain.TestService"/>
 <fullyQualifiedTypeName name="domain.FacadeActionManager"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="domain.ExercisePool"/>
-<fullyQualifiedTypeName name="domain.CategoryPool"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="domain.Category"/>
 <fullyQualifiedTypeName name="view.panels.CategoryOverviewPanel"/>
 <fullyQualifiedTypeName name="controller.QuestionOverviewAction"/>
+<fullyQualifiedTypeName name="view.panels.JComboCheckBox"/>
+<fullyQualifiedTypeName name="javax.swing.JList"/>
+<fullyQualifiedTypeName name="domain.FeedbackPool"/>
+<fullyQualifiedTypeName name="domain.CategoryPool"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
+<fullyQualifiedTypeName name="java.sql.Array"/>
+<fullyQualifiedTypeName name="domain.Feedback"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter"/>
 </qualifiedTypeNameHistroy>

@@ -12,8 +12,6 @@ import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
-import controller.QuestionOverviewAction;
-import domain.FacadeActionManager;
 import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
@@ -22,7 +20,6 @@ public class CompetentieTesterApp {
 		
 		
 		CategoryOverviewAction categoryOverviewAction = new CategoryOverviewAction(service);
-		QuestionOverviewAction questionOverviewAction = new QuestionOverviewAction(service);
 		CategoryEditAction categoryEditAction = new CategoryEditAction(service);
 		CategoryNewAction categoryNewAction = new CategoryNewAction(service);
 		CategoryDoneAction categoryDoneAction = new CategoryDoneAction(service);

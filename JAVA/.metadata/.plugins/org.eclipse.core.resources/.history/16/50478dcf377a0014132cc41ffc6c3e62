@@ -1,0 +1,19 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+
+import domain.FacadeActionManager;
+
+public class SettingsSaveAction  extends AbstractTestAction{
+
+	public SettingsSaveAction(FacadeActionManager service) {
+		super(service, "Save");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

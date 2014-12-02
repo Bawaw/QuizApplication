@@ -12,13 +12,11 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionbehaviour"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="domain.ScoreBehaviour"/>
 <fullyQualifiedTypeName name="domain.ParticipationPool"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionFactory"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="domain.Participation"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="domain.Exercise"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
@@ -46,4 +44,16 @@
 <fullyQualifiedTypeName name="domain.Feedback"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter"/>
+<fullyQualifiedTypeName name="controller.SettingsOverviewController"/>
+<fullyQualifiedTypeName name="controller.SettingsOverviewAction"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="controller.SettingsSaveAction"/>
+<fullyQualifiedTypeName name="view.panels.SettingsOverviewPanel"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="javax.swing.JComponent"/>
+<fullyQualifiedTypeName name="javax.swing.JSlider"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
 </qualifiedTypeNameHistroy>

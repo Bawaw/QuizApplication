@@ -35,7 +35,7 @@ public class CategoryOverviewPanel extends JPanel {
 		initListTitle(row);
 		initList(++row, editAction);
 		row += 10;
-		//initButtons(row, newAction);
+		initButtons(row, newAction);
 	}
 
 	private void initListTitle(int rij) {

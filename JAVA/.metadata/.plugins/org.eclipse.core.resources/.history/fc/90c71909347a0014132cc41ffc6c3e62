@@ -1,0 +1,9 @@
+package controller;
+
+public class SettingsOverviewController {
+
+	public SettingsOverviewController() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

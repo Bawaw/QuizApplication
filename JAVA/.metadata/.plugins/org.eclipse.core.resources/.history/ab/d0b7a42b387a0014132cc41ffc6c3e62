@@ -1,0 +1,31 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+
+import view.panels.CategoryDetailPanel;
+import domain.FacadeActionManager;
+
+public class SettingsSaveAction  extends AbstractTestAction{
+	private static final long serialVersionUID = 1L;
+	private CategoryDetailPanel detailPanel;
+	
+	
+	public SettingsSaveAction(FacadeActionManager service) {
+		super(service, "Save");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		this.getDetailPanel().
+		
+	}
+
+	
+	private CategoryDetailPanel getDetailPanel() {
+		return detailPanel;
+	}
+
+	public void setDetailPanel(CategoryDetailPanel detailPanel) {
+		this.detailPanel = detailPanel;
+	}
+}

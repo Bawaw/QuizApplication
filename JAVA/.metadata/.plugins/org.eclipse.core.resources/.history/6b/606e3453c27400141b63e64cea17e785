@@ -1,9 +1,0 @@
-package domain;
-
-public class TestHandler {
-
-	public TestHandler() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

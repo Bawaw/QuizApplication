@@ -1,0 +1,20 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+
+import domain.FacadeActionManager;
+
+public class SettingsOverviewController extends AbstractTestAction {
+
+	public SettingsOverviewController(FacadeActionManager service) {
+		super(service,"Settings");
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

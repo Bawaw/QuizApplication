@@ -137,11 +137,13 @@ public class CategoryDetailPanel extends JPanel {
 				if(boxes.getElementAt(i).isSelected())
 					selectedFeedbacks.add(getFeedbackByName(boxes.getElementAt(i).getText()));
 			}
-			getCategory().setFeedbacks(selectedFeedbacks);
+				
+			}
 		} catch (DomainException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		//TODO standaard feedback
 		return getCategory();
 	}
 
@@ -172,7 +174,14 @@ public class CategoryDetailPanel extends JPanel {
 	}
 
 	private void update() {
+		if (getCategories() != null) {
+			Vector<Category> cats = new Vector<Category>(getCategories());
+			DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
+			feedbackField.setModel(categoriesModel);
+		}
+		
 		if (getFeedbacks() != null) {
+			//DefaultListModel<Feedback> feedModel = new DefaultListModel<Feedback>();
 			ArrayList<JCheckBox> feedModel = new ArrayList<JCheckBox>();
 			for (Feedback f : getFeedbacks()) {
 				JCheckBox box = new JCheckBox(f.getText());

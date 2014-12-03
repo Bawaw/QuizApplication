@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 
 import view.CheckBoxList;
 import domain.Category;
@@ -131,26 +130,13 @@ public class CategoryDetailPanel extends JPanel {
 		try {
 			getCategory().setName(titleField.getText());
 			getCategory().setDescription(descriptionField.getText());
-			ListModel<JCheckBox> boxes = feedbackField.getModel();
-			ArrayList<Feedback> selectedFeedbacks = new ArrayList<Feedback>();
-			for (int i = 0; i < boxes.getSize(); i++) {
-				if(boxes.getElementAt(i).isSelected())
-					selectedFeedbacks.add(getFeedbackByName(boxes.getElementAt(i).getText()));
-			}
-			getCategory().setFeedbacks(selectedFeedbacks);
+			getCategory().setFeedbacks((ArrayList<Feedback>) feedbackField.getSelectedValuesList());
 		} catch (DomainException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		//TODO standaard feedback
 		return getCategory();
-	}
-
-	public Feedback getFeedbackByName(String text){
-		for (Feedback f : getFeedbacks()) {
-			if(f.getText().equals(text))
-				return f;
-		}
-		return null;
 	}
 
 	private List<Category> getCategories() {
@@ -172,17 +158,19 @@ public class CategoryDetailPanel extends JPanel {
 	}
 
 	private void update() {
+		if (getCategories() != null) {
+			Vector<Category> cats = new Vector<Category>(getCategories());
+			DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
+			feedbackField.setModel(categoriesModel);
+		}
+		
 		if (getFeedbacks() != null) {
+			//DefaultListModel<Feedback> feedModel = new DefaultListModel<Feedback>();
 			ArrayList<JCheckBox> feedModel = new ArrayList<JCheckBox>();
 			for (Feedback f : getFeedbacks()) {
-				JCheckBox box = new JCheckBox(f.getText());
-
-				if(getCategory().getFeedbacks().contains(f))
-					box.setSelected(true);
-				feedModel.add(box);
-					
+				feedModel.add(new JCheckBox(f.getText()));
 			}
-			feedbackField.setListData(feedModel.toArray());;
+			feedbackField.setListData(feedModel);;
 		}
 
 		if (getCategory() != null) {

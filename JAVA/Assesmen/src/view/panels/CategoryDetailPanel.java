@@ -1,23 +1,19 @@
 package view.panels;
 
-import java.awt.Checkbox;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.ScrollPane;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.Action;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 
@@ -30,14 +26,14 @@ import domain.Feedback;
 public class CategoryDetailPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints constraints = new GridBagConstraints();
-	private JButton btnOK, btnCancel;
-	private JTextField titleField, descriptionField; 
+	private JButton btnOK, btnCancel,btnRemoveFeedback,btnAddFeedback;
+	private JTextField titleField, descriptionField,newFeedbackField; 
 	private CheckBoxList feedbackField;
 	private Category category;
 	private List<Category> categories;
 	private List<Feedback> feedbacks;
 	
-	public CategoryDetailPanel(Action action) {
+	public CategoryDetailPanel(Action action,Action feedbackAction) {
 		setCategory(category);
 		setCategories(categories);
 		setFeedbacks(feedbacks);
@@ -48,14 +44,47 @@ public class CategoryDetailPanel extends JPanel {
 		initTitle(++rij);
 		initDescription(++rij);
 		initStandardFeedback(++rij);
+		initbtnRemoveFeedback(++rij, feedbackAction);
+		initAddFeedback(++rij,feedbackAction);
 		initButtons(++rij, action);
 	}
+	
+	public String getNewFeedbackFieldText(){
+		return newFeedbackField.getText();
+	}
+	
+	public void clearfeedbackFieldText(){
+		newFeedbackField.setText("");
+	}
+	
+	protected void initAddFeedback(int rij, Action action) {
+		btnAddFeedback = new JButton("Add");
+		changeConstraints(1, 1, 2, rij);		
+		btnAddFeedback.setAction(action);
+		btnAddFeedback.setActionCommand("AddFeedback");
+		btnAddFeedback.setText("Add");
+		addToPanel(btnAddFeedback);
+		newFeedbackField = new JTextField();
+		changeConstraints(1, 1, 1, rij);
+		addToPanel(newFeedbackField);
+	}
+
+	
+	protected void initbtnRemoveFeedback(int rij, Action action) {
+		btnRemoveFeedback = new JButton("Remove");
+		changeConstraints(1, 2, 1, rij);		
+		btnRemoveFeedback.setAction(action);
+		btnRemoveFeedback.setActionCommand("RemoveFeedback");
+		btnRemoveFeedback.setText("Remove");
+		addToPanel(btnRemoveFeedback);
+	}
+
 
 	protected void initTitle(int rij) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Title: "));
 
-		changeConstraints(1, 1, 1, rij);
+		changeConstraints(1, 2, 1, rij);
 		titleField = new JTextField();
 		addToPanel(titleField);
 	}
@@ -64,18 +93,18 @@ public class CategoryDetailPanel extends JPanel {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Description: "));
 
-		changeConstraints(1, 1, 1, rij);
+		changeConstraints(1, 2, 1, rij);
 		descriptionField = new JTextField();
 		addToPanel(descriptionField);
 	}
 
 	protected void initStandardFeedback(int rij) {
 		changeConstraints(1, 1, 0, rij);
-		addToPanel(new JLabel("Feedback: "));
+		addToPanel(new JLabel("Feedback (select all that apply): "));
 
-		changeConstraints(1, 1, 1, rij);
+		changeConstraints(1, 2, 1, rij);
 		feedbackField = new CheckBoxList();
-		addToPanel(feedbackField);
+		addToPanel(new JScrollPane(feedbackField));
 	}
 
 	protected void initButtons(int rij, Action action) {
@@ -88,7 +117,7 @@ public class CategoryDetailPanel extends JPanel {
 
 		btnOK = new JButton("Save");
 		btnOK.isDefaultButton();		
-		changeConstraints(1, 1, 1, rij);
+		changeConstraints(1, 2, 1, rij);
 		btnOK.setAction(action);
 		btnOK.setActionCommand("Save");
 		btnOK.setText("Save");
@@ -96,7 +125,7 @@ public class CategoryDetailPanel extends JPanel {
 	}
 
 	private void initConstraints() {
-		constraints.insets = new Insets(10, 10, 0, 10);
+		constraints.insets = new Insets(10, 20, 10, 20);
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1.0;
 		constraints.weighty = 1.0;
@@ -119,6 +148,10 @@ public class CategoryDetailPanel extends JPanel {
 
 	private Category getCategory() {
 		return category;
+	}
+	
+	public String getSelectedValue(){
+		return ((JCheckBox) feedbackField.getSelectedValue()).getText();
 	}
 
 	public void setCategory(Category category) {

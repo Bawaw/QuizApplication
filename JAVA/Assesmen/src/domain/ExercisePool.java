@@ -3,11 +3,11 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
-
 	public ExercisePool() {
 		exercises = new ArrayList<Exercise>();
 	}
@@ -19,6 +19,13 @@ public class ExercisePool {
 		removeExercise(oldExercise);
 		addExercise(newExercise);
 		Collections.sort(exercises);
+	}
+	
+	public void removeFeedback(Feedback feedback) throws DomainException{
+		for (Exercise e : getExercisePool()) {
+			if(e.getFeedback().equals(feedback))
+				e.setFeedback(new Feedback(Feedback.STANDARD_FEEDBACK));
+		}
 	}
 	
 	public void addExercise(Exercise exercise) throws DomainException{

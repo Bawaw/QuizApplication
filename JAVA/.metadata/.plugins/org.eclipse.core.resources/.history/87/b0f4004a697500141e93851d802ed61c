@@ -1,9 +1,0 @@
-package domain;
-
-public class CategoryPool {
-
-	public CategoryPool() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

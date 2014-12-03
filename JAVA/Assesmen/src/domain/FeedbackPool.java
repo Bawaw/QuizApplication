@@ -21,4 +21,8 @@ private HashSet<Feedback> feedbacks;
 	private void setFeedbacks(HashSet<Feedback> feedbacks){
 		this.feedbacks = feedbacks;
 	}
+	
+	public void removeFeedback(Feedback feedback){
+		getAllStandardFeedbacks().remove(feedback);
+	}
 }

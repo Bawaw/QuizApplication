@@ -28,6 +28,8 @@ public class CategoryDoneAction extends AbstractTestAction {
 			getService().addCategory(getDetailPanel().getCreatedCategory());	
 		}
 		
+		System.out.println(getService().getFeedbackPool().getAllStandardFeedbacks().size());
+		
 		List<Category> categories = getService().getCategoryList();
 		getOverviewPanel().setCategories(categories);
 		try {

@@ -13,6 +13,7 @@ import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
+import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.SettingsOverviewAction;
 import controller.SettingsSaveAction;
@@ -27,13 +28,14 @@ public class CompetentieTesterApp {
 		CategoryEditAction categoryEditAction = new CategoryEditAction(service);
 		CategoryNewAction categoryNewAction = new CategoryNewAction(service);
 		CategoryDoneAction categoryDoneAction = new CategoryDoneAction(service);
+		FeedBackActionManager feedbackActionManager = new FeedBackActionManager(service);
 		
 		SettingsOverviewAction settingsOverviewAction = new SettingsOverviewAction(service);
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction);
-		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction);
+		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
 		
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
@@ -43,6 +45,7 @@ public class CompetentieTesterApp {
 		categoryDoneAction.setOverviewPanel(categoryOverviewPanel);
 		settingsSaveAction.setOverviewPanel(settingsOverviewPanel);
 		jsliderAmountAction.setSettingsOverviewPanel(settingsOverviewPanel);
+		feedbackActionManager.setCategoryDetailPanel(categoryDetailPanel);
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		
@@ -60,7 +63,7 @@ public class CompetentieTesterApp {
 		categoryDoneAction.setView(mainView);
 		settingsOverviewAction.setView(mainView);
 		settingsSaveAction.setView(mainView);
-		
+		feedbackActionManager.setView(mainView);
 		mainView.setVisible(true);
 		
 	}

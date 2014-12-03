@@ -56,7 +56,7 @@ public class CategoryDetailPanel extends JPanel {
 		return newFeedbackField.getText();
 	}
 	public void initLabel(int rij){
-		alreadyExist=new JLabel();
+		alreadyExist=new JLabel(" ");
 		changeConstraints(1, 2, 1, rij);		
 		addToPanel(alreadyExist);
 	}

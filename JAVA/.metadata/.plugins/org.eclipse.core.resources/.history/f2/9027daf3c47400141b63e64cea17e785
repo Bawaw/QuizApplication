@@ -1,9 +1,0 @@
-package domain;
-
-public class QuestionSelectionbehaviour {
-
-	public QuestionSelectionbehaviour() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

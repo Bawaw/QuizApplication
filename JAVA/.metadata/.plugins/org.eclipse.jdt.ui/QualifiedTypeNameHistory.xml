@@ -20,7 +20,6 @@
 <fullyQualifiedTypeName name="domain.Exercise"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
-<fullyQualifiedTypeName name="domain.enums.QuestionSelectionBehaviourType"/>
 <fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="domain.strategy.score.ScoreBehaviour"/>
 <fullyQualifiedTypeName name="domain.strategy.score.MaxScoreCalculator"/>
@@ -50,10 +49,15 @@
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="controller.SettingsSaveAction"/>
-<fullyQualifiedTypeName name="view.panels.SettingsOverviewPanel"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="javax.swing.JComponent"/>
-<fullyQualifiedTypeName name="javax.swing.JSlider"/>
+<fullyQualifiedTypeName name="domain.enums.ScoreBehaviourType"/>
+<fullyQualifiedTypeName name="domain.enums.QuestionSelectionBehaviourType"/>
+<fullyQualifiedTypeName name="config.InitConfigHandler"/>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="javax.swing.JSlider"/>
+<fullyQualifiedTypeName name="view.panels.SettingsOverviewPanel"/>
+<fullyQualifiedTypeName name="javax.swing.event.ChangeListener"/>
+<fullyQualifiedTypeName name="controller.JsliderAmountAction"/>
 </qualifiedTypeNameHistroy>

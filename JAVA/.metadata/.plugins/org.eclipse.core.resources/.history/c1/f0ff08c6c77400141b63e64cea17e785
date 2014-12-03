@@ -1,9 +1,0 @@
-package domain;
-
-public class Exercise {
-
-	public Exercise() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

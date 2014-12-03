@@ -1,9 +1,0 @@
-package domain;
-
-public class FeedbackPool {
-
-	public FeedbackPool() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

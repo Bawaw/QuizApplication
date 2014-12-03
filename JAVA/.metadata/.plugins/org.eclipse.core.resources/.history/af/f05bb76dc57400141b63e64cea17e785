@@ -1,9 +1,0 @@
-package domain;
-
-public class ExcercisePoolHandler {
-
-	public ExcercisePoolHandler() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

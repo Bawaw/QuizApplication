@@ -27,28 +27,33 @@ public class FeedBackActionManager extends AbstractTestAction {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("AddFeedback")) {
 			try {
-				String newFeedback = getCategoryDetailPanel().getNewFeedbackFieldText();
-				getService().addFeedback(newFeedback);
-				updateFeedbackList();
+				String newFeedbak = getCategoryDetailPanel()
+						.getNewFeedbackFieldText();
+				getService().addFeedback(newFeedbak);
+				getCategoryDetailPanel().setFeedbacks(
+						new ArrayList(getService().getFeedbackPool()
+								.getAllStandardFeedbacks()));
+				getCategoryDetailPanel().clearfeedbackFieldText();
 			} catch (DomainException e1) {
 				e1.printStackTrace();
 			}
 		}
 		else{
 			try {
-				String oldFeedback = getCategoryDetailPanel().getSelectedValue();
-				getService().removeFeedback(oldFeedback);
-				updateFeedbackList();
+				String oldFeedbak = getCategoryDetailPanel()
+						.getSelectedValue();
+				getService().removeFeedback(oldFeedbak);
+				getCategoryDetailPanel().setFeedbacks(
+						new ArrayList(getService().getFeedbackPool()
+								.getAllStandardFeedbacks()));
+				
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(super.getView(),"Select a feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(super.getView(),"Select feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
+				//e1.printStackTrace();
 			}
 		}
 	}
 
-	private void updateFeedbackList(){
-		getCategoryDetailPanel().setFeedbacks(new ArrayList(getService().getFeedbackPool().getAllStandardFeedbacks()));
-	}
-	
 	public CategoryDetailPanel getCategoryDetailPanel() {
 		return categoryDetailPanel;
 	}

@@ -76,7 +76,7 @@ public class SettingsOverviewPanel extends JPanel {
 	}
 
 	private void initConstraints() {
-		constraints.insets = new Insets(10, 20, 10, 20);
+		constraints.insets = new Insets(10, 10, 0, 10);
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.weightx = 1.0;
 		constraints.weighty = 1.0;

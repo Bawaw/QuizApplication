@@ -3,8 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
@@ -26,26 +24,25 @@ public class CategoryDoneAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e){
-		//probleem: Wanneer we category editten -> geeft hij terug dat die category al bestaat met die naam. (logisch)
-		//probleem2: Wanneer we een categroy die al bestaat de naam aanpassen, komt deze 2 maal in lijst te staan (no idea)
-		
 		
 		if(e.getActionCommand().equals("Save")){
 			try{
-				getService().addCategory(getDetailPanel().getCreatedCategory());
-				List<Category> categories = getService().getCategoryList();
-				getOverviewPanel().setCategories(categories);
-				getOverviewPanel().update();
-				setPanelAsContentForView(getOverviewPanel());	
-				System.out.println(this.getService().getCategoryPool().getCategoryPool().size());
+			getService().addCategory(getDetailPanel().getCreatedCategory());	
 			}
-			catch (Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+		catch (Exception ex){
+			System.out.println(ex.getMessage());
 			}
 		}
-		else{
-			setPanelAsContentForView(getOverviewPanel());		
+		
+
+		List<Category> categories = getService().getCategoryList();
+		getOverviewPanel().setCategories(categories);
+		try {
+			getOverviewPanel().update();
+		} catch (ViewException e1) {
+			e1.printStackTrace();
 		}
+		setPanelAsContentForView(getOverviewPanel());		
 	}
 
 	private CategoryOverviewPanel getOverviewPanel() {

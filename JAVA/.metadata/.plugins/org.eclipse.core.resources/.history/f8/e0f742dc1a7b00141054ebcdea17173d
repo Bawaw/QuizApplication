@@ -36,11 +36,13 @@ public class FeedBackActionManager extends AbstractTestAction {
 		}
 		else{
 			try {
-				String oldFeedback = getCategoryDetailPanel().getSelectedValue();
-				getService().removeFeedback(oldFeedback);
+				String oldFeedbak = getCategoryDetailPanel()
+						.getSelectedValue();
+				getService().removeFeedback(oldFeedbak);
 				updateFeedbackList();
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(super.getView(),"Select a feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(super.getView(),"Select feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
+				//e1.printStackTrace();
 			}
 		}
 	}

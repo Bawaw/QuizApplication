@@ -26,8 +26,8 @@ public class CategoryDoneAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e){
-		//probleem: Wanneer we category editten -> geeft hij terug dat die category al bestaat met die naam. (logisch)
-		//probleem2: Wanneer we een categroy die al bestaat de naam aanpassen, komt deze 2 maal in lijst te staan (no idea)
+		//probleem: Wanneer we category editten -> geeft hij terug dat die category al bestaat met die naam.
+		//probleem2: Wanneer we een categroy die al bestaat de naam aanpassen, komt deze 2 maal in lijst te staan
 		
 		
 		if(e.getActionCommand().equals("Save")){
@@ -40,7 +40,8 @@ public class CategoryDoneAction extends AbstractTestAction {
 				System.out.println(this.getService().getCategoryPool().getCategoryPool().size());
 			}
 			catch (Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				System.out.println(ex.getMessage());
+				//JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else{

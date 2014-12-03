@@ -1,5 +1,5 @@
 #Admin Settings
-#Wed Dec 03 12:24:30 CET 2014
+#Wed Dec 03 19:38:22 CET 2014
 questionBehaviour=RandomQuestions
-evaluationSize=5
+evaluationSize=17
 scoreBehaviour=ErrorCorrectionCalculator

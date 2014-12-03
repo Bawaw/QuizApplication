@@ -13,6 +13,7 @@ import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
+import controller.CategoryRemoveAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.SettingsOverviewAction;
@@ -29,12 +30,12 @@ public class CompetentieTesterApp {
 		CategoryNewAction categoryNewAction = new CategoryNewAction(service);
 		CategoryDoneAction categoryDoneAction = new CategoryDoneAction(service);
 		FeedBackActionManager feedbackActionManager = new FeedBackActionManager(service);
-		
+		CategoryRemoveAction categoryRemoveAction = new CategoryRemoveAction(service);
 		SettingsOverviewAction settingsOverviewAction = new SettingsOverviewAction(service);
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 
-		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction);
+		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
 		
@@ -46,6 +47,7 @@ public class CompetentieTesterApp {
 		settingsSaveAction.setOverviewPanel(settingsOverviewPanel);
 		jsliderAmountAction.setSettingsOverviewPanel(settingsOverviewPanel);
 		feedbackActionManager.setCategoryDetailPanel(categoryDetailPanel);
+		categoryRemoveAction.setOverviewPanel(categoryOverviewPanel);
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		
@@ -64,6 +66,7 @@ public class CompetentieTesterApp {
 		settingsOverviewAction.setView(mainView);
 		settingsSaveAction.setView(mainView);
 		feedbackActionManager.setView(mainView);
+		categoryRemoveAction.setView(mainView);
 		mainView.setVisible(true);
 		
 	}

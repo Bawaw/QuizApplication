@@ -1,0 +1,38 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JTable;
+
+import view.panels.CategoryDetailPanel;
+import view.panels.CategoryOverviewPanel;
+import view.panels.CategoryTableModel;
+import domain.Category;
+import domain.FacadeActionManager;
+import domain.Feedback;
+
+public class CategoryRemoveAction extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
+	private CategoryOverviewPanel overviewPanel;
+
+	public CategoryRemoveAction(FacadeActionManager service) {
+		super(service, "New");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		CategoryTableModel tablem = getOverviewPanel().getModel();
+		Category clickedCategory = (Category) tablem.getCategoryAt(table
+				.getSelectedRow());
+	}
+
+	private CategoryOverviewPanel getOverviewPanel() {
+		return overviewPanel;
+	}
+
+	public void setOverviewPanel(CategoryOverviewPanel overviewPanel) {
+		this.overviewPanel = overviewPanel;
+	}
+}

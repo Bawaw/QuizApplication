@@ -1,0 +1,40 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import view.panels.CategoryDetailPanel;
+import view.panels.CategoryOverviewPanel;
+import domain.Category;
+import domain.FacadeActionManager;
+import domain.Feedback;
+
+public class CategoryNewAction extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
+	private CategoryOverviewPanel overviewPanel;
+
+	public CategoryNewAction(FacadeActionManager service) {
+		super(service, "New");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		getDetailPanel().setCategory(new Category());
+
+		List<Category> categories = getService().getCategoryList();
+		getDetailPanel().setCategories(categories);
+		getDetailPanel().setFeedbacks(
+				new ArrayList<Feedback>(getService().getFeedbackPool()
+						.getAllStandardFeedbacks()));
+		setPanelAsContentForView(getDetailPanel());
+	}
+
+	private CategoryOverviewPanel getOverviewPanel() {
+		return overviewPanel;
+	}
+
+	public void CategoryOverviewPanel(CategoryOverviewPanel detailPanel) {
+		this.overviewPanel = detailPanel;
+	}
+}

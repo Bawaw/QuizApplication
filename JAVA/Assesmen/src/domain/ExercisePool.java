@@ -21,6 +21,13 @@ public class ExercisePool {
 		Collections.sort(exercises);
 	}
 	
+	public void removeWithCategory(Category category) throws DomainException{
+		for (Exercise e : getExercisePool()){
+			if(e.getCategory().equals(category))
+				exercises.remove(e);
+		}
+	}
+	
 	public void removeFeedback(Feedback feedback) throws DomainException{
 		for (Exercise e : getExercisePool()) {
 			if(e.getFeedback().equals(feedback))

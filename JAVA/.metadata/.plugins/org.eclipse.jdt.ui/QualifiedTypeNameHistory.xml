@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
-<fullyQualifiedTypeName name="domain.QuestionSelectionbehaviour"/>
-<fullyQualifiedTypeName name="domain.ScoreBehaviour"/>
 <fullyQualifiedTypeName name="domain.ParticipationPool"/>
 <fullyQualifiedTypeName name="domain.QuestionSelectionFactory"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
@@ -16,13 +11,11 @@
 <fullyQualifiedTypeName name="domain.strategy.score.MaxScoreCalculator"/>
 <fullyQualifiedTypeName name="config.ConfigException"/>
 <fullyQualifiedTypeName name="domain.enums.QuestionType"/>
-<fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="domain.TestService"/>
 <fullyQualifiedTypeName name="domain.FacadeActionManager"/>
 <fullyQualifiedTypeName name="domain.ExercisePool"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="domain.Category"/>
-<fullyQualifiedTypeName name="view.panels.CategoryOverviewPanel"/>
 <fullyQualifiedTypeName name="controller.QuestionOverviewAction"/>
 <fullyQualifiedTypeName name="view.panels.JComboCheckBox"/>
 <fullyQualifiedTypeName name="javax.swing.JList"/>
@@ -36,7 +29,6 @@
 <fullyQualifiedTypeName name="controller.SettingsOverviewAction"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
-<fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="controller.SettingsSaveAction"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
@@ -52,12 +44,20 @@
 <fullyQualifiedTypeName name="java.awt.Checkbox"/>
 <fullyQualifiedTypeName name="javax.swing.ListModel"/>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
-<fullyQualifiedTypeName name="view.panels.CategoryDetailPanel"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="controller.FeedBackActionManager"/>
 <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
-<fullyQualifiedTypeName name="domain.Exercise"/>
 <fullyQualifiedTypeName name="domain.Feedback"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="view.panels.CategoryDetailPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JTable"/>
+<fullyQualifiedTypeName name="controller.CategoryOverviewAction"/>
+<fullyQualifiedTypeName name="view.panels.CategoryOverviewPanel"/>
+<fullyQualifiedTypeName name="view.panels.CategoryTableModel"/>
+<fullyQualifiedTypeName name="domain.DomainException"/>
+<fullyQualifiedTypeName name="domain.Exercise"/>
+<fullyQualifiedTypeName name="controller.CategoryRemoveAction"/>
+<fullyQualifiedTypeName name="controller.CategoryNewAction"/>
 </qualifiedTypeNameHistroy>

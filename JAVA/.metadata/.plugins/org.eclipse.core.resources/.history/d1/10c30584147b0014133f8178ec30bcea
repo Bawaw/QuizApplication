@@ -33,7 +33,8 @@ public class CategoryDoneAction extends AbstractTestAction {
 			System.out.println(ex.getMessage());
 		}
 		
-
+		System.out.println(getService().getCategoryPool().getCategoryPool().size());
+		
 		List<Category> categories = getService().getCategoryList();
 		getOverviewPanel().setCategories(categories);
 		try {

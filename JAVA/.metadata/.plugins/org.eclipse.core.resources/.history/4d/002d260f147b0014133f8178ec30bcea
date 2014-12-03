@@ -57,11 +57,6 @@ public class Category {
 		return output;
 	}
 
-	@Override
-	public int hashCode(){
-		return this.getName().hashCode();
-	}
-	
 	public void addFeedback(Feedback feedback) {
 		if (!this.getFeedbacks().contains(feedback)) {
 			this.getFeedbacks().add(feedback);

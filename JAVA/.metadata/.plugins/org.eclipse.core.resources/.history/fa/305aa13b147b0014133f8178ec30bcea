@@ -32,11 +32,8 @@ public class CategoryPool {
 		this.categoryPool = categoryPool;
 	}
 
-	public void AddCategory(Category category) throws DomainException {
-		if (categoryPool.contains(category)){
-			throw new DomainException("Category already exists!");
-		}
-			
+	public void AddCategory(Category category) {
+		if (!categoryPool.contains(category))
 			this.categoryPool.add(category);
 	}
 

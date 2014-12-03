@@ -25,16 +25,20 @@ public class CategoryDoneAction extends AbstractTestAction {
 	@Override
 	public void actionPerformed(ActionEvent e){
 		if(e.getActionCommand().equals("Save")){
-			getService().addCategory(getDetailPanel().getCreatedCategory());	
+			System.out.print(getDetailPanel().getCreatedCategory());
+			getService().addCategory(getDetailPanel().getCreatedCategory());
+			System.out.println(getService().getCategoryPool().getCategoryPool().size());
+			
+			try {
+				getOverviewPanel().update();
+			} catch (ViewException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		List<Category> categories = getService().getCategoryList();
 		getOverviewPanel().setCategories(categories);
-		try {
-			getOverviewPanel().update();
-		} catch (ViewException e1) {
-			e1.printStackTrace();
-		}
 		setPanelAsContentForView(getOverviewPanel());		
 	}
 

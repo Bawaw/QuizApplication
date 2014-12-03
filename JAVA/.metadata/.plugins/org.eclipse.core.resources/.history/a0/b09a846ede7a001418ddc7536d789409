@@ -25,7 +25,11 @@ public class CategoryDoneAction extends AbstractTestAction {
 	@Override
 	public void actionPerformed(ActionEvent e){
 		if(e.getActionCommand().equals("Save")){
-			getService().addCategory(getDetailPanel().getCreatedCategory());	
+			System.out.print(getDetailPanel().getCreatedCategory());
+			getService().addCategory(getDetailPanel().getCreatedCategory());
+			System.out.println(getService().getCategoryPool().getCategoryPool().size());
+			
+		
 		}
 		
 		List<Category> categories = getService().getCategoryList();

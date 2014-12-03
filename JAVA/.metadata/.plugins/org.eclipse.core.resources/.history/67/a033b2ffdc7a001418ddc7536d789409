@@ -66,8 +66,4 @@ public class Category {
 	public boolean hasFeedback(Feedback feedback) {
 		return this.getFeedbacks().contains(feedback);
 	}
-	
-	public String toString(){
-		return this.getName() + " " +this.getDescription() +" "+this.getFeedbacks();
-	}
 }

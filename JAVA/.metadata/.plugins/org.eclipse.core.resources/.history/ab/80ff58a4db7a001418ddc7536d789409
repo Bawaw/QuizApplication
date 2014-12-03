@@ -30,6 +30,7 @@ public class SettingsSaveAction  extends AbstractTestAction{
 			JOptionPane.showMessageDialog(super.getView(),"Settings saved successfully!");
 		} catch (ConfigException e) {
 			JOptionPane.showMessageDialog(super.getView(),"Couldn't save setings!","Error",JOptionPane.ERROR_MESSAGE);
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		

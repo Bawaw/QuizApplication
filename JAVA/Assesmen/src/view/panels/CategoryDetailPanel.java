@@ -155,11 +155,11 @@ public class CategoryDetailPanel extends JPanel {
 	}
 
 	private void update() {
-		//if (getCategories() != null) {
-			//Vector<Category> cats = new Vector<Category>(getCategories());
-			//DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
-			//feedbackField.setModel(categoriesModel);
-		//}
+		if (getCategories() != null) {
+			Vector<Category> cats = new Vector<Category>(getCategories());
+			DefaultComboBoxModel<Category> categoriesModel = new DefaultComboBoxModel<Category>(cats);
+			feedbackField.setModel(categoriesModel);
+		}
 		
 		if (getFeedbacks() != null) {
 			DefaultListModel<Feedback> feedModel = new DefaultListModel<Feedback>();

@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 public class CategoryPool {
@@ -33,11 +34,36 @@ public class CategoryPool {
 	}
 
 	public void AddCategory(Category category) throws DomainException {
-		if (categoryPool.contains(category)){
-			throw new DomainException("Category already exists! Choose another Title!");
+		if (!categoryPool.contains(category)){
+			this.categoryPool.add(category);
+		}
+		else{
+			updateExistingCategory(category);
 		}
 			
-			this.categoryPool.add(category);
+			
+	}
+	
+	public boolean catNameAlreadyInPool(String name){
+		Iterator<Category> it=this.getCategoryPool().iterator();
+		while(it.hasNext()){
+			Category c=it.next();
+			if(c.getName().equals(name)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void updateExistingCategory(Category cat) throws DomainException{
+		Iterator<Category> it=this.getCategoryPool().iterator();
+		while(it.hasNext()){
+			Category c=it.next();
+			if(c.equals(cat)){
+				c.setDescription(cat.getDescription());
+				c.setFeedbacks(cat.getFeedbacks());
+			}
+		}
 	}
 
 	public void removeCategory(Category category) {

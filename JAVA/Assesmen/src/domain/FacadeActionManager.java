@@ -58,6 +58,9 @@ public class FacadeActionManager {
 
 	}
 
+	public boolean doesCatExist(String name){
+		return this.getCategoryPool().catNameAlreadyInPool(name);
+	}
 	public void addCategory(Category category) throws DomainException {
 		categoryPool.AddCategory(category);
 	}

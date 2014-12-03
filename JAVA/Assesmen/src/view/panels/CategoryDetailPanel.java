@@ -1,10 +1,10 @@
 package view.panels;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.ScrollPane;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.event.DocumentListener;
 
 import view.CheckBoxList;
 import domain.Category;
@@ -27,13 +28,14 @@ public class CategoryDetailPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private JButton btnOK, btnCancel,btnRemoveFeedback,btnAddFeedback;
+	private JLabel alreadyExist;
 	private JTextField titleField, descriptionField,newFeedbackField; 
 	private CheckBoxList feedbackField;
 	private Category category;
 	private List<Category> categories;
 	private List<Feedback> feedbacks;
 	
-	public CategoryDetailPanel(Action action,Action feedbackAction) {
+	public CategoryDetailPanel(Action action,Action feedbackAction,DocumentListener catNameListener) {
 		setCategory(category);
 		setCategories(categories);
 		setFeedbacks(feedbacks);
@@ -41,7 +43,8 @@ public class CategoryDetailPanel extends JPanel {
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int rij = 0;
-		initTitle(++rij);
+		initTitle(++rij,catNameListener);
+		initLabel(++rij);
 		initDescription(++rij);
 		initStandardFeedback(++rij);
 		initbtnRemoveFeedback(++rij, feedbackAction);
@@ -51,6 +54,22 @@ public class CategoryDetailPanel extends JPanel {
 	
 	public String getNewFeedbackFieldText(){
 		return newFeedbackField.getText();
+	}
+	public void initLabel(int rij){
+		alreadyExist=new JLabel();
+		changeConstraints(1, 2, 1, rij);		
+		addToPanel(alreadyExist);
+	}
+	
+	public void overrideText(){
+		this.alreadyExist.setForeground(Color.RED);
+		this.alreadyExist.setText("Category will be overriden!");
+	}
+	
+	public void notOverrideText(){
+		this.alreadyExist.setForeground(Color.BLUE);
+		this.alreadyExist.setText("Category doesn't exist yet!");
+		
 	}
 	
 	public void clearfeedbackFieldText(){
@@ -80,12 +99,13 @@ public class CategoryDetailPanel extends JPanel {
 	}
 
 
-	protected void initTitle(int rij) {
+	protected void initTitle(int rij,DocumentListener a) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Title: "));
 
 		changeConstraints(1, 2, 1, rij);
 		titleField = new JTextField();
+		titleField.getDocument().addDocumentListener(a);
 		addToPanel(titleField);
 	}
 
@@ -159,9 +179,8 @@ public class CategoryDetailPanel extends JPanel {
 		update();
 	}
 	
-	public Category getCreatedCategory(){
-		
-		try {
+	public Category getCreatedCategory() throws DomainException{
+
 			getCategory().setName(titleField.getText());
 			getCategory().setDescription(descriptionField.getText());
 			ListModel<JCheckBox> boxes = feedbackField.getModel();
@@ -171,10 +190,7 @@ public class CategoryDetailPanel extends JPanel {
 					selectedFeedbacks.add(getFeedbackByName(boxes.getElementAt(i).getText()));
 			}
 			getCategory().setFeedbacks(selectedFeedbacks);
-		} catch (DomainException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+				
 		return getCategory();
 	}
 
@@ -224,4 +240,7 @@ public class CategoryDetailPanel extends JPanel {
 		}
 	}
 
+	public String getCategoryTitle(){
+		return titleField.getText();
+	}
 }

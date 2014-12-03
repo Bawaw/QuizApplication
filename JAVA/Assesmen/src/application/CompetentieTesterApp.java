@@ -13,6 +13,7 @@ import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
+import controller.CheckCategoryNameAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.SettingsOverviewAction;
@@ -33,9 +34,10 @@ public class CompetentieTesterApp {
 		SettingsOverviewAction settingsOverviewAction = new SettingsOverviewAction(service);
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
+		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
 
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction);
-		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager);
+		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
 		
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
@@ -46,6 +48,7 @@ public class CompetentieTesterApp {
 		settingsSaveAction.setOverviewPanel(settingsOverviewPanel);
 		jsliderAmountAction.setSettingsOverviewPanel(settingsOverviewPanel);
 		feedbackActionManager.setCategoryDetailPanel(categoryDetailPanel);
+		checkCategoryNameAction.setCategoryDetailPanel(categoryDetailPanel);
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		

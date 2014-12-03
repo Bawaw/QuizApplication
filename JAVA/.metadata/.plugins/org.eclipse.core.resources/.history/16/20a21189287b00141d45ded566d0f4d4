@@ -1,0 +1,44 @@
+package controller;
+
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import view.panels.CategoryDetailPanel;
+
+public class CheckCategoryNameAction implements DocumentListener {
+	private CategoryDetailPanel categoryDetailPanel;
+	
+	public CheckCategoryNameAction() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		print();
+
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		print();
+
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		print();
+
+	}
+
+	public CategoryDetailPanel getCategoryDetailPanel() {
+		return categoryDetailPanel;
+	}
+
+	public void setCategoryDetailPanel(CategoryDetailPanel categoryDetailPanel) {
+		this.categoryDetailPanel = categoryDetailPanel;
+	}
+
+	public void print(){
+		System.out.println(getCategoryDetailPanel().getCategoryTitle());
+	}
+}

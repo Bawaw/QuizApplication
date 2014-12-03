@@ -1,0 +1,5 @@
+#Admin Settings
+#Wed Dec 03 10:31:51 CET 2014
+questionBehaviour=QuestionsByType
+evaluationSize=24
+scoreBehaviour=ErrorCorrectionCalculator

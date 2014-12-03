@@ -14,17 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeListener;
 
 import view.ViewException;
+import controller.JsliderAmountAction;
 
 public class SettingsOverviewPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints constraints = new GridBagConstraints();
-	private JComboBox selectBeh= new JComboBox();
-	private JComboBox scoreBeh= new JComboBox();
+	private JComboBox<String> selectBeh= new JComboBox<String>();
+	private JComboBox<String> scoreBeh= new JComboBox<String>();
 	private JSlider amount=new JSlider(1, 30);
+	private JTextField jTextField=new JTextField();
 	
-	public SettingsOverviewPanel(Action action) throws ViewException {
+	public SettingsOverviewPanel(Action action,ChangeListener changeListener) throws ViewException {
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int row = 0;
@@ -35,7 +38,7 @@ public class SettingsOverviewPanel extends JPanel {
 		row++;
 		addComboCouple("ScoreBehaviour",this.getScoreBeh(),row);
 		row++;
-		addSliderCouple("Number of Questions",this.getAmount(),row);
+		addSliderCouple("Number of Questions",this.getAmount(),this.getjTextField(),row,changeListener);
 		row ++;
 		AddButton(action, row);
 	}
@@ -46,13 +49,13 @@ public class SettingsOverviewPanel extends JPanel {
 
 	}
 
-	private void addSliderCouple(String name,JSlider j,int rij){
+	private void addSliderCouple(String name,JSlider j,JTextField jt,int rij,ChangeListener changeListener){
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel(name));
 		changeConstraints(1, 1, 1, rij);
+		j.addChangeListener(changeListener);
 		addToPanel(j);
 		changeConstraints(1, 1, 2, rij);
-		JTextField jt=new JTextField("Dit veld update");
 		jt.setEditable(false);
 		addToPanel(jt);
 	}
@@ -94,22 +97,38 @@ public class SettingsOverviewPanel extends JPanel {
 		constraints.gridy = gridy;
 	}
 
-	public JComboBox getSelectBeh() {
+	private int getComboBoxIndex(String[] list,String item){
+
+		for(int i=0;i<list.length;i++){
+			if(list[i].equals(item)){
+				return i;
+			}
+		}
+		return 0;
+	}
+	
+	public JComboBox<String> getSelectBeh() {
 		return selectBeh;
 	}
 
-	public void setSelectBeh(JComboBox selectBeh) {
+	public void setSelectBeh(JComboBox<String> selectBeh) {
 		this.selectBeh = selectBeh;
 	}
 
 	
-	
+	public JTextField getjTextField() {
+		return jTextField;
+	}
 
-	public JComboBox getScoreBeh() {
+	public void setjTextField(JTextField jTextField) {
+		this.jTextField = jTextField;
+	}
+
+	public JComboBox<String> getScoreBeh() {
 		return scoreBeh;
 	}
 
-	public void setScoreBeh(JComboBox scoreBeh) {
+	public void setScoreBeh(JComboBox<String> scoreBeh) {
 		this.scoreBeh = scoreBeh;
 	}
 
@@ -121,23 +140,40 @@ public class SettingsOverviewPanel extends JPanel {
 		this.amount = amount;
 	}
 
-	public void setSelectList(String[] selectList) {
-		DefaultComboBoxModel model = new DefaultComboBoxModel(selectList);
+	public void setSelectList(String[] selectList,String current) {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(selectList);
 		this.getSelectBeh().setModel(model);
+		int index=getComboBoxIndex(selectList, current);
+		this.getSelectBeh().setSelectedIndex(index);
 	}
 
 	
-	public void setScoreList(String[] scoreList) {
+	public void setScoreList(String[] scoreList,String current) {
 		DefaultComboBoxModel model = new DefaultComboBoxModel(scoreList);
 		this.getScoreBeh().setModel(model);
+		int index=getComboBoxIndex(scoreList, current);
+		this.getScoreBeh().setSelectedIndex(index);
 	}
 
 	public void setAmount(int amount){
 		this.getAmount().setValue(amount);
+		setAmountField(amount);
 	}
 
 
+	public void setAmountField(int amount){
+		this.getjTextField().setText(Integer.toString(amount));
+	}
 	
+	public int getNumberOfQuestions(){
+		return this.getAmount().getValue();
+	}
 	
+	public String getSelectionBehaviour(){
+		return (String)this.getSelectBeh().getSelectedItem();
+	}
 	
+	public String getScoreBehaviour(){
+		return (String)this.getScoreBeh().getSelectedItem();
+	}
 }

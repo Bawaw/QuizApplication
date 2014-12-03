@@ -1,0 +1,18 @@
+package controller;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class JsliderAmountAction implements ChangeListener {
+
+	public JsliderAmountAction() {
+		
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		System.out.println("you moved it!");
+
+	}
+
+}

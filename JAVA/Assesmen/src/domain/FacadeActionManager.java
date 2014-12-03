@@ -2,17 +2,22 @@ package domain;
 
 import java.util.ArrayList;
 
+import config.ConfigException;
+import config.InitConfigHandler;
+import domain.enums.QuestionSelectionBehaviourType;
+import domain.enums.ScoreBehaviourType;
 import domain.strategy.questionSelection.QuestionSelectionFactory;
 
 public class FacadeActionManager {
-	FeedbackPool feedbackPool;
-	ParticipationPool participations;
-	ExercisePool exercisePool;
-	AnswerPool answerPool;
-	Evaluation activeEvalutaion;
-	QuestionSelectionFactory questionSelectionFactory;
-	CategoryPool categoryPool;
-	int timer;
+	private FeedbackPool feedbackPool;
+	private ParticipationPool participations;
+	private ExercisePool exercisePool;
+	private AnswerPool answerPool;
+	private Evaluation activeEvalutaion;
+	private QuestionSelectionFactory questionSelectionFactory;
+	private CategoryPool categoryPool;
+	private InitConfigHandler initConfigHandler;
+	private int timer;
 
 	// config handler
 
@@ -20,7 +25,7 @@ public class FacadeActionManager {
 		exercisePool = new ExercisePool();
 		categoryPool = new CategoryPool();
 		feedbackPool = new FeedbackPool();
-		
+		initConfigHandler = new InitConfigHandler();
 		// temp
 		try {
 			Category temp = new Category();
@@ -120,4 +125,37 @@ public class FacadeActionManager {
 		this.timer = timer;
 	}
 
+	public String[] getAllScoreBehaviours(){
+		return ScoreBehaviourType.toStringArray();
+	}
+	
+	public String[] getAllQuestionSelectionBehaviours(){
+		return QuestionSelectionBehaviourType.toStringArray();
+	}
+	
+	
+	public int getNumberofQuestionForEvaluation() throws ConfigException{
+		return initConfigHandler.getDefaultEvaluationSize();
+	}
+	
+	public String currentScoreBehaviourName() throws ConfigException{
+		return initConfigHandler.getScoreBehaviour();
+	}
+	
+	public String currentQuestionSelectionBehaviour() throws ConfigException{
+		return initConfigHandler.getQuestionSelectionBehaviour();
+	}
+	
+	public void saveScoreBehaviour(String scoreBehaviour) throws ConfigException{
+		this.initConfigHandler.saveScoreBehaviour(scoreBehaviour);
+	}
+	
+	public void saveSelectionBehaviour(String selectionBehaviour) throws ConfigException{
+		this.initConfigHandler.saveQuestionSelectionBehaviour(selectionBehaviour);
+	}
+	
+	public void saveNumberofQuestions(int number) throws ConfigException{
+		this.initConfigHandler.saveDefaultEvaluationSize(number);
+	}
 }
+

@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class InitConfigHandler {
 	private Properties table;
-	private final String defaultPath = "init.dat";
+	private final String defaultPath = "src/config/init.dat";
 	private final int defaultEvaluationSize = 5;
 	private final String defaultScoreBehaviour = "MaxScoreCalculator";
 	private final String defaultQuestionSelectionbehaviour = "RandomQuestions";

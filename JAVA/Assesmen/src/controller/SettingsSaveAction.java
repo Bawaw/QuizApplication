@@ -1,9 +1,11 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
+
+import javax.swing.JOptionPane;
 
 import view.panels.SettingsOverviewPanel;
+import config.ConfigException;
 import domain.FacadeActionManager;
 
 public class SettingsSaveAction  extends AbstractTestAction{
@@ -18,7 +20,19 @@ public class SettingsSaveAction  extends AbstractTestAction{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		//Info uit panel lezen en opslaan in model!!!
-		System.out.println(this.getDetailPanel().getSelectBeh().getSelectedItem());
+		String selectionBehaviour = this.getDetailPanel().getSelectionBehaviour();
+		String scoreBehaviour =this.getDetailPanel().getScoreBehaviour();
+		int number = this.getDetailPanel().getNumberOfQuestions();
+		try {
+			super.getService().saveSelectionBehaviour(selectionBehaviour);
+			super.getService().saveScoreBehaviour(scoreBehaviour);
+			super.getService().saveNumberofQuestions(number);
+			JOptionPane.showMessageDialog(super.getView(),"Settings saved successfully!");
+		} catch (ConfigException e) {
+			JOptionPane.showMessageDialog(super.getView(),"Couldn't save setings!","Error",JOptionPane.ERROR_MESSAGE);
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -27,7 +41,7 @@ public class SettingsSaveAction  extends AbstractTestAction{
 		return detailPanel;
 	}
 
-	public void setDetailPanel(SettingsOverviewPanel detailPanel) {
+	public void setOverviewPanel(SettingsOverviewPanel detailPanel) {
 		this.detailPanel = detailPanel;
 	}
 }

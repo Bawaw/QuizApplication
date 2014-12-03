@@ -1,0 +1,18 @@
+package controller;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class JsliderAmountAction implements ChangeListener {
+
+	public JsliderAmountAction() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

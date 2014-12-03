@@ -18,14 +18,23 @@ public class SettingsOverviewAction extends AbstractTestAction {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		String[] selectList= {"1","2"};
-		String[] scoreList={"3","4"};
+	public void actionPerformed(ActionEvent arg0){
+		try{
+		String[] selectList= this.getService().getAllQuestionSelectionBehaviours();
+		String[] scoreList=this.getService().getAllScoreBehaviours();
 		
-		getOverviewPanel().setSelectList(selectList);
-		getOverviewPanel().setScoreList(scoreList);
-		getOverviewPanel().setAmount(2);
-
+		String currentScoreBehaviour=this.getService().currentScoreBehaviourName();
+		String currentSelectionBehaviour=this.getService().currentQuestionSelectionBehaviour();
+		
+		int numberOfQuestions=this.getService().getNumberofQuestionForEvaluation();
+		
+		getOverviewPanel().setSelectList(selectList,currentSelectionBehaviour);
+		getOverviewPanel().setScoreList(scoreList,currentScoreBehaviour);
+		getOverviewPanel().setAmount(numberOfQuestions);
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
 		setPanelAsContentForView(getOverviewPanel());
 
 	}

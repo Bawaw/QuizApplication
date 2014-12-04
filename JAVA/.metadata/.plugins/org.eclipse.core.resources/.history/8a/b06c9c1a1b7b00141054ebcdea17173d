@@ -1,13 +1,13 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 
 public class CategoryPool {
 	HashSet<Category> categoryPool;
 
 	public CategoryPool() {
-		categoryPool = new LinkedHashSet<Category>();
+		categoryPool = new HashSet<Category>();
 	}
 
 	public HashSet<Category> getCategoryPool() {
@@ -34,7 +34,7 @@ public class CategoryPool {
 
 	public void AddCategory(Category category) throws DomainException {
 		if (categoryPool.contains(category)){
-			throw new DomainException("Category already exists! Choose another Title!");
+			throw new DomainException("Category already exists!");
 		}
 			
 			this.categoryPool.add(category);

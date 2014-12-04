@@ -26,9 +26,6 @@ public class CategoryDoneAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e){
-		//probleem: Wanneer we category editten -> geeft hij terug dat die category al bestaat met die naam. (logisch)
-		//probleem2: Wanneer we een categroy die al bestaat de naam aanpassen, komt deze 2 maal in lijst te staan (no idea)
-		
 		
 		if(e.getActionCommand().equals("Save")){
 			try{
@@ -36,16 +33,13 @@ public class CategoryDoneAction extends AbstractTestAction {
 				List<Category> categories = getService().getCategoryList();
 				getOverviewPanel().setCategories(categories);
 				getOverviewPanel().update();
-				setPanelAsContentForView(getOverviewPanel());	
-				System.out.println(this.getService().getCategoryPool().getCategoryPool().size());
 			}
 			catch (Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(super.getView(),"Select feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		else{
+		
 			setPanelAsContentForView(getOverviewPanel());		
-		}
 	}
 
 	private CategoryOverviewPanel getOverviewPanel() {

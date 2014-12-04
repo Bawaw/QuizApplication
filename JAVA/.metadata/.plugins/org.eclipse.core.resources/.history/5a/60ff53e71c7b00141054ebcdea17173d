@@ -23,7 +23,7 @@ public class Category {
 
 	public void setName(String name) throws DomainException {
 		if (name == null || name.equals("")) {
-			throw new DomainException("Invalid title!");
+			throw new DomainException("Invalid name");
 		}
 		this.name = name;
 	}
@@ -34,7 +34,7 @@ public class Category {
 
 	public void setDescription(String description) throws DomainException {
 		if (description == null || description.equals("")) {
-			throw new DomainException("Invalid description!");
+			throw new DomainException("Invalid description");
 		}
 		this.description = description;
 	}

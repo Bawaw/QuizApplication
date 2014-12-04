@@ -40,7 +40,8 @@ public class CategoryDoneAction extends AbstractTestAction {
 				System.out.println(this.getService().getCategoryPool().getCategoryPool().size());
 			}
 			catch (Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				System.out.println(ex.getMessage());
+				//JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else{

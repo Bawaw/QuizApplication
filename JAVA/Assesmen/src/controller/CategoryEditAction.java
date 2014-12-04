@@ -20,16 +20,21 @@ public class CategoryEditAction extends AbstractTestMouseAdapter {
 	}
 	
 	public void mouseClicked(MouseEvent evt) {
-		
-		JTable table = (JTable)(evt.getSource());
-		CategoryTableModel tablem = (CategoryTableModel)(table.getModel());
-		Category clickedCategory = (Category) tablem.getCategoryAt(table.getSelectedRow());
-		getDetailPanel().setCategory(clickedCategory);
-		
-		List<Category> categories = getService().getCategoryList();
-		getDetailPanel().setCategories(categories);
-		getDetailPanel().setFeedbacks(new ArrayList<Feedback>(getService().getFeedbackPool().getAllStandardFeedbacks()));
-		setPanelAsContentForView(getDetailPanel());		
+		if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+			JTable table = (JTable) (evt.getSource());
+			CategoryTableModel tablem = (CategoryTableModel) (table.getModel());
+			Category clickedCategory = (Category) tablem.getCategoryAt(table
+					.getSelectedRow());
+			getDetailPanel().setCategory(clickedCategory);
+
+			List<Category> categories = getService().getCategoryList();
+			getDetailPanel().setCategories(categories);
+			getDetailPanel().setFeedbacks(
+					new ArrayList<Feedback>(getService().getFeedbackPool()
+							.getAllStandardFeedbacks()));
+			setPanelAsContentForView(getDetailPanel());
+			evt.consume();
+		}
 	}
 
 	private CategoryDetailPanel getDetailPanel() {

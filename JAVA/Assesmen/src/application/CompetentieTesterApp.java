@@ -13,6 +13,7 @@ import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
+import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
@@ -30,13 +31,13 @@ public class CompetentieTesterApp {
 		CategoryNewAction categoryNewAction = new CategoryNewAction(service);
 		CategoryDoneAction categoryDoneAction = new CategoryDoneAction(service);
 		FeedBackActionManager feedbackActionManager = new FeedBackActionManager(service);
-		
+		CategoryRemoveAction categoryRemoveAction = new CategoryRemoveAction(service);
 		SettingsOverviewAction settingsOverviewAction = new SettingsOverviewAction(service);
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
 
-		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction);
+		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
 		
@@ -49,6 +50,7 @@ public class CompetentieTesterApp {
 		jsliderAmountAction.setSettingsOverviewPanel(settingsOverviewPanel);
 		feedbackActionManager.setCategoryDetailPanel(categoryDetailPanel);
 		checkCategoryNameAction.setCategoryDetailPanel(categoryDetailPanel);
+		categoryRemoveAction.setOverviewPanel(categoryOverviewPanel);
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		
@@ -67,6 +69,7 @@ public class CompetentieTesterApp {
 		settingsOverviewAction.setView(mainView);
 		settingsSaveAction.setView(mainView);
 		feedbackActionManager.setView(mainView);
+		categoryRemoveAction.setView(mainView);
 		mainView.setVisible(true);
 		
 	}

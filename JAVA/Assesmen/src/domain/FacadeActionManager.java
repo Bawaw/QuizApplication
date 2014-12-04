@@ -48,6 +48,11 @@ public class FacadeActionManager {
 	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
 	// }
 	
+	public void removeCategory(Category c) throws DomainException{
+		categoryPool.removeCategory(c);
+		exercisePool.removeWithCategory(c);
+	}
+	
 	public void removeFeedback(String s) throws DomainException{
 		Feedback feedback = new Feedback(s);
 		getFeedbackPool().removeFeedback(feedback);

@@ -57,6 +57,10 @@ public class Category {
 		return output;
 	}
 
+	public void removeFeedback(Feedback f){
+		this.getFeedbacks().remove(f);
+	}
+	
 	@Override
 	public int hashCode(){
 		return this.getName().hashCode();

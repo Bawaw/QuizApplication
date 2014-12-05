@@ -55,7 +55,11 @@ public class FacadeActionManager {
 	
 	public void removeFeedback(String s) throws DomainException{
 		Feedback feedback = new Feedback(s);
+		//remove feedback from feedbackpool
 		getFeedbackPool().removeFeedback(feedback);
+		//unlink feedback from all categories
+		getCategoryPool().removeFeedbackFromAllCat(feedback);
+		//remove feedback from all questions
 		getExercisePool().removeFeedback(feedback);
 	}
 
@@ -175,5 +179,7 @@ public class FacadeActionManager {
 	public void saveNumberofQuestions(int number) throws ConfigException{
 		this.initConfigHandler.saveDefaultEvaluationSize(number);
 	}
+	
+	
 }
 

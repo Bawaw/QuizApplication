@@ -25,6 +25,7 @@ public class CategoryEditAction extends AbstractTestMouseAdapter {
 			CategoryTableModel tablem = (CategoryTableModel) (table.getModel());
 			Category clickedCategory = (Category) tablem.getCategoryAt(table
 					.getSelectedRow());
+			System.out.println(clickedCategory.getFeedbacks().size());
 			getDetailPanel().setCategory(clickedCategory);
 
 			List<Category> categories = getService().getCategoryList();

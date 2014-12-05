@@ -43,6 +43,13 @@ public class CategoryPool {
 			
 			
 	}
+	public void removeFeedbackFromAllCat(Feedback f){
+		for(Category c : getCategoryPool()){
+			c.removeFeedback(f);
+		}
+			
+	}
+	
 	
 	public boolean catNameAlreadyInPool(String name){
 		Iterator<Category> it=this.getCategoryPool().iterator();

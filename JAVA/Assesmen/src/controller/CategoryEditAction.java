@@ -32,6 +32,7 @@ public class CategoryEditAction extends AbstractTestMouseAdapter {
 			getDetailPanel().setFeedbacks(
 					new ArrayList<Feedback>(getService().getFeedbackPool()
 							.getAllStandardFeedbacks()));
+			getDetailPanel().setEdit();
 			setPanelAsContentForView(getDetailPanel());
 			evt.consume();
 		}

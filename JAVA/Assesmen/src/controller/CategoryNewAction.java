@@ -24,6 +24,7 @@ public class CategoryNewAction extends AbstractTestAction {
 		List<Category> categories = getService().getCategoryList();
 		getDetailPanel().setCategories(categories);
 		getDetailPanel().setFeedbacks(new ArrayList<Feedback>(getService().getFeedbackPool().getAllStandardFeedbacks()));
+		getDetailPanel().setNewScreen();
 		setPanelAsContentForView(getDetailPanel());		
 	}
 

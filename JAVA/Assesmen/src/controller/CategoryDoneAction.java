@@ -29,7 +29,10 @@ public class CategoryDoneAction extends AbstractTestAction {
 		
 		if(e.getActionCommand().equals("Save")){
 			try{
-				getService().addCategory(getDetailPanel().getCreatedCategory());
+				Category c=getDetailPanel().getCreatedCategory();
+				if(!getDetailPanel().isEditScreen()){
+					getService().addCategory(c);
+				}
 				List<Category> categories = getService().getCategoryList();
 				getOverviewPanel().setCategories(categories);
 				getOverviewPanel().update();

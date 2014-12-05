@@ -34,6 +34,7 @@ public class CategoryDetailPanel extends JPanel {
 	private Category category;
 	private List<Category> categories;
 	private List<Feedback> feedbacks;
+	private boolean editScreen;
 	
 	public CategoryDetailPanel(Action action,Action feedbackAction,DocumentListener catNameListener) {
 		setCategory(category);
@@ -220,6 +221,7 @@ public class CategoryDetailPanel extends JPanel {
 		update();
 	}
 
+	
 	private void update() {
 		if (getFeedbacks() != null) {
 			ArrayList<JCheckBox> feedModel = new ArrayList<JCheckBox>();
@@ -242,5 +244,33 @@ public class CategoryDetailPanel extends JPanel {
 
 	public String getCategoryTitle(){
 		return titleField.getText();
+	}
+
+	public void LockTitleField(){
+		this.titleField.setBackground(new Color(205, 201, 201));
+		this.titleField.setEditable(false);
+	}
+	
+	public void unlockTitleField(){
+		this.titleField.setBackground(Color.WHITE);
+		this.titleField.setEditable(true);
+	}
+	
+	
+	public boolean isEditScreen() {
+		return editScreen;
+	}
+
+	public void setEditScreen(boolean editScreen) {
+		this.editScreen = editScreen;
+	}
+	
+	public void setEdit(){
+		setEditScreen(true);
+		LockTitleField();
+	}
+	public void setNewScreen(){
+		setEditScreen(false);
+		unlockTitleField();
 	}
 }

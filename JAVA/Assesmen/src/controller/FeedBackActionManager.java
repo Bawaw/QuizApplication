@@ -29,6 +29,7 @@ public class FeedBackActionManager extends AbstractTestAction {
 			try {
 				String newFeedback = getCategoryDetailPanel().getNewFeedbackFieldText();
 				getService().addFeedback(newFeedback);
+				getCategoryDetailPanel().clearfeedbackFieldText();
 				updateFeedbackList();
 			} catch (DomainException e1) {
 				e1.printStackTrace();
@@ -36,9 +37,15 @@ public class FeedBackActionManager extends AbstractTestAction {
 		}
 		else{
 			try {
-				String oldFeedback = getCategoryDetailPanel().getSelectedValue();
-				getService().removeFeedback(oldFeedback);
-				updateFeedbackList();
+				
+					String oldFeedback = getCategoryDetailPanel().getSelectedValue();
+					
+					int confirm = JOptionPane.showConfirmDialog (super.getView(), "This will unlink/remove feeback from ALL categories and exercises!","Warning",JOptionPane.YES_NO_OPTION);
+					if(confirm == JOptionPane.YES_OPTION)
+						{
+					getService().removeFeedback(oldFeedback);
+					updateFeedbackList();
+						}
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(super.getView(),"Select a feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
 			}

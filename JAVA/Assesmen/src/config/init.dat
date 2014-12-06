@@ -1,5 +1,6 @@
 #Admin Settings
-#Wed Dec 03 19:38:22 CET 2014
-questionBehaviour=RandomQuestions
-evaluationSize=17
-scoreBehaviour=ErrorCorrectionCalculator
+#Sat Dec 06 10:19:56 CET 2014
+questionBehaviour=LeastAskedQuestions
+evaluationSize=10
+evaluationType=ScoreEvaluation
+scoreBehaviour=MaxScoreCalculator

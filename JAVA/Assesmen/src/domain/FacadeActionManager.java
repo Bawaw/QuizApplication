@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import config.ConfigException;
 import config.InitConfigHandler;
+import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.ScoreBehaviourType;
 import domain.strategy.questionSelection.QuestionSelectionFactory;
@@ -155,6 +156,9 @@ public class FacadeActionManager {
 		return QuestionSelectionBehaviourType.toStringArray();
 	}
 	
+	public String[] getAllEvaluationTypes(){
+		return EvaluationType.toStringArray();
+	}
 	
 	public int getNumberofQuestionForEvaluation() throws ConfigException{
 		return initConfigHandler.getDefaultEvaluationSize();
@@ -166,6 +170,10 @@ public class FacadeActionManager {
 	
 	public String currentQuestionSelectionBehaviour() throws ConfigException{
 		return initConfigHandler.getQuestionSelectionBehaviour();
+	}
+	
+	public String currentEvaluationType() throws ConfigException{
+		return initConfigHandler.getEvaluationType();
 	}
 	
 	public void saveScoreBehaviour(String scoreBehaviour) throws ConfigException{
@@ -180,6 +188,9 @@ public class FacadeActionManager {
 		this.initConfigHandler.saveDefaultEvaluationSize(number);
 	}
 	
+	public void saveEvaluationType(String evaluation) throws ConfigException{
+		this.initConfigHandler.saveEvaluationType(evaluation);
+	}
 	
 }
 

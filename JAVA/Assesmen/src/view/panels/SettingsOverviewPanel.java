@@ -24,6 +24,7 @@ public class SettingsOverviewPanel extends JPanel {
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private JComboBox<String> selectBeh= new JComboBox<String>();
 	private JComboBox<String> scoreBeh= new JComboBox<String>();
+	private JComboBox<String> evalType= new JComboBox<String>(); 
 	private JSlider amount=new JSlider(1, 30);
 	private JTextField jTextField=new JTextField();
 	
@@ -37,6 +38,8 @@ public class SettingsOverviewPanel extends JPanel {
 		addComboCouple("SelectBehaviour",this.getSelectBeh(),row);
 		row++;
 		addComboCouple("ScoreBehaviour",this.getScoreBeh(),row);
+		row++;
+		addComboCouple("EvaluationType",this.getEvalTypeJ(),row);
 		row++;
 		addSliderCouple("Number of Questions",this.getAmount(),this.getjTextField(),row,changeListener);
 		row ++;
@@ -154,6 +157,13 @@ public class SettingsOverviewPanel extends JPanel {
 		int index=getComboBoxIndex(scoreList, current);
 		this.getScoreBeh().setSelectedIndex(index);
 	}
+	
+	public void setEvalList(String[] evalList,String current){
+		DefaultComboBoxModel model = new DefaultComboBoxModel(evalList);
+		this.getEvalTypeJ().setModel(model);
+		int index=getComboBoxIndex(evalList, current);
+		this.getEvalTypeJ().setSelectedIndex(index);
+	}
 
 	public void setAmount(int amount){
 		this.getAmount().setValue(amount);
@@ -173,7 +183,20 @@ public class SettingsOverviewPanel extends JPanel {
 		return (String)this.getSelectBeh().getSelectedItem();
 	}
 	
+	public String getEvalType(){
+		return (String)this.getEvalTypeJ().getSelectedItem();
+	}
+	
 	public String getScoreBehaviour(){
 		return (String)this.getScoreBeh().getSelectedItem();
 	}
+
+	public JComboBox<String> getEvalTypeJ() {
+		return evalType;
+	}
+
+	public void setEvalTypeJ(JComboBox<String> evalType) {
+		this.evalType = evalType;
+	}
+	
 }

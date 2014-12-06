@@ -22,14 +22,16 @@ public class SettingsOverviewAction extends AbstractTestAction {
 		try{
 		String[] selectList= this.getService().getAllQuestionSelectionBehaviours();
 		String[] scoreList=this.getService().getAllScoreBehaviours();
+		String[] evalList=this.getService().getAllEvaluationTypes();
 		
 		String currentScoreBehaviour=this.getService().currentScoreBehaviourName();
 		String currentSelectionBehaviour=this.getService().currentQuestionSelectionBehaviour();
-		
+		String currentEvalType=this.getService().currentEvaluationType();
 		int numberOfQuestions=this.getService().getNumberofQuestionForEvaluation();
 		
 		getOverviewPanel().setSelectList(selectList,currentSelectionBehaviour);
 		getOverviewPanel().setScoreList(scoreList,currentScoreBehaviour);
+		getOverviewPanel().setEvalList(evalList, currentEvalType);
 		getOverviewPanel().setAmount(numberOfQuestions);
 		}
 		catch(Exception ex){

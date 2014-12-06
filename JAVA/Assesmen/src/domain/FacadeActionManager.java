@@ -29,22 +29,55 @@ public class FacadeActionManager {
 	}
 
 	private FacadeActionManager() {
-		exercisePool = new ExercisePool();
-		categoryPool = new CategoryPool();
-		feedbackPool = new FeedbackPool();
-		initConfigHandler = InitConfigHandler.getInstance();
+		setExercisePool(new ExercisePool());
+		setCategoryPool( new CategoryPool());
+		setFeedbackPool(new FeedbackPool());
+		setInitConfigHandler(InitConfigHandler.getInstance());
 		// temp
 		try {
-			Category temp = new Category();
-			Feedback feed = new Feedback("Swing is so 1996");
-			Feedback feed2 = new Feedback("blabla");
-			temp.setName("test");
-			temp.setDescription("description test");
+			Category cat1 = new Category();
+			Category cat2 = new Category();
+			Category cat3 = new Category();
+			Category cat4 = new Category();
+			
+			Feedback feed = new Feedback("Feedback 1");
+			Feedback feed2 = new Feedback("Feedback 2");
+			Feedback feed3 = new Feedback("Feedback 3");
+			Feedback feed4 = new Feedback("Feedback 4");
+			Feedback feed5 = new Feedback("Feedback 5");
+			
 			feedbackPool.addFeedback(feed);
 			feedbackPool.addFeedback(feed2);
-			temp.addFeedback(feed);
-			temp.addFeedback(feed2);
-			categoryPool.AddCategory(temp);
+			feedbackPool.addFeedback(feed3);
+			feedbackPool.addFeedback(feed4);
+			feedbackPool.addFeedback(feed5);
+			
+			cat1.setName("Test Cat 1");
+			cat1.setDescription("Description test 1");
+			cat1.addFeedback(feed);
+			cat1.addFeedback(feed2);
+			
+			cat2.setName("Test Cat 2");
+			cat2.setDescription("Description test 2");
+			
+			cat3.setName("Test Cat 3");
+			cat3.setDescription("Description test 3");
+			cat3.addFeedback(feed);
+			cat3.addFeedback(feed2);
+			cat3.addFeedback(feed3);
+			cat3.addFeedback(feed4);
+			cat3.addFeedback(feed5);
+			
+			cat4.setName("Test Cat 4");
+			cat4.setDescription("Description test 4");
+			cat4.addFeedback(feed4);
+			cat4.addFeedback(feed5);
+			
+			
+			categoryPool.AddCategory(cat1);
+			categoryPool.AddCategory(cat2);
+			categoryPool.AddCategory(cat3);
+			categoryPool.AddCategory(cat4);
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
@@ -111,6 +144,15 @@ public class FacadeActionManager {
 
 	public ExercisePool getExercisePool() {
 		return exercisePool;
+	}
+
+	
+	public InitConfigHandler getInitConfigHandler() {
+		return initConfigHandler;
+	}
+
+	public void setInitConfigHandler(InitConfigHandler initConfigHandler) {
+		this.initConfigHandler = initConfigHandler;
 	}
 
 	private void setExercisePool(ExercisePool exercisePool) {

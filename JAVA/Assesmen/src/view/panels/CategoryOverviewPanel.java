@@ -29,7 +29,6 @@ public class CategoryOverviewPanel extends JPanel {
 
 	public CategoryOverviewPanel(MouseAdapter editAction, Action newAction,
 			Action removeAction) throws ViewException {
-		setCategories(categories);
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int row = 0;

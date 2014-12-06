@@ -39,9 +39,6 @@ public abstract class Question {
 		if(options.size()>5 || options.size()<2){
 			throw new DomainException("Options have to be between 2-5");
 		}
-		for(Answer a:options){
-			a.increaseTimesPicked();
-		}
 		this.options = options;
 	}
 

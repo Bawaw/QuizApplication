@@ -7,6 +7,7 @@ import view.MainView;
 import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
+import view.panels.ParticipationPanel;
 import view.panels.SettingsOverviewPanel;
 import controller.AbstractTestAction;
 import controller.CategoryDoneAction;
@@ -15,6 +16,7 @@ import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
+import controller.ParticipationAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.SettingsOverviewAction;
@@ -36,11 +38,14 @@ public class CompetentieTesterApp {
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
+		ParticipationAction evaluationAction=new ParticipationAction(service);
 
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
+		ParticipationPanel evaluationPanel=new ParticipationPanel();
 		
+		evaluationAction.setEvaluationPanel(evaluationPanel);
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
 		categoryEditAction.setDetailPanel(categoryDetailPanel);
 		categoryNewAction.setDetailPanel(categoryDetailPanel);
@@ -58,9 +63,12 @@ public class CompetentieTesterApp {
 		List<AbstractTestAction> actions = new ArrayList<AbstractTestAction>();
 		actions.add(categoryOverviewAction);
 		actions.add(settingsOverviewAction);
+		actions.add(evaluationAction);
 
 		MainView mainView = new MainView(actions);
 	
+		evaluationAction.setView(mainView);
+		
 		categoryOverviewAction.setView(mainView);
 		categoryEditAction.setView(mainView);
 		categoryNewAction.setView(mainView);

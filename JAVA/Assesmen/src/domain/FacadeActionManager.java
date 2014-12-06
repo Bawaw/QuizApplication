@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import config.ConfigException;
 import config.InitConfigHandler;
@@ -29,6 +30,18 @@ public class FacadeActionManager {
 	}
 
 	private FacadeActionManager() {
+		ArrayList<Participation> participations=new ArrayList<Participation>();
+		try{
+			participations.add(new Participation(10, null));
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		this.setParticipations(new ParticipationPool(participations));
+		
+		
+		
 		setExercisePool(new ExercisePool());
 		setCategoryPool( new CategoryPool());
 		setFeedbackPool(new FeedbackPool());
@@ -147,6 +160,7 @@ public class FacadeActionManager {
 	}
 
 	
+	
 	public InitConfigHandler getInitConfigHandler() {
 		return initConfigHandler;
 	}
@@ -238,6 +252,10 @@ public class FacadeActionManager {
 	
 	public void saveEvaluationType(String evaluation) throws ConfigException{
 		this.initConfigHandler.saveEvaluationType(evaluation);
+	}
+
+	public List<Participation> getParticipationList() {
+		return this.getParticipations().getParticipationPool();
 	}
 	
 }

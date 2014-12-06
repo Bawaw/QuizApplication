@@ -2,6 +2,8 @@ package domain.factory;
 
 import java.lang.reflect.Constructor;
 
+import config.ConfigException;
+import config.InitConfigHandler;
 import domain.DomainException;
 import domain.ExercisePool;
 import domain.enums.QuestionSelectionBehaviourType;
@@ -10,7 +12,13 @@ import domain.strategy.questionSelection.QuestionSelectionBehaviour;
 public class QuestionSelectAlgFactory {
 
 	public static QuestionSelectionBehaviour createStandard(ExercisePool exercisePool) throws DomainException{
+		InitConfigHandler it=new InitConfigHandler();
 		QuestionSelectionBehaviourType questionSelectionBehaviourType=null;
+		try {
+			questionSelectionBehaviourType = QuestionSelectionBehaviourType.valueOf(it.getQuestionSelectionBehaviour());
+		} catch (ConfigException e) {
+			throw new DomainException(e);
+		}
 		return QuestionSelectAlgFactory.create(exercisePool, questionSelectionBehaviourType);
 	}
 	

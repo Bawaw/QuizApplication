@@ -2,6 +2,8 @@ package domain.factory;
 
 import java.lang.reflect.Constructor;
 
+import config.ConfigException;
+import config.InitConfigHandler;
 import domain.DomainException;
 import domain.Evaluation;
 import domain.enums.ScoreBehaviourType;
@@ -10,7 +12,13 @@ import domain.strategy.score.ScoreBehaviour;
 public class ScoreBehaviourFactory {
 
 	public static ScoreBehaviour createStandard(Evaluation evaluation) throws DomainException{
+		InitConfigHandler it=new InitConfigHandler();
 		ScoreBehaviourType scorebehaviourtype=null;
+		try {
+			scorebehaviourtype = ScoreBehaviourType.valueOf(it.getScoreBehaviour());
+		} catch (ConfigException e) {
+			throw new DomainException(e);
+		}
 		return ScoreBehaviourFactory.create(evaluation, scorebehaviourtype);
 	}
 	

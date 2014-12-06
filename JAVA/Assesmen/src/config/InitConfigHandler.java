@@ -12,8 +12,17 @@ public class InitConfigHandler {
 	private final String defaultScoreBehaviour = "MaxScoreCalculator";
 	private final String defaultQuestionSelectionbehaviour = "RandomQuestions";
 	private final String defaultEvaluationType="ScoreEvaluation";
-
-	public InitConfigHandler() {
+	private static InitConfigHandler singleton;
+	
+	public static synchronized InitConfigHandler getInstance(){
+		if(singleton == null){
+			singleton=new InitConfigHandler();
+		}
+		return singleton;
+	}
+	
+	
+	private InitConfigHandler() {
 		this.setTable(new Properties());
 	}
 

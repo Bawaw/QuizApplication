@@ -17,7 +17,7 @@ import domain.enums.ScoreBehaviourType;
 public class EvaluationFactory {
 	
 	public static Evaluation create(ArrayList<Entry<Exercise, Answer>> exercises,ScoreBehaviourType scoreBehaviourType) throws DomainException {
-		InitConfigHandler it=new InitConfigHandler();
+		InitConfigHandler it=InitConfigHandler.getInstance();
 		EvaluationType evaluationType=null;
 		try{
 			evaluationType=EvaluationType.valueOf(it.getEvaluationType());

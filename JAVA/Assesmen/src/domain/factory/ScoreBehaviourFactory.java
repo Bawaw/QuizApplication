@@ -12,7 +12,7 @@ import domain.strategy.score.ScoreBehaviour;
 public class ScoreBehaviourFactory {
 
 	public static ScoreBehaviour createStandard(Evaluation evaluation) throws DomainException{
-		InitConfigHandler it=new InitConfigHandler();
+		InitConfigHandler it=InitConfigHandler.getInstance();
 		ScoreBehaviourType scorebehaviourtype=null;
 		try {
 			scorebehaviourtype = ScoreBehaviourType.valueOf(it.getScoreBehaviour());

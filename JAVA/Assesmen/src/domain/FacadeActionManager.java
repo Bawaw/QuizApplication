@@ -19,14 +19,20 @@ public class FacadeActionManager {
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
 	private int timer;
+	private static FacadeActionManager singleton;
+	
+	public static synchronized FacadeActionManager getInstance(){
+		if(singleton == null){
+			singleton=new FacadeActionManager();
+		}
+		return singleton;
+	}
 
-	// config handler
-
-	public FacadeActionManager() {
+	private FacadeActionManager() {
 		exercisePool = new ExercisePool();
 		categoryPool = new CategoryPool();
 		feedbackPool = new FeedbackPool();
-		initConfigHandler = new InitConfigHandler();
+		initConfigHandler = InitConfigHandler.getInstance();
 		// temp
 		try {
 			Category temp = new Category();

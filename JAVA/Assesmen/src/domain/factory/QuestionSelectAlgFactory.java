@@ -12,7 +12,7 @@ import domain.strategy.questionSelection.QuestionSelectionBehaviour;
 public class QuestionSelectAlgFactory {
 
 	public static QuestionSelectionBehaviour createStandard(ExercisePool exercisePool) throws DomainException{
-		InitConfigHandler it=new InitConfigHandler();
+		InitConfigHandler it=InitConfigHandler.getInstance();
 		QuestionSelectionBehaviourType questionSelectionBehaviourType=null;
 		try {
 			questionSelectionBehaviourType = QuestionSelectionBehaviourType.valueOf(it.getQuestionSelectionBehaviour());

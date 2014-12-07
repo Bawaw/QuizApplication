@@ -1,6 +1,6 @@
 #Admin Settings
-#Sun Dec 07 15:20:43 CET 2014
+#Sun Dec 07 16:21:40 CET 2014
 questionBehaviour=RandomQuestions
-evaluationSize=3
+evaluationSize=30
 evaluationType=ScoreEvaluation
 scoreBehaviour=MaxScoreCalculator

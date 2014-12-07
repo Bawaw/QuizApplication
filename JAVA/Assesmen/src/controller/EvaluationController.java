@@ -30,8 +30,8 @@ public class EvaluationController extends AbstractTestAction {
 			setPanelAsContentForView(getEvaluationPanel());
 			}
 			catch(Exception ex){
+				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
-				System.out.println(ex.getMessage());
 			}
 		}
 		else if(e.getActionCommand().equals("stop")){
@@ -63,6 +63,7 @@ public class EvaluationController extends AbstractTestAction {
 				this.getService().addParticipation(activeEvaluation.getEvaluationReport());	
 			}
 			catch(Exception ex){
+				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
 

@@ -3,7 +3,10 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
-import view.MainView;
+import javax.swing.JOptionPane;
+
+import view.MainViewAdmin;
+import view.MainViewUser;
 import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
@@ -18,9 +21,9 @@ import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
 import controller.EvaluationController;
-import controller.ParticipationAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
+import controller.ParticipationAction;
 import controller.SettingsOverviewAction;
 import controller.SettingsSaveAction;
 import domain.FacadeActionManager;
@@ -29,6 +32,7 @@ public class CompetentieTesterApp {
 	public static void main(String[] args) throws ViewException{
 		FacadeActionManager service = FacadeActionManager.getInstance();
 		
+		//###########################################ADMINSIDE##############################################
 		
 		CategoryOverviewAction categoryOverviewAction = new CategoryOverviewAction(service);
 		CategoryEditAction categoryEditAction = new CategoryEditAction(service);
@@ -40,22 +44,13 @@ public class CompetentieTesterApp {
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
-		ParticipationAction participationAction=new ParticipationAction(service);
-		EvaluationController evaluationController=new EvaluationController(service);
-
+		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
-		ParticipationPanel participationPanel=new ParticipationPanel(evaluationController);
-		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController);
 		
 		
-		//Need this to return to overview
-		evaluationController.setParticipationAction(participationAction);
 		
-		
-		evaluationController.setEvaluationPanel(evaluationPanel);
-		participationAction.setEvaluationPanel(participationPanel);
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
 		categoryEditAction.setDetailPanel(categoryDetailPanel);
 		categoryNewAction.setDetailPanel(categoryDetailPanel);
@@ -73,23 +68,66 @@ public class CompetentieTesterApp {
 		List<AbstractTestAction> actions = new ArrayList<AbstractTestAction>();
 		actions.add(categoryOverviewAction);
 		actions.add(settingsOverviewAction);
-		actions.add(participationAction);
 
-		MainView mainView = new MainView(actions);
+		MainViewAdmin admin = new MainViewAdmin(actions);
+		MainViewUser user = new MainViewUser();
 	
-		participationAction.setView(mainView);
-		evaluationController.setView(mainView);
 		
-		categoryOverviewAction.setView(mainView);
-		categoryEditAction.setView(mainView);
-		categoryNewAction.setView(mainView);
-		categoryDoneAction.setView(mainView);
-		categoryDoneAction.setView(mainView);
-		settingsOverviewAction.setView(mainView);
-		settingsSaveAction.setView(mainView);
-		feedbackActionManager.setView(mainView);
-		categoryRemoveAction.setView(mainView);
-		mainView.setVisible(true);
+		categoryOverviewAction.setView(admin);
+		categoryEditAction.setView(admin);
+		categoryNewAction.setView(admin);
+		categoryDoneAction.setView(admin);
+		categoryDoneAction.setView(admin);
+		settingsOverviewAction.setView(admin);
+		settingsSaveAction.setView(admin);
+		feedbackActionManager.setView(admin);
+		categoryRemoveAction.setView(admin);
+		admin.setVisible(false);
+		//################################################################################################
 		
+
+		//#####################################USERSIDE#####################################################
+		ParticipationAction participationAction=new ParticipationAction(service);
+		EvaluationController evaluationController=new EvaluationController(service);
+
+		
+		
+		ParticipationPanel participationPanel=new ParticipationPanel(evaluationController);
+		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController);
+		
+		
+	
+		evaluationController.setParticipationAction(participationAction);
+		
+		
+		evaluationController.setEvaluationPanel(evaluationPanel);
+		participationAction.setEvaluationPanel(participationPanel);
+		
+		
+
+		participationAction.setView(user);
+		evaluationController.setView(user);
+		
+		//load participation overview
+		participationAction.actionPerformed(null);
+		
+		user.setVisible(false);
+		//################################################################################################
+		
+		String[] buttons = { "ADMIN", "USER"};    
+	
+		 int option =JOptionPane.showOptionDialog(null,"Choose!","Who are you?",JOptionPane.DEFAULT_OPTION,
+				    JOptionPane.QUESTION_MESSAGE,null,buttons,buttons[0]);
+		
+		 switch(option){
+		 case 0:
+			 admin.setVisible(true);
+			 break;
+		 case 1:
+			 user.setVisible(true);
+			 break;
+		 default:
+			System.exit(0);
+		 }
 	}
 }

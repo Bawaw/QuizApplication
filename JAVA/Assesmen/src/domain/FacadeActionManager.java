@@ -81,6 +81,13 @@ public class FacadeActionManager {
 			Question q3=new YesNoQuestion("Question 3", new Answer("Yes"), 30);
 			Question q4=new YesNoQuestion("Question 4", new Answer("Yes"), 30);
 			Question q5=new YesNoQuestion("Question 5", new Answer("Yes"), 30);
+			HashSet<Answer> a=new HashSet<Answer>();
+			a.add(new Answer("no"));
+			a.add(new Answer("nonononononono"));
+			a.add(new Answer("nononon"));
+			a.add(new Answer("ba"));
+			a.add(new Answer("none"));
+			Question q6=new MultipleChoiceQuestion("my multiplechoicequestion is very very very long lalalalala", new Answer("ba"),a, 30);
 			
 			
 			
@@ -124,12 +131,14 @@ public class FacadeActionManager {
 			Exercise e3=new Exercise(q3, cat3, feed2, 1);
 			Exercise e4=new Exercise(q4, cat4, feed4, 4);
 			Exercise e5=new Exercise(q5, cat4, feed5, 6);
+			Exercise e6= new Exercise(q6, cat4, feed4, 3);
 			
 			this.getExercisePool().addExercise(e1);
 			this.getExercisePool().addExercise(e2);
 			this.getExercisePool().addExercise(e3);
 			this.getExercisePool().addExercise(e4);
 			this.getExercisePool().addExercise(e5);
+			this.getExercisePool().addExercise(e6);
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}

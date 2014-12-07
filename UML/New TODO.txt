@@ -1,13 +1,9 @@
 deelnemer kant 
-	 Nog verplaatsen naar user
-	- timer ?
-	- testen met vragen met 5 antwoorden (hoe ziet het eruit)
+	- timer !
 	- testen of least asked questions werkt
-	- settings "select by type" werkt niet (aanpassing nodig in adminsettings panel!)
+	- settings "select by type" werkt nog niet (aanpassing nodig in adminsettings panel!)
 	
 excel reader
-
-bij opstarten deelnemer-admin scherm
 
 edit question gui
 

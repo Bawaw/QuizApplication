@@ -11,6 +11,7 @@ import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
 import view.panels.EvaluationPanel;
+import view.panels.ExerciseOverviewPanel;
 import view.panels.ParticipationPanel;
 import view.panels.SettingsOverviewPanel;
 import controller.AbstractTestAction;
@@ -21,6 +22,7 @@ import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
 import controller.EvaluationController;
+import controller.ExerciseOverviewAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.ParticipationAction;
@@ -44,13 +46,15 @@ public class CompetentieTesterApp {
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
+		ExerciseOverviewAction exerciseOverviewAction=new ExerciseOverviewAction(service);
+		
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
+		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel();
 		
-		
-		
+		exerciseOverviewAction.setExererciseOverviewPanel(exererciseOverviewPanel);
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
 		categoryEditAction.setDetailPanel(categoryDetailPanel);
 		categoryNewAction.setDetailPanel(categoryDetailPanel);
@@ -67,12 +71,13 @@ public class CompetentieTesterApp {
 
 		List<AbstractTestAction> actions = new ArrayList<AbstractTestAction>();
 		actions.add(categoryOverviewAction);
+		actions.add(exerciseOverviewAction);
 		actions.add(settingsOverviewAction);
 
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
-		
+		exerciseOverviewAction.setView(admin);
 		categoryOverviewAction.setView(admin);
 		categoryEditAction.setView(admin);
 		categoryNewAction.setView(admin);

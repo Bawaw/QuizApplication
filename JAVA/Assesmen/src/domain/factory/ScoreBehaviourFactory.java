@@ -30,11 +30,12 @@ public class ScoreBehaviourFactory {
 
 		try {
 			Class<?> c = Class.forName(scorebehaviourtype.getFQDN());
-			Constructor<?> constructor = c.getConstructor(evaluation.getClass());
+			Constructor<?> constructor = c.getConstructor(Evaluation.class);
 			scoreBehaviour = (ScoreBehaviour) constructor
 					.newInstance(evaluation);
 		} catch (Exception e) {
-			throw new DomainException("fACTORY ERROR",e);
+			e.printStackTrace();
+			throw new DomainException(e);
 		}
 		return scoreBehaviour;
 	}

@@ -37,6 +37,7 @@ public class EvaluationFactory {
 				Constructor<?> constructor = c.getConstructor(exercises.getClass(), scoreBehaviourType.getClass());
 				evaluation = (Evaluation) constructor.newInstance(exercises,scoreBehaviourType);
 			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
 				throw new DomainException(e);
 			}
 			

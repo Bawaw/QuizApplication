@@ -4,9 +4,9 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
 import java.util.List;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,11 +23,22 @@ public class ParticipationPanel extends JPanel {
 	private JButton btnParticipation;
 	private TableModel tableModel;
 	
-	public ParticipationPanel() {
+	public ParticipationPanel(Action a) {
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int row = 0;
 		initList(row);
+		row=row+6;
+		intiNewButton(a,row);
+	}
+	
+	private void intiNewButton(Action a,int row){
+		btnParticipation = new JButton("New");
+		changeConstraints(1, 1, 1, row);
+		btnParticipation.setAction(a);
+		btnParticipation.setActionCommand("new");
+		btnParticipation.setText("New test");
+		addToPanel(btnParticipation);
 	}
 	
 	private void initList(int row) {

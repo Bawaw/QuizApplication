@@ -33,7 +33,8 @@ public class QuestionSelectAlgFactory {
 			Constructor<?> constructor = c.getConstructor(exercisePool.getClass());
 			questionSelectionBehaviour = (QuestionSelectionBehaviour) constructor.newInstance(exercisePool);
 		} catch (Exception e) {
-			throw new DomainException("fACTORY ERROR",e);
+			e.printStackTrace();
+			throw new DomainException(e);
 		}
 		return questionSelectionBehaviour;
 	}

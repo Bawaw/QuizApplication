@@ -1,13 +1,19 @@
 package domain;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 
 import config.ConfigException;
 import config.InitConfigHandler;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.ScoreBehaviourType;
+import domain.factory.EvaluationFactory;
+import domain.factory.QuestionSelectAlgFactory;
+import domain.strategy.questionSelection.QuestionSelectionBehaviour;
 import domain.strategy.questionSelection.QuestionSelectionFactory;
 
 public class FacadeActionManager {
@@ -15,7 +21,7 @@ public class FacadeActionManager {
 	private ParticipationPool participations;
 	private ExercisePool exercisePool;
 	private AnswerPool answerPool;
-	private Evaluation activeEvalutaion;
+	private Evaluation activeEvaluation;
 	private QuestionSelectionFactory questionSelectionFactory;
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
@@ -59,6 +65,14 @@ public class FacadeActionManager {
 			Feedback feed4 = new Feedback("Feedback 4");
 			Feedback feed5 = new Feedback("Feedback 5");
 			
+			Question q1=new YesNoQuestion("Question 1", new Answer("Yes"), 30);
+			Question q2=new YesNoQuestion("Question 2", new Answer("Yes"), 30);
+			Question q3=new YesNoQuestion("Question 3", new Answer("Yes"), 30);
+			Question q4=new YesNoQuestion("Question 4", new Answer("Yes"), 30);
+			Question q5=new YesNoQuestion("Question 5", new Answer("Yes"), 30);
+			
+			
+			
 			feedbackPool.addFeedback(feed);
 			feedbackPool.addFeedback(feed2);
 			feedbackPool.addFeedback(feed3);
@@ -91,6 +105,20 @@ public class FacadeActionManager {
 			categoryPool.AddCategory(cat2);
 			categoryPool.AddCategory(cat3);
 			categoryPool.AddCategory(cat4);
+			
+			
+			
+			Exercise e1=new Exercise(q1, cat1, feed, 3);
+			Exercise e2=new Exercise(q2, cat1, feed2, 2);
+			Exercise e3=new Exercise(q3, cat3, feed2, 1);
+			Exercise e4=new Exercise(q4, cat4, feed4, 4);
+			Exercise e5=new Exercise(q5, cat4, feed5, 6);
+			
+			this.getExercisePool().addExercise(e1);
+			this.getExercisePool().addExercise(e2);
+			this.getExercisePool().addExercise(e3);
+			this.getExercisePool().addExercise(e4);
+			this.getExercisePool().addExercise(e5);
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
@@ -184,14 +212,22 @@ public class FacadeActionManager {
 	public void addFeedback(String text) throws DomainException {
 		feedbackPool.addFeedback(new Feedback(text));	
 	}
+
 	
-	public Evaluation getActiveEvalutaion() {
-		return activeEvalutaion;
+	
+	public void createEvaluation() throws DomainException, ConfigException{
+		QuestionSelectionBehaviour questionSelector =QuestionSelectAlgFactory.createStandard(this.getExercisePool());
+		HashSet<Exercise> exerciseList=questionSelector.selectQuestions(this.getInitConfigHandler().getDefaultEvaluationSize());
+		ArrayList<Entry<Exercise, Answer>> exercises=new ArrayList<Entry<Exercise, Answer>>(exerciseList.size());
+		for(Exercise e:exerciseList){
+			Entry<Exercise, Answer> entry=new AbstractMap.SimpleEntry<Exercise, Answer>(e,null);
+			exercises.add(entry);
+		}
+		
+		Evaluation eval=EvaluationFactory.create(exercises, ScoreBehaviourType.valueOf(this.getInitConfigHandler().getScoreBehaviour()));
+		this.setActiveEvaluation(eval);
 	}
 
-	public void setActiveEvalutaion(Evaluation activeEvalutaion) {
-		this.activeEvalutaion = activeEvalutaion;
-	}
 
 	public QuestionSelectionFactory getQuestionSelectionFactory() {
 		return questionSelectionFactory;
@@ -257,6 +293,15 @@ public class FacadeActionManager {
 	public List<Participation> getParticipationList() {
 		return this.getParticipations().getParticipationPool();
 	}
+
+	public Evaluation getActiveEvaluation() {
+		return activeEvaluation;
+	}
+
+	public void setActiveEvaluation(Evaluation activeEvaluation) {
+		this.activeEvaluation = activeEvaluation;
+	}
+	
 	
 }
 

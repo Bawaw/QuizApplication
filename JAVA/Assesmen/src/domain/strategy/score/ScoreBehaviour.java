@@ -32,7 +32,7 @@ public abstract class ScoreBehaviour {
 	}
 	
 	
-	public final int calculateScore(){
+	public final long calculateScore(){
 		ArrayList<Entry<Exercise, Answer>> exercises=this.getTest().getExercises();
 		int totalScore=0;
 		int Userscore=0;
@@ -54,8 +54,8 @@ public abstract class ScoreBehaviour {
 		
 		Userscore+=bonusPoints();
 		
-		int result=(Userscore/totalScore)*this.getScoreOn();
-		
+		long result=Math.round((Userscore/(totalScore*1.0))*this.getScoreOn());
+
 		if(result<0){
 			result=0;
 		}

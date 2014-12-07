@@ -44,6 +44,11 @@ public class Answer {
 		}
 		return output;
 	}
+	
+	@Override
+	public String toString(){
+		return this.getAnswer();
+	}
 
 	@Override
 	public int hashCode() {

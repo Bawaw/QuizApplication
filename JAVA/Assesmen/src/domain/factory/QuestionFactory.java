@@ -30,18 +30,25 @@ public class QuestionFactory {
 			q = (Question) constr.newInstance(args);
 
 		} catch (InstantiationException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (SecurityException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		} catch (InvocationTargetException e) {
+			e.printStackTrace();
 			throw new DomainException(e);
 		}
 		return q;

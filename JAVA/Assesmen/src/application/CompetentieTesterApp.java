@@ -7,6 +7,7 @@ import view.MainView;
 import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
+import view.panels.EvaluationPanel;
 import view.panels.ParticipationPanel;
 import view.panels.SettingsOverviewPanel;
 import controller.AbstractTestAction;
@@ -16,6 +17,7 @@ import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
+import controller.EvaluationController;
 import controller.ParticipationAction;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
@@ -38,14 +40,18 @@ public class CompetentieTesterApp {
 		SettingsSaveAction settingsSaveAction = new SettingsSaveAction(service);
 		JsliderAmountAction jsliderAmountAction = new JsliderAmountAction();
 		CheckCategoryNameAction checkCategoryNameAction = new CheckCategoryNameAction(service);
-		ParticipationAction evaluationAction=new ParticipationAction(service);
+		ParticipationAction participationAction=new ParticipationAction(service);
+		EvaluationController evaluationController=new EvaluationController(service);
 
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
-		ParticipationPanel evaluationPanel=new ParticipationPanel();
+		ParticipationPanel participationPanel=new ParticipationPanel(evaluationController);
+		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController);
 		
-		evaluationAction.setEvaluationPanel(evaluationPanel);
+		
+		evaluationController.setEvaluationPanel(evaluationPanel);
+		participationAction.setEvaluationPanel(participationPanel);
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);
 		categoryEditAction.setDetailPanel(categoryDetailPanel);
 		categoryNewAction.setDetailPanel(categoryDetailPanel);
@@ -63,11 +69,12 @@ public class CompetentieTesterApp {
 		List<AbstractTestAction> actions = new ArrayList<AbstractTestAction>();
 		actions.add(categoryOverviewAction);
 		actions.add(settingsOverviewAction);
-		actions.add(evaluationAction);
+		actions.add(participationAction);
 
 		MainView mainView = new MainView(actions);
 	
-		evaluationAction.setView(mainView);
+		participationAction.setView(mainView);
+		evaluationController.setView(mainView);
 		
 		categoryOverviewAction.setView(mainView);
 		categoryEditAction.setView(mainView);

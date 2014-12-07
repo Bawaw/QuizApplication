@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import domain.enums.ScoreBehaviourType;
@@ -20,7 +21,36 @@ public abstract class Evaluation {
 		setScoreBehaviour(scoreBehaviourType);
 		setTimeAllowed();
 	}
+	
+	public void increaseIndex(){
+		if(hasNextQuestion()){
+			this.setIndexCurrentExercise(this.getIndexCurrentExercise()+1);
+		}
+	}
+	
+	public void decreaseIndex(){
+		if(hasPreviousQuestion()){
+			this.setIndexCurrentExercise(this.getIndexCurrentExercise()-1);
+		}
+	}
+	
+	
+	private Exercise getCurrentExercise(){
+		return exercises.get(indexCurrentExercise).getKey();
+	}
 
+	public Answer getCurrentSelectedAnswer(){
+		return exercises.get(indexCurrentExercise).getValue();
+	}
+	
+	public List<Answer> getAnswers(){
+		return new ArrayList<Answer>(this.getCurrentExercise().getQuestion().getOptions());
+	}
+	
+	public String getCurrentQuestion(){
+		return getCurrentExercise().getQuestion().getQuestion();
+	}
+	
 	public ScoreBehaviour getScoreBehaviour() {
 		return scoreBehaviour;
 	}
@@ -30,30 +60,17 @@ public abstract class Evaluation {
 	}
 
 	public boolean hasNextQuestion() {
-		return (indexCurrentExercise + 1 <= exercises.size());
+		return (indexCurrentExercise <= exercises.size()-2);
 	}
 
 	public boolean hasPreviousQuestion() {
 		return (indexCurrentExercise - 1 >= 0);
 	}
 
-	public Exercise getNextExercise() throws DomainException {
-		if (!hasNextQuestion())
-			throw new DomainException("Out of bound");
-		indexCurrentExercise++;
-		return getExercises().get(indexCurrentExercise).getKey();
-	}
-
 	public int getNumberOfQuestions() {
 		return getExercises().size();
 	}
 
-	public Exercise getPreviousExercise() throws DomainException {
-		if (!hasNextQuestion())
-			throw new DomainException("Out of bound");
-		indexCurrentExercise++;
-		return getExercises().get(indexCurrentExercise).getKey();
-	}
 
 	public ArrayList<Entry<Exercise, Answer>> getExercises() {
 		return exercises;
@@ -76,6 +93,14 @@ public abstract class Evaluation {
 		this.indexCurrentExercise = indexCurrentExercise;
 	}
 
+	public int questionNumber(){
+		return this.getIndexCurrentExercise()+1;
+	}
+	
+	public void answerCurrentQuestion(Answer a){
+		exercises.get(indexCurrentExercise).setValue(a);
+	}
+	
 	public int getTimeAllowed() {
 		return timeAllowed;
 	}
@@ -93,7 +118,8 @@ public abstract class Evaluation {
 		return null; // handle feedback
 	}
 
-	public int calculateScore() {
+	public long calculateScore() {
+
 		return scoreBehaviour.calculateScore(); // lokaal handelen (params mee
 												// geven) of in controller? Ik
 												// zou vanuit de controller
@@ -108,4 +134,16 @@ public abstract class Evaluation {
 
 	// generateResult
 
+	
+	@Override
+	public String toString(){
+		String output ="";
+		for(Entry<Exercise, Answer> entry:exercises){
+			String question=entry.getKey().getQuestion().getQuestion();
+			Answer a=entry.getValue();
+			output+=question + " You answered : "+a+"\n";
+		}
+		
+		return output;
+	}
 }

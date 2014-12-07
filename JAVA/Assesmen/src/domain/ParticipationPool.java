@@ -1,25 +1,26 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ParticipationPool {
-	ArrayList<Participation> participationPool;
+	LinkedList<Participation> participationPool;
 
-	public ParticipationPool(ArrayList<Participation> participationPool) {
+	public ParticipationPool(LinkedList<Participation> participationPool) {
 			setParticipationPool(participationPool);
 	}
 
-	public ArrayList<Participation> getParticipationPool() {
+	public LinkedList<Participation> getParticipationPool() {
 		return participationPool;
 	}
 
-	private void setParticipationPool(ArrayList<Participation> participationPool) {
+	private void setParticipationPool(LinkedList<Participation> participationPool) {
 		this.participationPool = participationPool;
 	}
 	
 	public void addParticipation(Participation participation){
 		if(!participationPool.contains(participation))
-			participationPool.add(participation);
+			participationPool.add(0,participation);
 	}
 
 }

@@ -50,6 +50,7 @@ public class ParticipationPanel extends JPanel {
 	public void update() throws ViewException {
 		tableModel = new ParticipationTableModel(getParticipations());
 		table.setModel(tableModel);
+		updateRowHeights();
 	}
 	
 	public ParticipationTableModel getModel() {
@@ -92,7 +93,25 @@ public class ParticipationPanel extends JPanel {
 		this.participations = participations;
 	}
 
-	
+	//http://stackoverflow.com/questions/1783607/auto-adjust-the-height-of-rows-in-a-jtable
+		private void updateRowHeights()
+		{
+		    try
+		    {
+		        for (int row = 0; row < table.getRowCount(); row++)
+		        {
+		            int rowHeight = table.getRowHeight();
+
+		            for (int column = 2; column < table.getColumnCount(); column++)
+		            {
+		                Component comp = table.prepareRenderer(table.getCellRenderer(row, column), row, column);
+		                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+		            }
+		            table.setRowHeight(row, rowHeight);
+		        }
+		    }
+		    catch(ClassCastException e) {}
+		}
 	
 	
 }

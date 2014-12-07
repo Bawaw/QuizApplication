@@ -11,7 +11,7 @@ public class ParticipationTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Participation> participations;
-	private String[] columnNames = { "Datum", "ScoreOn20","Errors" };
+	private String[] columnNames = { "Datum", "ScoreOn20","Overview" };
 	
 	public ParticipationTableModel(List<Participation> participations) {
 		this.participations=participations;
@@ -38,11 +38,14 @@ public class ParticipationTableModel extends AbstractTableModel {
 		case 1:
 			return participation.getScore();
 		case 2:
-			return participation.getErrors();
+			return participation.getErrorsFormatted();
+			
 		default:
 			return "";
 		}
 	}
+	
+
 	
 	@Override
 	public String getColumnName(int column) {

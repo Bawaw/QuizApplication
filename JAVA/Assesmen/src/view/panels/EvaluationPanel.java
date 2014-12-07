@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,9 +21,9 @@ import domain.Answer;
 import domain.DomainException;
 
 public class EvaluationPanel extends JPanel {
-	private JLabel questionText,index;
+	private JLabel questionText,index,category,score;
 	private JPanel optionPanel;
-	private JButton next,prev;
+	private JButton next,prev,stop;
 	private GridBagConstraints constraints=new GridBagConstraints();
 	private ButtonGroup options=new ButtonGroup();
 	
@@ -31,22 +32,49 @@ public class EvaluationPanel extends JPanel {
 		initConstraints();
 		int row=0;
 		initindexLabel(row);
+		initCatLabel(row);
+		initScoreLabel(row);
 		row++;
 		initQuestionLabel(row);
 		row++;
 		initOptionPanel(row);
 		row++;
 		initPrevButton(a,row);
+		initStopButton(a, row);
 		initNextButton(a,row);
 	}
 	
+	private void initStopButton(Action a,int row){
+		stop = new JButton("stop");
+
+		changeConstraints(1, 1, 1, row);
+		stop.setAction(a);
+		constraints.weighty = 0.2;
+		stop.setActionCommand("stop");
+		stop.setText("Stop");
+		addToPanel(stop);
+	}
+	
+	private void initCatLabel(int row){
+		category=new JLabel("unkown");
+		changeConstraints(1,1,1,row);
+		this.addToPanel(category);
+	} 
+	
+	private void initScoreLabel(int row){
+		score=new JLabel("unkown");
+		changeConstraints(1,1,2,row);
+		this.addToPanel(score);
+	} 
+	
 	private void initOptionPanel(int row){
 		optionPanel=new JPanel();
+		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
 		changeConstraints(1,2,0,row);
 		this.addToPanel(optionPanel);
 	}
 	
-	public void update(String question,List<Answer> opt,Answer previousAnswer,boolean hasNext,boolean hasPrev,int currentQ,int totalQ){
+	public void update(String question,List<Answer> opt,Answer previousAnswer,boolean hasNext,boolean hasPrev,int currentQ,int totalQ,String category,int points){
 		this.setTextQuestion(question);
 		setPossibleOptions(opt);
 		reselectAnswer(previousAnswer);
@@ -64,6 +92,8 @@ public class EvaluationPanel extends JPanel {
 			this.changeFinishButton();
 		}
 		settingIndex(currentQ,totalQ);
+		settingCategory(category);
+		settingScore(points);
 	}
 	
 	
@@ -72,9 +102,18 @@ public class EvaluationPanel extends JPanel {
 		this.index.setText(index);
 	}
 	
+	private void settingCategory(String category){
+		this.category.setText(category);
+	}
+	
+	private void settingScore(int points){
+		String text="Points: "+points;
+		this.score.setText(text);
+	}
+	
 	private void initindexLabel(int row){
 		index=new JLabel("1/10");
-		changeConstraints(1,2,0,row);
+		changeConstraints(1,1,0,row);
 		this.addToPanel(index);
 	}
 	
@@ -87,7 +126,7 @@ public class EvaluationPanel extends JPanel {
 	private void initNextButton(Action a,int row){
 		next = new JButton("next");
 
-		changeConstraints(1, 1, 1, row);
+		changeConstraints(1, 1, 2, row);
 		next.setAction(a);
 		constraints.weighty = 0.2;
 		next.setActionCommand("next");

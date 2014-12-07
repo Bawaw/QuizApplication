@@ -15,9 +15,7 @@ public class ScoreEvaluation extends Evaluation {
 
 	@Override
 	public String getSpecificFeedback() {
-		// TODO Auto-generated method stub
-		//TODO write implementation
-		return null;
+		return super.getEvaluationReport().toString();
 	}
 
 }

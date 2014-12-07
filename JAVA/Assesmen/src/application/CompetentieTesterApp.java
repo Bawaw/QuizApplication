@@ -50,6 +50,10 @@ public class CompetentieTesterApp {
 		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController);
 		
 		
+		//Need this to return to overview
+		evaluationController.setParticipationAction(participationAction);
+		
+		
 		evaluationController.setEvaluationPanel(evaluationPanel);
 		participationAction.setEvaluationPanel(participationPanel);
 		categoryOverviewAction.setOverviewPanel(categoryOverviewPanel);

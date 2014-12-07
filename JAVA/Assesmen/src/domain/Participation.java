@@ -2,20 +2,21 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class Participation {
 	private Date date;
 	private int score;
-	private ArrayList<Entry<String, Integer>> errors;
+	private Map<String, PointCouple> errors;
 
-	public Participation(int score, ArrayList<Entry<String, Integer>> errors)
+	public Participation(int score, Map<String, PointCouple> map)
 			throws DomainException {
 		// sets date to current date
 		this.setDate(new Date());
 		this.setScore(score);
-		this.setErrors(errors);
+		this.setErrors(map);
 	}
 
 	public Date getDate() {
@@ -37,11 +38,22 @@ public class Participation {
 		this.score = score;
 	}
 
-	public ArrayList<Entry<String, Integer>> getErrors() {
+	public Map<String, PointCouple> getErrors() {
 		return errors;
 	}
+	
+	public String getErrorsFormatted(){
+		String output="<html>";
+		Iterator<Entry<String, PointCouple>> it=this.getErrors().entrySet().iterator();
+		while(it.hasNext()){
+			Entry<String, PointCouple> entry=it.next();
+			output+=entry.getKey() +" : "+entry.getValue().toString()+"<br>";
+		}
+		output+="</html>";
+		return output;
+	}
 
-	private void setErrors(ArrayList<Entry<String, Integer>> errors) {
+	private void setErrors(Map<String, PointCouple> errors) {
 		this.errors = errors;
 	}
 	

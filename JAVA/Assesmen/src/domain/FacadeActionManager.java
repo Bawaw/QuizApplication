@@ -2,7 +2,9 @@ package domain;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -36,9 +38,18 @@ public class FacadeActionManager {
 	}
 
 	private FacadeActionManager() {
-		ArrayList<Participation> participations=new ArrayList<Participation>();
+		LinkedList<Participation> participations=new LinkedList<Participation>();
 		try{
-			participations.add(new Participation(10, null));
+			HashMap<String,PointCouple> mp=new HashMap<String,PointCouple>();
+			PointCouple pt=new PointCouple();
+			pt.setCorrectQ(3);
+			pt.setTotalQ(5);
+			mp.put("Category 1", pt);
+			pt=new PointCouple();
+			pt.setCorrectQ(1);
+			pt.setTotalQ(3);
+			mp.put("Category 2", pt);
+			participations.add(new Participation(10, mp));
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
@@ -244,6 +255,11 @@ public class FacadeActionManager {
 
 	private void setTimer(int timer) {
 		this.timer = timer;
+	}
+	
+	public void addParticipation(EvaluationReport eval) throws DomainException{
+		Participation p = new Participation(eval.getScore(),eval.getCatScore());
+		this.getParticipations().addParticipation(p);
 	}
 
 	public String[] getAllScoreBehaviours(){

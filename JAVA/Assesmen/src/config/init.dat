@@ -1,6 +1,6 @@
 #Admin Settings
-#Sun Dec 07 12:50:03 CET 2014
-questionBehaviour=LeastAskedQuestions
+#Sun Dec 07 15:20:43 CET 2014
+questionBehaviour=RandomQuestions
 evaluationSize=3
 evaluationType=ScoreEvaluation
 scoreBehaviour=MaxScoreCalculator

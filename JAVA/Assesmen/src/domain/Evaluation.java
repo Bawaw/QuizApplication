@@ -13,6 +13,7 @@ public abstract class Evaluation {
 	int indexCurrentExercise;
 	int timeAllowed;
 	ScoreBehaviour scoreBehaviour;
+	EvaluationReport evaluationReport;
 
 	public Evaluation(ArrayList<Entry<Exercise, Answer>> exercises,
 			ScoreBehaviourType scoreBehaviourType) throws DomainException {
@@ -76,6 +77,15 @@ public abstract class Evaluation {
 		return exercises;
 	}
 
+	public int getPointsCurrentExercise(){
+		return this.getCurrentExercise().getScore();
+	}
+	
+	public String getCategoryCurrentExercise(){
+		return this.getCurrentExercise().getCategory().getName();
+	}
+	
+	
 	private void setExercises(ArrayList<Entry<Exercise, Answer>> exercises)
 			throws DomainException {
 		if (exercises == null)
@@ -112,13 +122,11 @@ public abstract class Evaluation {
 		}
 	}
 
+
+
 	public abstract String getSpecificFeedback();
 
-	public String getFeedback() {
-		return null; // handle feedback
-	}
-
-	public long calculateScore() {
+	public int calculateScore() {
 
 		return scoreBehaviour.calculateScore(); // lokaal handelen (params mee
 												// geven) of in controller? Ik
@@ -132,6 +140,26 @@ public abstract class Evaluation {
 												// bepaalde category etc.
 	}
 
+	
+	private EvaluationReport generateReport(){
+		EvaluationReport eval=new EvaluationReport();
+		eval.setScore(this.calculateScore());
+		eval.setScoreOn(this.getScoreBehaviour().getScoreOn());
+		for(Entry<Exercise, Answer> couple : this.getExercises()){
+			Exercise ex=couple.getKey();
+			Answer rightA	= ex.getQuestion().getRightAnswer();
+			Answer userAnswer = couple.getValue();
+			eval.addExercise(ex, rightA.equals(userAnswer));
+		}
+		return eval;
+	}
+	
+	
+	
+	public void finish(){
+		this.setEvaluationReport(generateReport());
+	}
+	
 	// generateResult
 
 	
@@ -146,4 +174,14 @@ public abstract class Evaluation {
 		
 		return output;
 	}
+
+	public EvaluationReport getEvaluationReport() {
+		return evaluationReport;
+	}
+
+	public void setEvaluationReport(EvaluationReport evaluationReport) {
+		this.evaluationReport = evaluationReport;
+	}
+	
+	
 }

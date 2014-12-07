@@ -14,9 +14,19 @@ public class FeedbackEvaluation extends Evaluation {
 
 	@Override
 	public String getSpecificFeedback() {
-		// TODO Auto-generated method stub
-		//TODO write implementation
-		return null;
+		String output="You made some mistakes:\n\n";
+		for(Entry<Exercise, Answer> couple : super.getExercises()){
+			Exercise ex=couple.getKey();
+			Answer rightA	= ex.getQuestion().getRightAnswer();
+			Answer userAnswer = couple.getValue();
+			if(!rightA.equals(userAnswer)){
+				output+=ex.getQuestion().getQuestion() +": " +ex.getFeedback().getText()+"\n";
+			}
+		}
+		if(output=="You made some mistakes:\n\n"){
+			output="You made no errors!";
+		}
+		return output;
 	}
 
 }

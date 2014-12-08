@@ -12,6 +12,7 @@ import config.ConfigException;
 import config.InitConfigHandler;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
+import domain.enums.QuestionType;
 import domain.enums.ScoreBehaviourType;
 import domain.factory.EvaluationFactory;
 import domain.factory.QuestionSelectAlgFactory;
@@ -162,6 +163,10 @@ public class FacadeActionManager {
 		getCategoryPool().removeFeedbackFromAllCat(feedback);
 		//remove feedback from all questions
 		getExercisePool().removeFeedback(feedback);
+	}
+	
+	public ArrayList<Exercise> getExercisesByQuestion(Exercise exercise){
+		return getExercisePool().getExerciseByQuestion(exercise.getQuestion().getQuestion());
 	}
 
 	public void removeExercise(Exercise exercise) {
@@ -325,6 +330,10 @@ public class FacadeActionManager {
 
 	public void setActiveEvaluation(Evaluation activeEvaluation) {
 		this.activeEvaluation = activeEvaluation;
+	}
+
+	public String[] getAllQuestionTypes() {
+		return QuestionType.toStringArrayUI();
 	}
 	
 	

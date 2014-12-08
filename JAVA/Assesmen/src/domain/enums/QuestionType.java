@@ -2,14 +2,27 @@ package domain.enums;
 
 
 public enum QuestionType {
-	YesNoQuestions("domain.YesNoQuestion"),
-	MultipleChoiceQuestions("domain.MultipleChoiceQuestion");
+	YesNoQuestions("domain.YesNoQuestion","Yes Or No Question"),
+	MultipleChoiceQuestions("domain.MultipleChoiceQuestion","Multiple Choice Question");
 	
 	private String FQDN;
+	private String uiString;
 	
-	private QuestionType(String FQDN){
+	private QuestionType(String FQDN,String uiString){
 		this.setFQDN(FQDN);
+		this.setUiString(uiString);
 	}
+
+	
+	public String getUiString() {
+		return uiString;
+	}
+
+
+	public void setUiString(String uiString) {
+		this.uiString = uiString;
+	}
+
 
 	public String getFQDN() {
 		return FQDN;
@@ -27,6 +40,17 @@ public enum QuestionType {
 		}
 		return output;
 	}
+	
+	public static String[] toStringArrayUI(){
+		QuestionType[] val= values();
+		String[] output=new String[val.length];
+		for(int i=0;i<val.length;i++){
+			output[i]=val[i].getUiString();
+		}
+		return output;
+	}
+	
+	
 	
 }
 

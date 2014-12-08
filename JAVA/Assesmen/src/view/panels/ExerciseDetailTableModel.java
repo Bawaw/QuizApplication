@@ -6,12 +6,12 @@ import javax.swing.table.AbstractTableModel;
 
 import domain.Exercise;
 
-public class ExerciseTableModel extends AbstractTableModel {
+public class ExerciseDetailTableModel extends AbstractTableModel {
 
 	private List<Exercise> exercises;
-	private String[] columnNames = { "QuestionType", "Question" };
+	private String[] columnNames = { "Category", "Feedback","Score" };
 
-	public ExerciseTableModel(List<Exercise> exercises2) {
+	public ExerciseDetailTableModel(List<Exercise> exercises2) {
 		setExercises(exercises2);
 	}
 
@@ -33,12 +33,6 @@ public class ExerciseTableModel extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		return exercises.size();
 	}
-	
-	public Exercise getExerciseAt(int rowIndex){
-		Exercise exercise = null;
-		exercise = exercises.get(rowIndex);
-		return exercise;
-	}
 
 	@Override
 	public Object getValueAt(int row, int column) {
@@ -46,10 +40,11 @@ public class ExerciseTableModel extends AbstractTableModel {
 		exercise = this.exercises.get(row);
 		switch (column) {
 		case 0:
-			return exercise.getQuestion().getType();
+			return exercise.getCategory().getName();
 		case 1:
-			return exercise.getQuestion().getQuestion();
-
+			return exercise.getFeedback().getText();
+		case 2: 
+			return exercise.getScore();
 		default:
 			return "";
 		}

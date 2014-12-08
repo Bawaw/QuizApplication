@@ -56,11 +56,6 @@ public class Exercise implements Comparable<Exercise> {
 		if (feedback == null) {
 			throw new DomainException("feedback cannot be null");
 		}
-		// TODO Moet dit wel? Wat als we de feedback in category verwijderen.
-		// Dan kan die category toch nog vragen hebben met die feedback!
-		if (!this.getCategory().hasFeedback(feedback)) {
-			throw new DomainException("Category does not have that feedback");
-		}
 		this.feedback = feedback;
 	}
 

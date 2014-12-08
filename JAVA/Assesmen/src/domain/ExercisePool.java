@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
@@ -22,9 +21,12 @@ public class ExercisePool {
 	}
 	
 	public void removeWithCategory(Category category) throws DomainException{
-		for (Exercise e : getExercisePool()){
-			if(e.getCategory().equals(category))
-				exercises.remove(e);
+		Iterator<Exercise> it=getExercisePool().iterator();
+		while(it.hasNext()){
+			Exercise ex=it.next();
+			if(ex.getCategory().equals(category)){
+				it.remove();
+			}
 		}
 	}
 	

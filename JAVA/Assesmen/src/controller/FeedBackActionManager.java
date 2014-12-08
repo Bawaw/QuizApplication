@@ -47,6 +47,7 @@ public class FeedBackActionManager extends AbstractTestAction {
 					updateFeedbackList();
 						}
 			} catch (Exception e1) {
+				e1.printStackTrace();
 				JOptionPane.showMessageDialog(super.getView(),"Select a feedback to remove!","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}

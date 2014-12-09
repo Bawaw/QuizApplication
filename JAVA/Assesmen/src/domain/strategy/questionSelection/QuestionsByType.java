@@ -47,13 +47,17 @@ public class QuestionsByType extends ExercisePoolHandler implements
 			}
 				
 		}
+		if(typeList.size() <amount){
+			throw new DomainException("You need atleast: " + amount
+					+ " unique "+ questionType+" before you can create an evaluation");
+		}
 
 		for (int i = 0; i < amount; i++) {
 			boolean valid = false;
 			for (int j = 0; j < QuestionSelectionBehaviour.iterations && !valid; j++) {
 				int index = r.nextInt(getExercisePool().getExercisePool()
-						.size()-1); // not sure if works since internal clock
-				if (!retSet.contains(typeList.get(index))) {
+						.size()); 
+				if (index<=typeList.size()-1 && !retSet.contains(typeList.get(index))) {
 					retSet.add(typeList.get(index));
 					valid = true;
 				}

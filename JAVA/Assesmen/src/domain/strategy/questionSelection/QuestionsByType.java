@@ -52,7 +52,7 @@ public class QuestionsByType extends ExercisePoolHandler implements
 			boolean valid = false;
 			for (int j = 0; j < QuestionSelectionBehaviour.iterations && !valid; j++) {
 				int index = r.nextInt(getExercisePool().getExercisePool()
-						.size()); // not sure if works since internal clock
+						.size()-1); // not sure if works since internal clock
 				if (!retSet.contains(typeList.get(index))) {
 					retSet.add(typeList.get(index));
 					valid = true;

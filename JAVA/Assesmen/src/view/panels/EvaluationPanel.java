@@ -4,8 +4,11 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.util.Enumeration;
 import java.util.List;
+
+import javafx.event.ActionEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
@@ -15,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.Timer;
 
 import view.ViewException;
 import domain.Answer;
@@ -23,27 +27,53 @@ import domain.DomainException;
 public class EvaluationPanel extends JPanel {
 	private JLabel questionText,index,category,score;
 	private JPanel optionPanel;
+	private JLabel timeLabel;
 	private JButton next,prev,stop;
 	private GridBagConstraints constraints=new GridBagConstraints();
 	private ButtonGroup options=new ButtonGroup();
+	private Timer timer;
+	private final int TIME_INTERVAL = 1000;
+	private int time;
 	
-	public EvaluationPanel(Action a) {
+	public EvaluationPanel(Action a,ActionListener tickEvent) {
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int row=0;
+		initTimer(tickEvent,row);
+		++row;
 		initindexLabel(row);
 		initCatLabel(row);
 		initScoreLabel(row);
-		row++;
-		initQuestionLabel(row);
-		row++;
-		initOptionPanel(row);
-		row++;
-		initPrevButton(a,row);
+		initQuestionLabel(++row);
+		initOptionPanel(++row);
+		initPrevButton(a,++row);
 		initStopButton(a, row);
 		initNextButton(a,row);
 	}
 	
+	private void initTimer(ActionListener tickEvent, int row){
+		changeConstraints(1, 1, 1, row);
+		timeLabel = new JLabel("paused");
+		addToPanel(timeLabel);
+		timer = new Timer(TIME_INTERVAL,tickEvent);
+		timer.stop();
+		timer.setRepeats(true);
+		time = 0;
+	}
+	
+	public void startTimer(){
+		timer.start();
+	}
+	
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+		timeLabel.setText(Integer.toString(time));
+	}
+
 	private void initStopButton(Action a,int row){
 		stop = new JButton("stop");
 
@@ -77,6 +107,7 @@ public class EvaluationPanel extends JPanel {
 	public void update(String question,List<Answer> opt,Answer previousAnswer,boolean hasNext,boolean hasPrev,int currentQ,int totalQ,String category,int points){
 		this.setTextQuestion(question);
 		setPossibleOptions(opt);
+		startTimer();
 		reselectAnswer(previousAnswer);
 		if(!hasPrev){
 			this.prev.setEnabled(false);;

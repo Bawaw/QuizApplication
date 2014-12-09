@@ -23,6 +23,7 @@ import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
 import controller.CheckCategoryNameAction;
 import controller.EvaluationController;
+import controller.EvaluationTimerAction;
 import controller.ExerciseEditAction;
 import controller.ExerciseOverviewAction;
 import controller.ExerciseRemoveAction;
@@ -112,21 +113,22 @@ public class CompetentieTesterApp {
 
 		//#####################################USERSIDE#####################################################
 		ParticipationAction participationAction=new ParticipationAction(service);
+		EvaluationTimerAction evaluationTimerAction = new EvaluationTimerAction();
 		EvaluationController evaluationController=new EvaluationController(service);
 
 		
 		
 		ParticipationPanel participationPanel=new ParticipationPanel(evaluationController);
-		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController);
+		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController,evaluationTimerAction);
 		
 		
 	
 		evaluationController.setParticipationAction(participationAction);
-		
+		evaluationTimerAction.setEvaluationPanel(evaluationPanel);
 		
 		evaluationController.setEvaluationPanel(evaluationPanel);
 		participationAction.setEvaluationPanel(participationPanel);
-		
+		evaluationTimerAction.setEvaluationPanel(evaluationPanel);
 		
 
 		participationAction.setView(user);

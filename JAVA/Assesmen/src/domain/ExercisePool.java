@@ -63,6 +63,20 @@ public class ExercisePool {
 		return returnList;
 	}
 	
+	public void removeSimilarExercise(Exercise ex){
+		String QuestionString =ex.getQuestion().getQuestion();
+		
+		Iterator<Exercise> it=this.getExercisePool().iterator();
+		while(it.hasNext()){
+			Exercise e=it.next();
+			String qS=e.getQuestion().getQuestion();
+			if(QuestionString.equals(qS)){
+				it.remove();
+			}
+		}
+	}
+	
+	
 	public HashSet<Category> getCategories(){
 		HashSet<Category> returnList = new HashSet<Category>();
 		for (Exercise exercise : getExercisePool()) {

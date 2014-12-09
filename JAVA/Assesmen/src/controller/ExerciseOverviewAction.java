@@ -12,7 +12,7 @@ import domain.FacadeActionManager;
 
 public class ExerciseOverviewAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;
-	private ExerciseOverviewPanel exererciseOverviewPanel;
+	private ExerciseOverviewPanel exerciseOverviewPanel;
 
 	public ExerciseOverviewAction(FacadeActionManager service) {
 		super(service, "Exercises");
@@ -21,26 +21,26 @@ public class ExerciseOverviewAction extends AbstractTestAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// Listener to get all categories from service...
-		List<Exercise> exercises = new ArrayList<Exercise>(getService().getExercisePool().getUniqueExerciseSet());
+		List<Exercise> exercises = new ArrayList<Exercise>(getService().getUniqueExercises());
 		
-		getExererciseOverviewPanel().setExercises(exercises);
+		getExerciseOverviewPanel().setExercises(exercises);
 		try {
-			getExererciseOverviewPanel().update();
+			getExerciseOverviewPanel().update();
 		} catch (ViewException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		setPanelAsContentForView(getExererciseOverviewPanel());
+		setPanelAsContentForView(getExerciseOverviewPanel());
 
 	}
 
-	public ExerciseOverviewPanel getExererciseOverviewPanel() {
-		return exererciseOverviewPanel;
+	public ExerciseOverviewPanel getExerciseOverviewPanel() {
+		return exerciseOverviewPanel;
 	}
 
-	public void setExererciseOverviewPanel(
+	public void setExerciseOverviewPanel(
 			ExerciseOverviewPanel exererciseOverviewPanel) {
-		this.exererciseOverviewPanel = exererciseOverviewPanel;
+		this.exerciseOverviewPanel = exererciseOverviewPanel;
 	}
 
 }

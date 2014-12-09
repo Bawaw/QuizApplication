@@ -104,6 +104,9 @@ public class ExerciseOverviewPanel extends JPanel{
 		this.exercises = exercises;
 	}
 	
+	public ExerciseTableModel getModel(){
+		return (ExerciseTableModel)this.tableModel;
+	}
 	
 
 }

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import config.ConfigException;
 import config.InitConfigHandler;
@@ -37,6 +38,7 @@ public class FacadeActionManager {
 		}
 		return singleton;
 	}
+	
 
 	private FacadeActionManager() {
 		LinkedList<Participation> participations=new LinkedList<Participation>();
@@ -213,7 +215,9 @@ public class FacadeActionManager {
 		return exercisePool;
 	}
 
-	
+	public Set<Exercise> getUniqueExercises(){
+		return this.getExercisePool().getUniqueExerciseSet();
+	}
 	
 	public InitConfigHandler getInitConfigHandler() {
 		return initConfigHandler;
@@ -347,6 +351,11 @@ public class FacadeActionManager {
 	
 	public String[] getAllQuestionTypesAdmin(){
 		return QuestionType.toStringArray();
+	}
+
+
+	public void removeSimilarExercises(Exercise clickedExercise) {
+		this.getExercisePool().removeSimilarExercise(clickedExercise);
 	}
 	
 }

@@ -12,6 +12,7 @@ public class InitConfigHandler {
 	private final String defaultScoreBehaviour = "MaxScoreCalculator";
 	private final String defaultQuestionSelectionbehaviour = "RandomQuestions";
 	private final String defaultEvaluationType="ScoreEvaluation";
+	private final String defaultQuestionType="YesNoQuestions";
 	private static InitConfigHandler singleton;
 	
 	public static synchronized InitConfigHandler getInstance(){
@@ -94,6 +95,22 @@ public class InitConfigHandler {
 		return value;
 	}
 	
+	public String getQuestionType() throws ConfigException {
+		String value = null;
+		try {
+			FileInputStream in = new FileInputStream(defaultPath);
+			this.getTable().load(in);
+			in.close();
+			value = this.getTable().getProperty("questionType");
+		} catch (IOException ex) {
+			throw new ConfigException(ex);
+		}
+		if (value == null) {
+			value = this.defaultQuestionType;
+		}
+		return value;
+	}
+	
 	public void saveQuestionSelectionBehaviour(String questionSelectionBehaviour)
 			throws ConfigException {
 		try {
@@ -106,6 +123,20 @@ public class InitConfigHandler {
 			throw new ConfigException(ex);
 		}
 	}
+	
+	public void saveQuestionType(String questionType)
+			throws ConfigException {
+				try {
+					FileOutputStream out = new FileOutputStream(defaultPath);
+					this.getTable().setProperty("questionType",
+							questionType);
+					this.getTable().store(out, "Admin Settings");
+					out.close();
+				} catch (IOException ex) {
+					throw new ConfigException(ex);
+				}
+		}
+
 	
 	
 	public void saveEvaluationType(String evaluationType)

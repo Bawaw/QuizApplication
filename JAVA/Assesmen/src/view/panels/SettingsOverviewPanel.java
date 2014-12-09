@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -17,18 +18,19 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeListener;
 
 import view.ViewException;
-import controller.JsliderAmountAction;
 
 public class SettingsOverviewPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private JComboBox<String> selectBeh= new JComboBox<String>();
+	private JComboBox<String> questionType = new JComboBox<String>();
 	private JComboBox<String> scoreBeh= new JComboBox<String>();
 	private JComboBox<String> evalType= new JComboBox<String>(); 
 	private JSlider amount=new JSlider(1, 30);
 	private JTextField jTextField=new JTextField();
+	private JLabel questionT;
 	
-	public SettingsOverviewPanel(Action action,ChangeListener changeListener) throws ViewException {
+	public SettingsOverviewPanel(Action action,ChangeListener changeListener,ActionListener a) throws ViewException {
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int row = 0;
@@ -36,6 +38,9 @@ public class SettingsOverviewPanel extends JPanel {
 		row++;
 
 		addComboCouple("SelectBehaviour",this.getSelectBeh(),row);
+		addActionListenerTo(this.getSelectBeh(),a);
+		row++;
+		addQuestionType("QuestionType",this.getQuestionType(),row);
 		row++;
 		addComboCouple("ScoreBehaviour",this.getScoreBeh(),row);
 		row++;
@@ -46,6 +51,18 @@ public class SettingsOverviewPanel extends JPanel {
 		AddButton(action, row);
 	}
 
+	private void addQuestionType(String name,JComponent j,int rij){
+		changeConstraints(1, 1, 0, rij);
+		questionT=new JLabel(name);
+		addToPanel(questionT);
+		changeConstraints(1, 2, 1, rij);
+		addToPanel(j);
+	}
+	
+	private void addActionListenerTo(JComboBox<String> c,ActionListener a){
+		c.addActionListener(a);
+	}
+	
 	private void initListTitle(int rij) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Settings:"));
@@ -150,6 +167,12 @@ public class SettingsOverviewPanel extends JPanel {
 		this.getSelectBeh().setSelectedIndex(index);
 	}
 
+	public void setQuestionType(String[] questionTypeList,String current){
+		DefaultComboBoxModel model = new DefaultComboBoxModel(questionTypeList);
+		this.getQuestionType().setModel(model);
+		int index=getComboBoxIndex(questionTypeList, current);
+		this.getQuestionType().setSelectedIndex(index);
+	}
 	
 	public void setScoreList(String[] scoreList,String current) {
 		DefaultComboBoxModel model = new DefaultComboBoxModel(scoreList);
@@ -198,5 +221,30 @@ public class SettingsOverviewPanel extends JPanel {
 	public void setEvalTypeJ(JComboBox<String> evalType) {
 		this.evalType = evalType;
 	}
+
+	public JComboBox<String> getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(JComboBox<String> questionType) {
+		this.questionType = questionType;
+	}
 	
+	public String getSelectedSelectionAlgo(){
+		return (String)this.getSelectBeh().getSelectedItem();
+	}
+	
+	public String getQuestionTypeSelected(){
+		return (String)this.getQuestionType().getSelectedItem();
+	}
+	
+	public void hideQuestionType(){
+		this.questionT.setVisible(false);
+		this.getQuestionType().setVisible(false);
+	}
+	
+	public void showQuestionType(){
+		this.questionT.setVisible(true);
+		this.getQuestionType().setVisible(true);
+	}
 }

@@ -23,18 +23,22 @@ public class SettingsOverviewAction extends AbstractTestAction {
 		String[] selectList= this.getService().getAllQuestionSelectionBehaviours();
 		String[] scoreList=this.getService().getAllScoreBehaviours();
 		String[] evalList=this.getService().getAllEvaluationTypes();
+		String[] questionTypes=this.getService().getAllQuestionTypesAdmin();
 		
 		String currentScoreBehaviour=this.getService().currentScoreBehaviourName();
 		String currentSelectionBehaviour=this.getService().currentQuestionSelectionBehaviour();
 		String currentEvalType=this.getService().currentEvaluationType();
+		String currentQuestionType=this.getService().currentQuestionType();
 		int numberOfQuestions=this.getService().getNumberofQuestionForEvaluation();
 		
 		getOverviewPanel().setSelectList(selectList,currentSelectionBehaviour);
+		getOverviewPanel().setQuestionType(questionTypes, currentQuestionType);
 		getOverviewPanel().setScoreList(scoreList,currentScoreBehaviour);
 		getOverviewPanel().setEvalList(evalList, currentEvalType);
 		getOverviewPanel().setAmount(numberOfQuestions);
 		}
 		catch(Exception ex){
+			ex.printStackTrace();
 			System.out.println(ex.getMessage());
 		}
 		setPanelAsContentForView(getOverviewPanel());
@@ -49,4 +53,6 @@ public class SettingsOverviewAction extends AbstractTestAction {
 	public void setOverviewPanel(SettingsOverviewPanel overviewPanel) {
 		this.overviewPanel = overviewPanel;
 	}
+	
+
 }

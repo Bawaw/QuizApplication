@@ -104,6 +104,7 @@ public class FacadeActionManager {
 			cat1.addFeedback(feed2);
 			
 			cat2.setName("Test Cat 2");
+			cat2.addFeedback(feed3);
 			cat2.setDescription("Description test 2");
 			
 			cat3.setName("Test Cat 3");
@@ -304,6 +305,14 @@ public class FacadeActionManager {
 		return initConfigHandler.getEvaluationType();
 	}
 	
+	public String currentQuestionType() throws ConfigException{
+		return initConfigHandler.getQuestionType();
+	}
+	
+	public void saveQuestionType(String questionType) throws ConfigException{
+		this.initConfigHandler.saveQuestionType(questionType);
+	}
+	
 	public void saveScoreBehaviour(String scoreBehaviour) throws ConfigException{
 		this.initConfigHandler.saveScoreBehaviour(scoreBehaviour);
 	}
@@ -336,6 +345,9 @@ public class FacadeActionManager {
 		return QuestionType.toStringArrayUI();
 	}
 	
+	public String[] getAllQuestionTypesAdmin(){
+		return QuestionType.toStringArray();
+	}
 	
 }
 

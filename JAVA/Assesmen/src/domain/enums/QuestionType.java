@@ -1,5 +1,8 @@
 package domain.enums;
 
+import domain.MultipleChoiceQuestion;
+import domain.YesNoQuestion;
+
 
 public enum QuestionType {
 	YesNoQuestions("domain.YesNoQuestion","Yes Or No Question"),
@@ -7,13 +10,13 @@ public enum QuestionType {
 	
 	private String FQDN;
 	private String uiString;
+
 	
 	private QuestionType(String FQDN,String uiString){
 		this.setFQDN(FQDN);
 		this.setUiString(uiString);
 	}
 
-	
 	public String getUiString() {
 		return uiString;
 	}

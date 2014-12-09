@@ -31,6 +31,7 @@ import controller.JsliderAmountAction;
 import controller.ParticipationAction;
 import controller.SettingsOverviewAction;
 import controller.SettingsSaveAction;
+import controller.SettingsSelectionListener;
 import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
@@ -52,14 +53,16 @@ public class CompetentieTesterApp {
 		ExerciseOverviewAction exerciseOverviewAction=new ExerciseOverviewAction(service);
 		ExerciseEditAction exerciseEditAction=new ExerciseEditAction(service);
 		ExerciseTypeListener exerciseTypeListener=new ExerciseTypeListener();
+		SettingsSelectionListener settingsSelectionListener=new SettingsSelectionListener();
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(null,null,null,null,exerciseTypeListener);
-		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction);
+		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
 		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,null,null);
 		
 		
+		settingsSelectionListener.setSettingsOverviewPanel(settingsOverviewPanel);
 		exerciseTypeListener.setExerciseDetailpanel(exerciseDetailPanel);
 		exerciseEditAction.setExerciseDetailPanel(exerciseDetailPanel);
 		exerciseOverviewAction.setExererciseOverviewPanel(exererciseOverviewPanel);

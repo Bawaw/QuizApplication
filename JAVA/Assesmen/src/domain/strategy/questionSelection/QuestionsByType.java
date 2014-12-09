@@ -7,6 +7,7 @@ import java.util.Random;
 import domain.DomainException;
 import domain.Exercise;
 import domain.ExercisePool;
+import domain.YesNoQuestion;
 import domain.enums.QuestionType;
 
 public class QuestionsByType extends ExercisePoolHandler implements
@@ -38,9 +39,13 @@ public class QuestionsByType extends ExercisePoolHandler implements
 		ArrayList<Exercise> typeList = new ArrayList<Exercise>();
 
 		for (Exercise exercise : getExercisePool().getExercisePool()) {
-			//not sure if getname = full cuallifiedname
-			if(exercise.getClass().getName().equals(questionType.getFQDN()));
-			typeList.add(exercise);
+			
+		
+			
+			if(exercise.getQuestion().getClass().getName().equals(questionType.getFQDN())){
+				typeList.add(exercise);
+			}
+				
 		}
 
 		for (int i = 0; i < amount; i++) {

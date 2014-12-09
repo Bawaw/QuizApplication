@@ -23,12 +23,14 @@ public class SettingsSaveAction  extends AbstractTestAction{
 		String selectionBehaviour = this.getDetailPanel().getSelectionBehaviour();
 		String scoreBehaviour =this.getDetailPanel().getScoreBehaviour();
 		String evalType=this.getDetailPanel().getEvalType();
+		String questionType=this.getDetailPanel().getQuestionTypeSelected();
 		int number = this.getDetailPanel().getNumberOfQuestions();
 		try {
 			super.getService().saveSelectionBehaviour(selectionBehaviour);
 			super.getService().saveScoreBehaviour(scoreBehaviour);
 			super.getService().saveNumberofQuestions(number);
 			super.getService().saveEvaluationType(evalType);
+			super.getService().saveQuestionType(questionType);
 			JOptionPane.showMessageDialog(super.getView(),"Settings saved successfully!");
 		} catch (ConfigException e) {
 			JOptionPane.showMessageDialog(super.getView(),"Couldn't save setings!","Error",JOptionPane.ERROR_MESSAGE);

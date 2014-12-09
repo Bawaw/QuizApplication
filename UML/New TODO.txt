@@ -1,12 +1,14 @@
 deelnemer kant 
 	- timer !
 	- testen of least asked questions werkt
-	- settings "select by type" werkt nog niet (aanpassing nodig in adminsettings panel!)
-	
-excel reader
+
+excel reader + excel gui
 
 edit question gui
 
-excel gui
-
 verslag
+
+
+Mss deze vraag heeft geen feedbak deleten!!!
+
+JUnit

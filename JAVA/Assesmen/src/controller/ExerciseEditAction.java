@@ -28,7 +28,9 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 			ExerciseTableModel tablem = (ExerciseTableModel) (table.getModel());
 			
 			Exercise clickedExercise = (Exercise) tablem.getExerciseAt(table.getSelectedRow());
+
 			ArrayList<Exercise> similiarExercises = this.getService().getExercisesByQuestion(clickedExercise);
+
 			getExerciseDetailPanel().setCommonExercises(similiarExercises);
 			
 			

@@ -74,8 +74,9 @@ public class ExercisePool {
 	public ArrayList<Exercise> getExerciseByQuestion(String question){
 		ArrayList<Exercise> retList = new ArrayList<Exercise>();
 		for(Exercise ex: getExercisePool()){
-			if(ex.getQuestion().equals(question))
+			if(ex.getQuestion().getQuestion().equals(question)){
 			retList.add(ex);
+			}
 		}
 		return retList;
 	}

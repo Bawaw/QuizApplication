@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.Action;
@@ -26,6 +25,7 @@ import javax.swing.SpinnerNumberModel;
 import view.CheckBoxList;
 import domain.Answer;
 import domain.Exercise;
+import domain.Question;
 
 public class ExerciseDetailPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -205,16 +205,31 @@ public class ExerciseDetailPanel extends JPanel {
 
 	public void setCommonExercises(List<Exercise> commonExercises) {
 		this.commonExercises = commonExercises;
+		Exercise ex=commonExercises.get(0);
+		Question q=ex.getQuestion();
+		//Setting boolean to see if question is yes/no question
+		if(q.getType().equals("Yes Or No Question")){
+			isYesNoType = true;
+		}
+		else{
+			isYesNoType = false;
+		}
+		
 		ArrayList<Answer> options=new ArrayList(commonExercises.get(0).getQuestion().getOptions());
 		String[] opt=new String[options.size()];
+		
 		for(int i =0 ; i<options.size();i++){
 			opt[i]=options.get(i).getAnswer();
 		}
 		
 		
 		if(isYesNoType){
-			setAnswerList(opt,commonExercises.get(0).getQuestion().getRightAnswer().getAnswer());
+			setAnswerList(opt,ex.getQuestion().getRightAnswer().getAnswer());
 		}
+		
+		
+		setQuestionText(q.getQuestion());
+		
 	}
 
 	private void initConstraints() {
@@ -282,14 +297,19 @@ public class ExerciseDetailPanel extends JPanel {
 		this.optionPanel.setVisible(false);
 		answer.setVisible(false);
 		yesOrNoAnswer.setVisible(true);
-		isYesNoType = true;
+		//isYesNoType = true;
 	}
 
 	public void lockForMultipleChoice() {
 		this.optionPanel.setVisible(true);
 		answer.setVisible(true);
 		yesOrNoAnswer.setVisible(false);
-		isYesNoType = false;
+		//isYesNoType = false;
+	}
+	
+	public void setQuestionText(String text){
+		question.setText(text);
+		question.setEditable(false);
 	}
 
 }

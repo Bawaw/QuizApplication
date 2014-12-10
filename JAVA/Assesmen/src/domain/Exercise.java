@@ -87,7 +87,7 @@ public class Exercise implements Comparable<Exercise> {
 
 	@Override
 	public int compareTo(Exercise o) {
-		return o.getTimesPicked() - o.getTimesPicked();
+		return o.getTimesPicked() - this.getTimesPicked();
 	}
 
 	

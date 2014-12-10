@@ -17,7 +17,6 @@ public class ExercisePool {
 			throw new DomainException("value can not be null");
 		removeExercise(oldExercise);
 		addExercise(newExercise);
-		Collections.sort(exercises);
 	}
 	
 	public void removeWithCategory(Category category) throws DomainException{
@@ -41,7 +40,7 @@ public class ExercisePool {
 		if(exercise == null)
 			throw new DomainException("value can not be null");
 		exercises.add(exercise);
-		Collections.sort(exercises);
+		sortList();
 	}
 	
 	

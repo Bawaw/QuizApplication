@@ -1,7 +1,7 @@
 #Admin Settings
-#Tue Dec 09 11:29:17 CET 2014
-questionBehaviour=QuestionsByType
+#Wed Dec 10 10:13:12 CET 2014
+questionBehaviour=LeastAskedQuestions
 questionType=MultipleChoiceQuestions
 evaluationSize=1
 evaluationType=ScoreEvaluation
-scoreBehaviour=MaxScoreCalculator
+scoreBehaviour=TimeWeightedScoreCalculator

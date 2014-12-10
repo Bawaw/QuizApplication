@@ -33,6 +33,7 @@ public class RandomQuestions extends ExercisePoolHandler implements
 				}
 			}	
 		}
+		super.getExercisePool().sortList();
 		return retSet;
 	}
 

@@ -113,24 +113,25 @@ public class CompetentieTesterApp {
 
 		//#####################################USERSIDE#####################################################
 		ParticipationAction participationAction=new ParticipationAction(service);
-		EvaluationTimerAction evaluationTimerAction = new EvaluationTimerAction();
+		EvaluationTimerAction evaluationTimerAction = new EvaluationTimerAction(service);
 		EvaluationController evaluationController=new EvaluationController(service);
-
+		
 		
 		
 		ParticipationPanel participationPanel=new ParticipationPanel(evaluationController);
 		EvaluationPanel evaluationPanel=new EvaluationPanel(evaluationController,evaluationTimerAction);
 		
 		
-	
+		
 		evaluationController.setParticipationAction(participationAction);
 		evaluationTimerAction.setEvaluationPanel(evaluationPanel);
+		evaluationTimerAction.setEvaluationController(evaluationController);
 		
 		evaluationController.setEvaluationPanel(evaluationPanel);
 		participationAction.setEvaluationPanel(participationPanel);
 		evaluationTimerAction.setEvaluationPanel(evaluationPanel);
 		
-
+		evaluationTimerAction.setView(user);
 		participationAction.setView(user);
 		evaluationController.setView(user);
 		

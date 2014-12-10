@@ -11,8 +11,11 @@ public class TimeWeightedScoreCalculator extends ScoreBehaviour {
 	}
 
 	public int bonusPoints(){
-		//if remainingtime> totaltime/2 -> return 2 else 0;
-		return 0;
+		int output=0;
+		if (super.getTest().getRemainingTime() > (super.getTest().getTimeAllowed()/2)){
+			output=2;
+		}
+		return output;
 	}
 
 }

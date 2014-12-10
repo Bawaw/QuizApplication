@@ -56,9 +56,12 @@ public class EvaluationPanel extends JPanel {
 		timeLabel = new JLabel("paused");
 		addToPanel(timeLabel);
 		timer = new Timer(TIME_INTERVAL,tickEvent);
-		timer.stop();
+		stopTimer();
 		timer.setRepeats(true);
-		time = 0;
+	}
+	
+	public void stopTimer(){
+		this.timer.stop();
 	}
 	
 	public void startTimer(){
@@ -71,7 +74,7 @@ public class EvaluationPanel extends JPanel {
 
 	public void setTime(int time) {
 		this.time = time;
-		timeLabel.setText(Integer.toString(time));
+		timeLabel.setText(Integer.toString(time) +" sec");
 	}
 
 	private void initStopButton(Action a,int row){

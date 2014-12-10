@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import view.ViewException;
@@ -26,8 +27,13 @@ public class ExerciseCategoryRemoveAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(this.getExerciseDetailPanel().getNumberOfExercises()>1){
 		getExerciseDetailPanel().removeExerciseLocally(getExerciseDetailPanel().getSelectedExerciseIndex());
-		getExerciseDetailPanel().update();
+		getExerciseDetailPanel().updateForEdit();
+		}
+		else{
+			JOptionPane.showMessageDialog(super.getView(),"You need at least one exercise!","Error",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public ExerciseDetailPanel getExerciseDetailPanel() {

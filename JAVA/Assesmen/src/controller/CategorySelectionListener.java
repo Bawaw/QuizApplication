@@ -21,7 +21,6 @@ public class CategorySelectionListener implements ActionListener {
 
 		Category selectedCategory = getExerciseDetailPanel()
 				.getSelectedCategory();
-		System.out.println(selectedCategory);
 		if (selectedCategory != null) {
 			getExerciseDetailPanel().setFeedbacks(
 					selectedCategory.getFeedbacks());

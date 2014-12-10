@@ -28,6 +28,7 @@ import controller.CategorySelectionListener;
 import view.CheckBoxList;
 import domain.Answer;
 import domain.Category;
+import domain.DomainException;
 import domain.Exercise;
 import domain.Feedback;
 import domain.Question;
@@ -44,7 +45,7 @@ public class ExerciseDetailPanel extends JPanel {
 	private JComboBox<String> typeQuestion, yesOrNoAnswer, categoryOptions,
 			feedbackOptions;
 	private CheckBoxList optionSelector;
-
+	private ArrayList<JCheckBox> optionModel;
 	private List<Exercise> commonExercises;
 	private List<Answer> options;
 	private List<Category> categorieList;
@@ -276,7 +277,7 @@ public class ExerciseDetailPanel extends JPanel {
 		setAnswer(ex, opt);
 
 		setQuestionText(q.getQuestion());
-		update();
+		updateForEdit();
 
 	}
 
@@ -346,6 +347,8 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	public void setEdit() {
+		//duid antwoorden voor deze vraag aan!
+		this.setCheckedOptions();
 		this.typeQuestion.setEnabled(false);
 	}
 
@@ -361,8 +364,11 @@ public class ExerciseDetailPanel extends JPanel {
 		isYesNoType = true;
 	}
 
-	public void update() {
+	public void updateForEdit() {
+		//laadt alle antwoorden in in de lijst
 		this.setOptionSelector(this.getOptions());
+		//duid antwoorden aan die bij de vraag horen
+		setCheckedOptions();
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
 		updateFeedback();
@@ -395,20 +401,34 @@ public class ExerciseDetailPanel extends JPanel {
 		this.categoryOptions.setModel(model);
 	}
 
-	public void setOptionSelector(List<Answer> options) {
-		Question q = commonExercises.get(0).getQuestion();
+	
+	//SetOptionSelector opgesplitst in setOptionSelector en setCheckedOptions, zodat deze herbruikbaar is bij niet-edit
+	public void setOptionSelector(List<Answer> options) {  
 		if (options != null) {
-			ArrayList<JCheckBox> optionModel = new ArrayList<JCheckBox>();
+			optionModel = new ArrayList<JCheckBox>();
 			for (Answer a : options) {
 				JCheckBox box = new JCheckBox(a.getAnswer());
-
-				if (q.getOptions().contains(a))
-					box.setSelected(true);
 				optionModel.add(box);
 
 			}
 			optionSelector.setListData(optionModel.toArray());
-			;
+		}
+	}
+	
+	
+	public void setCheckedOptions(){
+		if(optionModel != null){
+		Question q = commonExercises.get(0).getQuestion();
+	
+		for(JCheckBox box:optionModel){
+			try {
+				if (q.getOptions().contains(new Answer(box.getText()))){
+					box.setSelected(true);
+				}
+			} catch (DomainException e) {
+				e.printStackTrace();
+			}
+		  }
 		}
 	}
 
@@ -434,6 +454,10 @@ public class ExerciseDetailPanel extends JPanel {
 
 	public String getNewOption() {
 		return newOption.getText();
+	}
+	
+	public int getNumberOfExercises(){
+		return commonExercises.size();
 	}
 
 	public String getSelectedValueOption() {

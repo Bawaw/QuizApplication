@@ -45,7 +45,7 @@ public class Category {
 
 	public void setFeedbacks(ArrayList<Feedback> feedbacks) throws DomainException {
 		if(feedbacks.size() ==0){
-			throw new DomainException("Cateory needs at least 1 feedback!");
+			throw new DomainException("Category needs at least 1 feedback!");
 		}
 		this.feedbacks = feedbacks;
 	}

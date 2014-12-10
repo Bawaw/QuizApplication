@@ -9,11 +9,12 @@ import domain.factory.ScoreBehaviourFactory;
 import domain.strategy.score.ScoreBehaviour;
 
 public abstract class Evaluation {
-	ArrayList<Entry<Exercise, Answer>> exercises;
-	int indexCurrentExercise;
-	int timeAllowed;
-	ScoreBehaviour scoreBehaviour;
-	EvaluationReport evaluationReport;
+	private ArrayList<Entry<Exercise, Answer>> exercises;
+	private int indexCurrentExercise;
+	private int timeAllowed;
+	private int remainingTime;
+	private ScoreBehaviour scoreBehaviour;
+	private EvaluationReport evaluationReport;
 
 	public Evaluation(ArrayList<Entry<Exercise, Answer>> exercises,
 			ScoreBehaviourType scoreBehaviourType) throws DomainException {
@@ -21,6 +22,7 @@ public abstract class Evaluation {
 		setIndexCurrentExercise(0);
 		setScoreBehaviour(scoreBehaviourType);
 		setTimeAllowed();
+		setRemainingTime(this.getTimeAllowed());
 	}
 	
 	public void increaseIndex(){
@@ -120,6 +122,7 @@ public abstract class Evaluation {
 		for (Entry<Exercise, Answer> ex : getExercises()) {
 			totalTime += ex.getKey().getQuestion().getTime();
 		}
+		this.timeAllowed=totalTime;
 	}
 
 
@@ -182,6 +185,18 @@ public abstract class Evaluation {
 	public void setEvaluationReport(EvaluationReport evaluationReport) {
 		this.evaluationReport = evaluationReport;
 	}
-	
+
+	public int getRemainingTime() {
+		return remainingTime;
+	}
+
+	public void setRemainingTime(int remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
+	public void decreaseRemainingTime() {
+		this.setRemainingTime(this.getRemainingTime()-1);
+	}
+
 	
 }

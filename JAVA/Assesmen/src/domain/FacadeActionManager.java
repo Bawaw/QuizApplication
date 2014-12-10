@@ -16,6 +16,7 @@ import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.QuestionType;
 import domain.enums.ScoreBehaviourType;
 import domain.factory.EvaluationFactory;
+import domain.factory.QuestionFactory;
 import domain.factory.QuestionSelectAlgFactory;
 import domain.strategy.questionSelection.QuestionSelectionBehaviour;
 import domain.strategy.questionSelection.QuestionSelectionFactory;
@@ -61,7 +62,7 @@ public class FacadeActionManager {
 		this.setParticipations(new ParticipationPool(participations));
 		
 		
-		
+		setAnswerPool(new AnswerPool());
 		setExercisePool(new ExercisePool());
 		setCategoryPool( new CategoryPool());
 		setFeedbackPool(new FeedbackPool());
@@ -79,18 +80,32 @@ public class FacadeActionManager {
 			Feedback feed4 = new Feedback("Feedback 4");
 			Feedback feed5 = new Feedback("Feedback 5");
 			
-			Question q1=new YesNoQuestion("Question 1", new Answer("Yes"), 30);
-			Question q2=new YesNoQuestion("Question 2", new Answer("Yes"), 30);
-			Question q3=new YesNoQuestion("Question 3", new Answer("Yes"), 30);
-			Question q4=new YesNoQuestion("Question 4", new Answer("Yes"), 30);
-			Question q5=new YesNoQuestion("Question 5", new Answer("Yes"), 30);
+			Question q1=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 1", new Answer("Yes"), 30);
+			Question q2=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 2", new Answer("Yes"), 30);
+			Question q3=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 3", new Answer("Yes"), 30);
+			Question q4=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 4", new Answer("Yes"), 30);
+			Question q5=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 5", new Answer("Yes"), 30);
+			
+			
 			HashSet<Answer> a=new HashSet<Answer>();
-			a.add(new Answer("no"));
-			a.add(new Answer("nonononononono"));
-			a.add(new Answer("nononon"));
-			a.add(new Answer("ba"));
-			a.add(new Answer("none"));
-			Question q6=new MultipleChoiceQuestion("my multiplechoicequestion is very very very long lalalalala", new Answer("ba"),a, 30);
+			Answer a1=new Answer("no");
+			Answer a2=new Answer("nooooo");
+			Answer a3=new Answer("noonononon");
+			Answer a4=new Answer("ba");
+			Answer a5=new Answer("none");
+			addAnswer(a1);
+			addAnswer(a2);
+			addAnswer(a3);
+			addAnswer(a4);
+			addAnswer(a5);
+			addAnswer(new Answer("nog een answer"));
+			a.add(a1);
+			a.add(a2);
+			a.add(a3);
+			a.add(a4);
+			a.add(a5);
+			Question q6=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
+			Question q7=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
 			
 			
 			
@@ -136,6 +151,7 @@ public class FacadeActionManager {
 			Exercise e4=new Exercise(q4, cat4, feed4, 4);
 			Exercise e5=new Exercise(q5, cat4, feed5, 6);
 			Exercise e6= new Exercise(q6, cat4, feed4, 3);
+			Exercise e7= new Exercise(q7, cat4, feed4, 3);
 			
 			this.getExercisePool().addExercise(e1);
 			this.getExercisePool().addExercise(e2);
@@ -143,6 +159,7 @@ public class FacadeActionManager {
 			this.getExercisePool().addExercise(e4);
 			this.getExercisePool().addExercise(e5);
 			this.getExercisePool().addExercise(e6);
+			this.getExercisePool().addExercise(e7);
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
@@ -152,6 +169,22 @@ public class FacadeActionManager {
 	// ArrayList<Exercise>
 	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
 	// }
+	
+	public void addAnswer(String s) throws DomainException{
+		Answer a=new Answer(s);
+		addAnswer(a);
+	}
+	
+	
+	public void addAnswer(Answer answer){
+		this.getAnswerPool().AddAnswer(answer);
+	}
+	
+	
+	public void removeAnswer(String s) throws DomainException{
+		Answer a =new Answer(s);
+		this.getAnswerPool().removeAnswer(a);
+	}
 	
 	public void removeCategory(Category c) throws DomainException{
 		categoryPool.removeCategory(c);
@@ -356,6 +389,18 @@ public class FacadeActionManager {
 
 	public void removeSimilarExercises(Exercise clickedExercise) {
 		this.getExercisePool().removeSimilarExercise(clickedExercise);
+	}
+	
+	public int getTotalTimeEvaluation(){
+		return this.getActiveEvaluation().getTimeAllowed();
+	}
+	
+	public int getRemainingTime(){
+		return this.getActiveEvaluation().getRemainingTime();
+	}
+	
+	public void decreaseRemainingTime(){
+		this.getActiveEvaluation().decreaseRemainingTime();
 	}
 	
 }

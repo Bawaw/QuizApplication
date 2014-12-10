@@ -21,6 +21,7 @@ public class LeastAskedQuestions extends ExercisePoolHandler implements
 		for (Exercise exercise : retSet) {
 			exercise.increaseTimesPicked();
 		}
+		super.getExercisePool().sortList();
 		return retSet;
 	}
 

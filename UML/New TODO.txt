@@ -1,10 +1,6 @@
-deelnemer kant 
-	- timer !
-	- testen of least asked questions werkt
-
 excel reader + excel gui
 
-edit question gui
+edit question gui + algorithm
 
 verslag
 

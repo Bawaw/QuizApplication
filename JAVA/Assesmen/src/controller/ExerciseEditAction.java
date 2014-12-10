@@ -2,17 +2,14 @@ package controller;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JTable;
 
-import view.panels.CategoryTableModel;
 import view.panels.ExerciseDetailPanel;
 import view.panels.ExerciseTableModel;
-import domain.Category;
+import domain.Answer;
 import domain.Exercise;
 import domain.FacadeActionManager;
-import domain.Feedback;
 
 public class ExerciseEditAction extends AbstractTestMouseAdapter {
 	private ExerciseDetailPanel exerciseDetailPanel;
@@ -30,12 +27,14 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 			Exercise clickedExercise = (Exercise) tablem.getExerciseAt(table.getSelectedRow());
 
 			ArrayList<Exercise> similiarExercises = this.getService().getExercisesByQuestion(clickedExercise);
-
-			getExerciseDetailPanel().setCommonExercises(similiarExercises);
-			
-			
-			
 			getExerciseDetailPanel().setTypeList(this.getService().getAllQuestionTypes(), clickedExercise.getQuestion().getType());
+			
+			getExerciseDetailPanel().setCategorieList(this.getService().getCategoryList());
+			getExerciseDetailPanel().setCommonExercises(similiarExercises);
+			getExerciseDetailPanel().setDefaultCategory();
+			getExerciseDetailPanel().setOptionSelector(new ArrayList<Answer>(getService().getAnswerPool().getAnswers()));
+
+			
 			
 			getExerciseDetailPanel().setEdit();
 			

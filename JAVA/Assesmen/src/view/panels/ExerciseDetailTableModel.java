@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import domain.Category;
 import domain.Exercise;
 
 public class ExerciseDetailTableModel extends AbstractTableModel {
@@ -21,6 +22,12 @@ public class ExerciseDetailTableModel extends AbstractTableModel {
 
 	public void setExercises(List<Exercise> exercises) {
 		this.exercises = exercises;
+	}
+	
+	public Exercise getExerciseAt(int rowIndex){
+		Exercise exercise = null;
+		exercise = exercises.get(rowIndex);
+		return exercise;
 	}
 
 	@Override

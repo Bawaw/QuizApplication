@@ -58,11 +58,14 @@ public class QuestionsByType extends ExercisePoolHandler implements
 				int index = r.nextInt(getExercisePool().getExercisePool()
 						.size()); 
 				if (index<=typeList.size()-1 && !retSet.contains(typeList.get(index))) {
-					retSet.add(typeList.get(index));
+					Exercise ex=typeList.get(index);
+					ex.increaseTimesPicked();
+					retSet.add(ex);
 					valid = true;
 				}
 			}
 		}
+		super.getExercisePool().sortList();
 		return retSet;
 	}
 

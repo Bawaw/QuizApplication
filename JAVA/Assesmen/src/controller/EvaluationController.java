@@ -6,12 +6,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import view.panels.EvaluationPanel;
-import view.panels.ParticipationPanel;
 import domain.Answer;
 import domain.Evaluation;
 import domain.FacadeActionManager;
 
 public class EvaluationController extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
 	private EvaluationPanel evaluationPanel;
 	private ParticipationAction participationAction;
 	
@@ -27,6 +27,7 @@ public class EvaluationController extends AbstractTestAction {
 			try{
 			this.getService().createEvaluation();	
 			update();
+			getEvaluationPanel().setTime(this.getService().getTotalTimeEvaluation());
 			setPanelAsContentForView(getEvaluationPanel());
 			}
 			catch(Exception ex){
@@ -48,32 +49,36 @@ public class EvaluationController extends AbstractTestAction {
 			update();
 		}
 		else if(e.getActionCommand().equals("finish")){
-			setAnswerForCurrentQuestion();
-			Evaluation activeEvaluation=this.getService().getActiveEvaluation();
-			activeEvaluation.finish();
-			
-			//System.out.println(activeEvaluation);
-			
-			JOptionPane.showMessageDialog(this.getView(),activeEvaluation.getSpecificFeedback());
-			
-			
-			
-			
-			try{
-				this.getService().addParticipation(activeEvaluation.getEvaluationReport());	
-			}
-			catch(Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-			}
-
-			goBackToOverview();
-			
+			evaluationDone();
 		}
 
 	}
 
+	
+	public void evaluationDone(){
+		stopTimer();
+		setAnswerForCurrentQuestion();
+		Evaluation activeEvaluation=this.getService().getActiveEvaluation();
+		activeEvaluation.finish();
+		
+		JOptionPane.showMessageDialog(this.getView(),activeEvaluation.getSpecificFeedback());
+		
+		
+		
+		
+		try{
+			this.getService().addParticipation(activeEvaluation.getEvaluationReport());	
+		}
+		catch(Exception ex){
+			JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+		}
+
+		goBackToOverview();
+	}
+	
 	private void goBackToOverview(){
+		stopTimer();
 		this.getParticipationAction().actionPerformed(null);
 	}
 	
@@ -104,11 +109,9 @@ public class EvaluationController extends AbstractTestAction {
 	
 	
 
-
-
-
-
-
+	public void stopTimer(){
+		getEvaluationPanel().stopTimer();
+	}
 
 	public ParticipationAction getParticipationAction() {
 		return participationAction;

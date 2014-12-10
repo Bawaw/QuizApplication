@@ -52,10 +52,11 @@ public abstract class ScoreBehaviour {
 			}
 		}
 		
-		Userscore+=bonusPoints();
+	
 		
 		int result= (int)Math.round((Userscore/(totalScore*1.0))*this.getScoreOn());
-
+		result+=bonusPoints();
+		
 		if(result<0){
 			result=0;
 		}

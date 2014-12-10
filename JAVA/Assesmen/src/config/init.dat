@@ -1,7 +1,7 @@
 #Admin Settings
-#Wed Dec 10 10:13:12 CET 2014
-questionBehaviour=LeastAskedQuestions
-questionType=MultipleChoiceQuestions
-evaluationSize=1
+#Wed Dec 10 11:46:51 CET 2014
+questionBehaviour=RandomQuestions
+questionType=YesNoQuestions
+evaluationSize=2
 evaluationType=ScoreEvaluation
 scoreBehaviour=TimeWeightedScoreCalculator

@@ -11,7 +11,7 @@ public class ParticipationTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Participation> participations;
-	private String[] columnNames = { "Datum", "ScoreOn20","Overview" };
+	private String[] columnNames = { "Date", "ScoreOn20","Overview" };
 	
 	public ParticipationTableModel(List<Participation> participations) {
 		this.participations=participations;

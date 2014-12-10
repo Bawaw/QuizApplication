@@ -22,9 +22,11 @@ import controller.CategoryEditAction;
 import controller.CategoryNewAction;
 import controller.CategoryOverviewAction;
 import controller.CategoryRemoveAction;
+import controller.CategorySelectionListener;
 import controller.CheckCategoryNameAction;
 import controller.EvaluationController;
 import controller.EvaluationTimerAction;
+import controller.ExerciseCategoryRemoveAction;
 import controller.ExerciseEditAction;
 import controller.ExerciseOverviewAction;
 import controller.ExerciseRemoveAction;
@@ -59,13 +61,16 @@ public class CompetentieTesterApp {
 		SettingsSelectionListener settingsSelectionListener=new SettingsSelectionListener();
 		ExerciseRemoveAction exerciseRemoveAction=new ExerciseRemoveAction(service);
 		AnswerActionManager answerActionManager=new AnswerActionManager(service);
+		CategorySelectionListener categorySelectionListener = new CategorySelectionListener(service);
+		ExerciseCategoryRemoveAction exerciseCategoryRemoveAction = new ExerciseCategoryRemoveAction(service);
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
-		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(null,null,null,null,exerciseTypeListener,answerActionManager);
+		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,null,null,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
 		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,null,exerciseRemoveAction);
 		
+		categorySelectionListener.setExerciseDetailPanel(exerciseDetailPanel);
 		answerActionManager.setExerciseDetailPanel(exerciseDetailPanel);
 		settingsSelectionListener.setSettingsOverviewPanel(settingsOverviewPanel);
 		exerciseTypeListener.setExerciseDetailpanel(exerciseDetailPanel);
@@ -82,6 +87,7 @@ public class CompetentieTesterApp {
 		checkCategoryNameAction.setCategoryDetailPanel(categoryDetailPanel);
 		categoryRemoveAction.setOverviewPanel(categoryOverviewPanel);
 		exerciseRemoveAction.setExerciseOverviewPanel(exererciseOverviewPanel);
+		exerciseCategoryRemoveAction.setExerciseDetailPanel(exerciseDetailPanel);
 		
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);

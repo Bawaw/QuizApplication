@@ -99,4 +99,9 @@ public class Exercise implements Comparable<Exercise> {
 		}
 		return output;
 	}
+	
+	@Override
+	public int hashCode(){
+		return score;
+	}
 }

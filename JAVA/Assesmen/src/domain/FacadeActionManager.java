@@ -105,6 +105,7 @@ public class FacadeActionManager {
 			a.add(a4);
 			a.add(a5);
 			Question q6=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
+			Question q7=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
 			
 			
 			
@@ -150,6 +151,7 @@ public class FacadeActionManager {
 			Exercise e4=new Exercise(q4, cat4, feed4, 4);
 			Exercise e5=new Exercise(q5, cat4, feed5, 6);
 			Exercise e6= new Exercise(q6, cat4, feed4, 3);
+			Exercise e7= new Exercise(q7, cat4, feed4, 3);
 			
 			this.getExercisePool().addExercise(e1);
 			this.getExercisePool().addExercise(e2);
@@ -157,6 +159,7 @@ public class FacadeActionManager {
 			this.getExercisePool().addExercise(e4);
 			this.getExercisePool().addExercise(e5);
 			this.getExercisePool().addExercise(e6);
+			this.getExercisePool().addExercise(e7);
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}

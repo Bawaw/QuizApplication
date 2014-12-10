@@ -29,7 +29,9 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 			ArrayList<Exercise> similiarExercises = this.getService().getExercisesByQuestion(clickedExercise);
 			getExerciseDetailPanel().setTypeList(this.getService().getAllQuestionTypes(), clickedExercise.getQuestion().getType());
 			
+			getExerciseDetailPanel().setCategorieList(this.getService().getCategoryList());
 			getExerciseDetailPanel().setCommonExercises(similiarExercises);
+			getExerciseDetailPanel().setDefaultCategory();
 			getExerciseDetailPanel().setOptionSelector(new ArrayList<Answer>(getService().getAnswerPool().getAnswers()));
 
 			

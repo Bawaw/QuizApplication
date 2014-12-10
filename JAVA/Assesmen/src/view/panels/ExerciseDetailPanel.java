@@ -24,8 +24,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import controller.CategorySelectionListener;
 import view.CheckBoxList;
 import domain.Answer;
+import domain.Category;
 import domain.Exercise;
 import domain.Feedback;
 import domain.Question;
@@ -38,40 +40,50 @@ public class ExerciseDetailPanel extends JPanel {
 	private JTextField question, answer, scoreDisplay, newOption;
 	private JSpinner score;
 	private JTable categories;
+	private ExerciseDetailTableModel exerciseDetailTableModel;
 	private JComboBox<String> typeQuestion, yesOrNoAnswer, categoryOptions,
 			feedbackOptions;
 	private CheckBoxList optionSelector;
 
 	private List<Exercise> commonExercises;
 	private List<Answer> options;
+	private List<Category> categorieList;
+	private List<Feedback> feedbacks;
 	private JPanel optionPanel;
 	private boolean isYesNoType;
 
-	public ExerciseDetailPanel(Action action, Action action2, Action action3,
-			Action action4,ActionListener action5,Action action6) {
-		//setCommonExercises(commonExercises);
+	public ExerciseDetailPanel(Action action,
+			CategorySelectionListener categorySelectionListener,
+			Action action3, Action action4, ActionListener action5,
+			Action action6) {
+		// setCommonExercises(commonExercises);
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int rij = 0;
-		initQuestionType(++rij,action5);
+		initQuestionType(++rij, action5);
 		initQuestionTitle(++rij);
 		initAnswerTitle(++rij);
 		initOptionPanel(++rij);
 		initOptionSelector(++rij);
 		rij = rij + 3;
-		initAddOption(rij,action6);
-		initOptionButtons(++rij,action6);
+		initAddOption(rij, action6);
+		initOptionButtons(++rij, action6);
 		initCategoryTable(++rij);
 		initRemoveCategory(++rij, action);
-		initCategoryOptions(++rij, action2);
+		initCategoryOptions(++rij, categorySelectionListener);
 		setFeedbackOptions(++rij);
 		setInitScore(++rij);
 		addCatButton(++rij, action3);
-		addAndRemoveButtons(++rij, action4);
-		//hideNewElements();
+		cancelAndSaveButtons(++rij, action4);
+		// hideNewElements();
 	}
 
-	private void addAndRemoveButtons(int rij, Action a) {
+	public void setExerciseDetailTableModel(
+			ExerciseDetailTableModel exerciseDetailTableModel) {
+		this.exerciseDetailTableModel = exerciseDetailTableModel;
+	}
+
+	private void cancelAndSaveButtons(int rij, Action a) {
 		btnCancel = new JButton();
 		changeConstraints(1, 1, 1, rij);
 		btnCancel.setAction(a);
@@ -104,6 +116,38 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(score);
 
 	}
+	
+	public int getSelectedExerciseIndex(){
+		return categories.getSelectedRow();
+	}
+
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+	
+	public void removeExerciseLocally(int i){
+		getCommonExercises().remove(i);
+	}
+	
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+
+	public List<Category> getCategorieList() {
+		return categorieList;
+	}
+
+	public void setCategorieList(List<Category> categorieList) {
+		this.categorieList = categorieList;
+	}
+
+	public Category getSelectedCategory() {
+		for (Category category : categorieList) {
+			if (category.getName().equals(categoryOptions.getSelectedItem()))
+				return category;
+		}
+		return null;
+	}
 
 	private void setFeedbackOptions(int rij) {
 		changeConstraints(1, 1, 0, rij);
@@ -113,12 +157,12 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(feedbackOptions);
 	}
 
-	private void initCategoryOptions(int rij, Action a) {
+	private void initCategoryOptions(int rij, ActionListener a) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Category: "));
 		categoryOptions = new JComboBox<String>();
 		changeConstraints(1, 2, 1, rij);
-		categoryOptions.setAction(a);
+		categoryOptions.addActionListener(a);
 		addToPanel(categoryOptions);
 	}
 
@@ -135,6 +179,8 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(new JLabel("Exercises: "));
 		changeConstraints(1, 2, 1, rij);
 		categories = new JTable();
+		categories.setModel(new ExerciseDetailTableModel(
+				new ArrayList<Exercise>()));
 		JScrollPane pane = new JScrollPane(categories);
 		pane.setPreferredSize(new Dimension(225, 200));
 		addToPanel(pane);
@@ -148,7 +194,7 @@ public class ExerciseDetailPanel extends JPanel {
 		addToInnerPanel(new JScrollPane(optionSelector));
 	}
 
-	private void initAddOption(int rij,Action a) {
+	private void initAddOption(int rij, Action a) {
 		changeConstraints(1, 1, 1, rij);
 		newOption = new JTextField();
 		addToInnerPanel(newOption);
@@ -160,7 +206,7 @@ public class ExerciseDetailPanel extends JPanel {
 		addToInnerPanel(btnAddOption);
 	}
 
-	private void initOptionButtons(int rij,Action a) {
+	private void initOptionButtons(int rij, Action a) {
 		changeConstraints(1, 1, 1, rij);
 		btnRemoveOption = new JButton("Remove");
 		btnRemoveOption.setAction(a);
@@ -181,7 +227,7 @@ public class ExerciseDetailPanel extends JPanel {
 		initConstraints();
 	}
 
-	protected void initQuestionType(int rij,ActionListener a) {
+	protected void initQuestionType(int rij, ActionListener a) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Type: "));
 		typeQuestion = new JComboBox<String>();
@@ -216,38 +262,37 @@ public class ExerciseDetailPanel extends JPanel {
 
 	public void setCommonExercises(List<Exercise> commonExercises) {
 		this.commonExercises = commonExercises;
-		Exercise ex=commonExercises.get(0);
-		Question q=ex.getQuestion();
+		Exercise ex = commonExercises.get(0);
+		Question q = ex.getQuestion();
 
-		
-		ArrayList<Answer> options=new ArrayList(commonExercises.get(0).getQuestion().getOptions());
-		String[] opt=new String[options.size()];
-		
-		for(int i =0 ; i<options.size();i++){
-			opt[i]=options.get(i).getAnswer();
+		ArrayList<Answer> options = new ArrayList(commonExercises.get(0)
+				.getQuestion().getOptions());
+		String[] opt = new String[options.size()];
+
+		for (int i = 0; i < options.size(); i++) {
+			opt[i] = options.get(i).getAnswer();
 		}
-		
-		
-		setAnswer(ex,opt);
-		
-		
+
+		setAnswer(ex, opt);
+
 		setQuestionText(q.getQuestion());
-		
+		update();
+
 	}
 
-	private void setAnswer(Exercise ex,String[] options){
-		if(isYesNoType){
-			setAnswerList(options,ex.getQuestion().getRightAnswer().getAnswer());
-		}
-		else{
+	private void setAnswer(Exercise ex, String[] options) {
+		if (isYesNoType) {
+			setAnswerList(options, ex.getQuestion().getRightAnswer()
+					.getAnswer());
+		} else {
 			setAnswerText(ex.getQuestion().getRightAnswer().getAnswer());
 		}
 	}
-	
-	private void setAnswerText(String text){
+
+	private void setAnswerText(String text) {
 		this.answer.setText(text);
 	}
-	
+
 	private void initConstraints() {
 		constraints.insets = new Insets(10 / 2, 20 / 2, 10 / 2, 20 / 2);
 		constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -258,27 +303,27 @@ public class ExerciseDetailPanel extends JPanel {
 	protected GridBagConstraints getConstraints() {
 		return constraints;
 	}
-	
-	
-	public void setAnswerList(String[] selectList,String current){
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(selectList);
+
+	public void setAnswerList(String[] selectList, String current) {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
+				selectList);
 		this.yesOrNoAnswer.setModel(model);
-		int index=getComboBoxIndex(selectList, current);
+		int index = getComboBoxIndex(selectList, current);
 		this.yesOrNoAnswer.setSelectedIndex(index);
 	}
-	
-	public void setTypeList(String[] selectList,String current){
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(selectList);
+
+	public void setTypeList(String[] selectList, String current) {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
+				selectList);
 		this.typeQuestion.setModel(model);
-		int index=getComboBoxIndex(selectList, current);
+		int index = getComboBoxIndex(selectList, current);
 		this.typeQuestion.setSelectedIndex(index);
 	}
-	
-	
-	private int getComboBoxIndex(String[] list,String item){
 
-		for(int i=0;i<list.length;i++){
-			if(list[i].equals(item)){
+	private int getComboBoxIndex(String[] list, String item) {
+
+		for (int i = 0; i < list.length; i++) {
+			if (list[i].equals(item)) {
 				return i;
 			}
 		}
@@ -305,9 +350,9 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	public String getSelectedType() {
-		return (String)this.typeQuestion.getSelectedItem();
+		return (String) this.typeQuestion.getSelectedItem();
 	}
-	
+
 	//
 	public void lockForYesNo() {
 		this.optionPanel.setVisible(false);
@@ -316,29 +361,57 @@ public class ExerciseDetailPanel extends JPanel {
 		isYesNoType = true;
 	}
 
-	public void update(){
+	public void update() {
 		this.setOptionSelector(this.getOptions());
+		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
+		populateCategoryList(getCategorieList());
+		updateFeedback();
+	}
+
+	public void updateFeedback() {
+		if(getFeedbacks() != null)
+		populateFeedbackField(getFeedbacks());
 	}
 	
-	
-	public void setOptionSelector(List<Answer> options){
-		Question q= commonExercises.get(0).getQuestion();
+	public void setDefaultCategory(){
+		categoryOptions.setSelectedIndex(0);
+	}
+
+	public void populateFeedbackField(List<Feedback> feedbacks) {
+		String[] feedText = new String[feedbacks.size()];
+		for (int i = 0; i < feedbacks.size(); i++) {
+			feedText[i] = feedbacks.get(i).getText();
+		}
+		DefaultComboBoxModel model = new DefaultComboBoxModel(feedText);
+		feedbackOptions.setModel(model);
+	}
+
+	public void populateCategoryList(List<Category> categories) {
+		String[] catNames = new String[categories.size()];
+		for (int i = 0; i < categories.size(); i++) {
+			catNames[i] = categories.get(i).getName();
+		}
+		DefaultComboBoxModel model = new DefaultComboBoxModel(catNames);
+		this.categoryOptions.setModel(model);
+	}
+
+	public void setOptionSelector(List<Answer> options) {
+		Question q = commonExercises.get(0).getQuestion();
 		if (options != null) {
 			ArrayList<JCheckBox> optionModel = new ArrayList<JCheckBox>();
 			for (Answer a : options) {
 				JCheckBox box = new JCheckBox(a.getAnswer());
 
-				if(q.getOptions().contains(a))
+				if (q.getOptions().contains(a))
 					box.setSelected(true);
 				optionModel.add(box);
-					
+
 			}
-			optionSelector.setListData(optionModel.toArray());;
+			optionSelector.setListData(optionModel.toArray());
+			;
 		}
 	}
-	
-	
-	
+
 	public List<Answer> getOptions() {
 		return options;
 	}
@@ -353,17 +426,17 @@ public class ExerciseDetailPanel extends JPanel {
 		yesOrNoAnswer.setVisible(false);
 		isYesNoType = false;
 	}
-	
-	public void setQuestionText(String text){
+
+	public void setQuestionText(String text) {
 		question.setText(text);
 		question.setEditable(false);
 	}
-	
-	public String getNewOption(){
+
+	public String getNewOption() {
 		return newOption.getText();
 	}
-	
-	public String getSelectedValueOption(){
+
+	public String getSelectedValueOption() {
 		return ((JCheckBox) optionSelector.getSelectedValue()).getText();
 	}
 

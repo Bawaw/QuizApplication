@@ -194,6 +194,7 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(new JLabel("Answer: "));
 		changeConstraints(1, 2, 1, rij);
 		answer = new JTextField();
+		answer.setEditable(false);
 		addToPanel(answer);
 		yesOrNoAnswer = new JComboBox<String>();
 		addToPanel(yesOrNoAnswer);
@@ -207,13 +208,7 @@ public class ExerciseDetailPanel extends JPanel {
 		this.commonExercises = commonExercises;
 		Exercise ex=commonExercises.get(0);
 		Question q=ex.getQuestion();
-		//Setting boolean to see if question is yes/no question
-		if(q.getType().equals("Yes Or No Question")){
-			isYesNoType = true;
-		}
-		else{
-			isYesNoType = false;
-		}
+
 		
 		ArrayList<Answer> options=new ArrayList(commonExercises.get(0).getQuestion().getOptions());
 		String[] opt=new String[options.size()];
@@ -223,15 +218,26 @@ public class ExerciseDetailPanel extends JPanel {
 		}
 		
 		
-		if(isYesNoType){
-			setAnswerList(opt,ex.getQuestion().getRightAnswer().getAnswer());
-		}
+		setAnswer(ex,opt);
 		
 		
 		setQuestionText(q.getQuestion());
 		
 	}
 
+	private void setAnswer(Exercise ex,String[] options){
+		if(isYesNoType){
+			setAnswerList(options,ex.getQuestion().getRightAnswer().getAnswer());
+		}
+		else{
+			setAnswerText(ex.getQuestion().getRightAnswer().getAnswer());
+		}
+	}
+	
+	private void setAnswerText(String text){
+		this.answer.setText(text);
+	}
+	
 	private void initConstraints() {
 		constraints.insets = new Insets(10 / 2, 20 / 2, 10 / 2, 20 / 2);
 		constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -297,14 +303,14 @@ public class ExerciseDetailPanel extends JPanel {
 		this.optionPanel.setVisible(false);
 		answer.setVisible(false);
 		yesOrNoAnswer.setVisible(true);
-		//isYesNoType = true;
+		isYesNoType = true;
 	}
 
 	public void lockForMultipleChoice() {
 		this.optionPanel.setVisible(true);
 		answer.setVisible(true);
 		yesOrNoAnswer.setVisible(false);
-		//isYesNoType = false;
+		isYesNoType = false;
 	}
 	
 	public void setQuestionText(String text){

@@ -1,5 +1,6 @@
 package view.panels;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,6 +27,7 @@ import javax.swing.SpinnerNumberModel;
 import view.CheckBoxList;
 import domain.Answer;
 import domain.Exercise;
+import domain.Feedback;
 import domain.Question;
 
 public class ExerciseDetailPanel extends JPanel {
@@ -40,11 +43,12 @@ public class ExerciseDetailPanel extends JPanel {
 	private CheckBoxList optionSelector;
 
 	private List<Exercise> commonExercises;
+	private List<Answer> options;
 	private JPanel optionPanel;
 	private boolean isYesNoType;
 
 	public ExerciseDetailPanel(Action action, Action action2, Action action3,
-			Action action4,ActionListener action5) {
+			Action action4,ActionListener action5,Action action6) {
 		//setCommonExercises(commonExercises);
 		setLayout(new GridBagLayout());
 		initConstraints();
@@ -55,8 +59,8 @@ public class ExerciseDetailPanel extends JPanel {
 		initOptionPanel(++rij);
 		initOptionSelector(++rij);
 		rij = rij + 3;
-		initAddOption(rij);
-		initOptionButtons(++rij);
+		initAddOption(rij,action6);
+		initOptionButtons(++rij,action6);
 		initCategoryTable(++rij);
 		initRemoveCategory(++rij, action);
 		initCategoryOptions(++rij, action2);
@@ -144,18 +148,24 @@ public class ExerciseDetailPanel extends JPanel {
 		addToInnerPanel(new JScrollPane(optionSelector));
 	}
 
-	private void initAddOption(int rij) {
+	private void initAddOption(int rij,Action a) {
 		changeConstraints(1, 1, 1, rij);
 		newOption = new JTextField();
 		addToInnerPanel(newOption);
 		changeConstraints(1, 1, 2, rij);
 		btnAddOption = new JButton("Add");
+		btnAddOption.setAction(a);
+		btnAddOption.setActionCommand("AddOption");
+		btnAddOption.setText("Add");
 		addToInnerPanel(btnAddOption);
 	}
 
-	private void initOptionButtons(int rij) {
+	private void initOptionButtons(int rij,Action a) {
 		changeConstraints(1, 1, 1, rij);
 		btnRemoveOption = new JButton("Remove");
+		btnRemoveOption.setAction(a);
+		btnRemoveOption.setActionCommand("RemoveOption");
+		btnRemoveOption.setText("Remove");
 		addToInnerPanel(btnRemoveOption);
 		changeConstraints(1, 1, 2, rij);
 		btnSelectCorrectOption = new JButton("Select Correct");
@@ -306,6 +316,37 @@ public class ExerciseDetailPanel extends JPanel {
 		isYesNoType = true;
 	}
 
+	public void update(){
+		this.setOptionSelector(this.getOptions());
+	}
+	
+	
+	public void setOptionSelector(List<Answer> options){
+		Question q= commonExercises.get(0).getQuestion();
+		if (options != null) {
+			ArrayList<JCheckBox> optionModel = new ArrayList<JCheckBox>();
+			for (Answer a : options) {
+				JCheckBox box = new JCheckBox(a.getAnswer());
+
+				if(q.getOptions().contains(a))
+					box.setSelected(true);
+				optionModel.add(box);
+					
+			}
+			optionSelector.setListData(optionModel.toArray());;
+		}
+	}
+	
+	
+	
+	public List<Answer> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<Answer> options) {
+		this.options = options;
+	}
+
 	public void lockForMultipleChoice() {
 		this.optionPanel.setVisible(true);
 		answer.setVisible(true);
@@ -316,6 +357,14 @@ public class ExerciseDetailPanel extends JPanel {
 	public void setQuestionText(String text){
 		question.setText(text);
 		question.setEditable(false);
+	}
+	
+	public String getNewOption(){
+		return newOption.getText();
+	}
+	
+	public String getSelectedValueOption(){
+		return ((JCheckBox) optionSelector.getSelectedValue()).getText();
 	}
 
 }

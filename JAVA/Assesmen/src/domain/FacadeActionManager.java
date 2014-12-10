@@ -98,6 +98,7 @@ public class FacadeActionManager {
 			addAnswer(a3);
 			addAnswer(a4);
 			addAnswer(a5);
+			addAnswer(new Answer("nog een answer"));
 			a.add(a1);
 			a.add(a2);
 			a.add(a3);
@@ -166,8 +167,20 @@ public class FacadeActionManager {
 	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
 	// }
 	
+	public void addAnswer(String s) throws DomainException{
+		Answer a=new Answer(s);
+		addAnswer(a);
+	}
+	
+	
 	public void addAnswer(Answer answer){
 		this.getAnswerPool().AddAnswer(answer);
+	}
+	
+	
+	public void removeAnswer(String s) throws DomainException{
+		Answer a =new Answer(s);
+		this.getAnswerPool().removeAnswer(a);
 	}
 	
 	public void removeCategory(Category c) throws DomainException{

@@ -25,6 +25,7 @@ public class FacadeActionManager {
 	private FeedbackPool feedbackPool;
 	private ParticipationPool participations;
 	private ExercisePool exercisePool;
+	private QuestionFactory questionFactory;
 	private AnswerPool answerPool;
 	private Evaluation activeEvaluation;
 	private QuestionSelectionFactory questionSelectionFactory;
@@ -151,7 +152,7 @@ public class FacadeActionManager {
 			Exercise e4=new Exercise(q4, cat4, feed4, 4);
 			Exercise e5=new Exercise(q5, cat4, feed5, 6);
 			Exercise e6= new Exercise(q6, cat4, feed4, 3);
-			Exercise e7= new Exercise(q7, cat4, feed4, 3);
+			Exercise e7= new Exercise(q7, cat3, feed2, 3);
 			
 			this.getExercisePool().addExercise(e1);
 			this.getExercisePool().addExercise(e2);
@@ -401,6 +402,16 @@ public class FacadeActionManager {
 	
 	public void decreaseRemainingTime(){
 		this.getActiveEvaluation().decreaseRemainingTime();
+	}
+
+
+	public QuestionFactory getQuestionFactory() {
+		return questionFactory;
+	}
+
+
+	public void setQuestionFactory(QuestionFactory questionFactory) {
+		this.questionFactory = questionFactory;
 	}
 	
 }

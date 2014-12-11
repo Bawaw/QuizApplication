@@ -16,6 +16,7 @@ import view.panels.ExerciseOverviewPanel;
 import view.panels.ParticipationPanel;
 import view.panels.SettingsOverviewPanel;
 import controller.AbstractTestAction;
+import controller.AddExercise;
 import controller.AnswerActionManager;
 import controller.CategoryDoneAction;
 import controller.CategoryEditAction;
@@ -63,10 +64,11 @@ public class CompetentieTesterApp {
 		AnswerActionManager answerActionManager=new AnswerActionManager(service);
 		CategorySelectionListener categorySelectionListener = new CategorySelectionListener(service);
 		ExerciseCategoryRemoveAction exerciseCategoryRemoveAction = new ExerciseCategoryRemoveAction(service);
+		AddExercise addExercise=new AddExercise(service);
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
-		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,null,null,exerciseTypeListener,answerActionManager);
+		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,addExercise,null,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
 		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,null,exerciseRemoveAction);
 		
@@ -88,6 +90,7 @@ public class CompetentieTesterApp {
 		categoryRemoveAction.setOverviewPanel(categoryOverviewPanel);
 		exerciseRemoveAction.setExerciseOverviewPanel(exererciseOverviewPanel);
 		exerciseCategoryRemoveAction.setExerciseDetailPanel(exerciseDetailPanel);
+		addExercise.setExerciseDetailPanel(exerciseDetailPanel);
 		
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
@@ -101,6 +104,7 @@ public class CompetentieTesterApp {
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
+		addExercise.setView(admin);
 		exerciseOverviewAction.setView(admin);
 		exerciseEditAction.setView(admin);
 		categoryOverviewAction.setView(admin);

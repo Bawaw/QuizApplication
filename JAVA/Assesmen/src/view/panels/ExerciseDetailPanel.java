@@ -1,6 +1,5 @@
 package view.panels;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -24,8 +23,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
-import controller.CategorySelectionListener;
 import view.CheckBoxList;
+import view.ViewException;
+import controller.CategorySelectionListener;
 import domain.Answer;
 import domain.Category;
 import domain.DomainException;
@@ -464,4 +464,25 @@ public class ExerciseDetailPanel extends JPanel {
 		return ((JCheckBox) optionSelector.getSelectedValue()).getText();
 	}
 
+	public int getScoreValue(){
+		return (Integer)this.score.getValue();
+	}
+
+	public Feedback getSelectedFeedback() {
+		for (Feedback feedback : feedbacks) {
+			if (feedback.getText().equals(feedbackOptions.getSelectedItem()))
+				return feedback;
+		}
+		return null;
+	}
+
+	public void addExerciseLocally(Exercise ex) throws ViewException {
+		for(Exercise exer:getCommonExercises()){
+			if(exer.getCategory().equals(ex.getCategory())){
+				throw new ViewException("Exercise with this category already exists!");
+			}
+		}
+		getCommonExercises().add(ex);
+		
+	}
 }

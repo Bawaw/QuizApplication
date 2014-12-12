@@ -56,7 +56,7 @@ public abstract class Question {
 		}
 		if (!this.getOptions().contains(rightAnswer)) {
 			throw new DomainException(
-					"the rightAnswer is not included inside the options!");
+					"Include the right answer in the options!");
 		}
 
 		this.rightAnswer = rightAnswer;

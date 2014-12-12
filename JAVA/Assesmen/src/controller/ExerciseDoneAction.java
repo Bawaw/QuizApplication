@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import view.panels.ExerciseDetailPanel;
 import view.panels.ExerciseOverviewPanel;
 import domain.Exercise;
@@ -11,6 +13,8 @@ import domain.FacadeActionManager;
 public class ExerciseDoneAction extends AbstractTestAction {
 	private ExerciseDetailPanel exercisedetailPanel;
 	private ExerciseOverviewPanel exerciseOverviewPanel;
+	private ExerciseOverviewAction exerOverviewAction;
+	
 	
 	public ExerciseDoneAction(FacadeActionManager service) {
 		super(service);
@@ -22,22 +26,31 @@ public class ExerciseDoneAction extends AbstractTestAction {
 		if(arg0.getActionCommand().equals("SaveNewExercise")){
 			try{
 				ArrayList<Exercise> ex=getExercisedetailPanel().getCreatedExercises();
-				for(Exercise e:ex){
-					
-					System.out.println(e.getFeedback().getText());
-					System.out.println(e.getQuestion().getQuestion());
-				}
+				this.getService().updateExercises(ex);
+				updateOverview();
 			}
 			catch (Exception ex){
+				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
 		}
 		else{
-			setPanelAsContentForView(getExerciseOverviewPanel());		
+			updateOverview();
+			
 		}
 
 	}
 
+	private void updateOverview(){
+		try{
+		this.getExerOverviewAction().actionPerformed(null);	
+		this.getExerciseOverviewPanel().update();
+		}
+		catch(Exception ex){
+			JOptionPane.showMessageDialog(super.getView(),"Reloading exercises failed!","Error",JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+		}
+	}
 
 	public ExerciseDetailPanel getExercisedetailPanel() {
 		return exercisedetailPanel;
@@ -56,6 +69,16 @@ public class ExerciseDoneAction extends AbstractTestAction {
 
 	public void setExerciseOverviewPanel(ExerciseOverviewPanel exerciseOverviewPanel) {
 		this.exerciseOverviewPanel = exerciseOverviewPanel;
+	}
+
+
+	public ExerciseOverviewAction getExerOverviewAction() {
+		return exerOverviewAction;
+	}
+
+
+	public void setExerOverviewAction(ExerciseOverviewAction exerOverviewAction) {
+		this.exerOverviewAction = exerOverviewAction;
 	}
 	
 	

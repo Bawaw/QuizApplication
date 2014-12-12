@@ -95,7 +95,7 @@ public class CompetentieTesterApp {
 		addExercise.setExerciseDetailPanel(exerciseDetailPanel);
 		exerciseDoneAction.setExercisedetailPanel(exerciseDetailPanel);
 		exerciseDoneAction.setExerciseOverviewPanel(exererciseOverviewPanel);
-		
+		exerciseDoneAction.setExerOverviewAction(exerciseOverviewAction);
 		
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		

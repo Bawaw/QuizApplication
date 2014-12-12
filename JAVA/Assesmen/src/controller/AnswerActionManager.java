@@ -42,6 +42,10 @@ public class AnswerActionManager extends AbstractTestAction{
 			}
 			
 		}
+		else if(arg0.getActionCommand().equals("SelectOption")){
+			String s = this.getExerciseDetailPanel().getSelectedValueOption();
+			this.getExerciseDetailPanel().setAnswerText(s);
+		}
 		
 	}
 

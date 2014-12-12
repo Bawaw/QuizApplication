@@ -1,7 +1,7 @@
 package domain.enums;
 
-import domain.MultipleChoiceQuestion;
-import domain.YesNoQuestion;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public enum QuestionType {
@@ -10,7 +10,21 @@ public enum QuestionType {
 	
 	private String FQDN;
 	private String uiString;
-
+	private static final Map<String,QuestionType> questionMap=new HashMap<String,QuestionType>();
+	
+	static{
+		QuestionType[] val= values();
+		for(int i=0;i<val.length;i++){
+			QuestionType.questionMap.put(val[i].getUiString(),val[i]);
+		}
+	}
+	
+	
+	public static QuestionType getQuestionTypeByDescription(String description){
+		QuestionType out=null;
+		out=QuestionType.questionMap.get(description);
+		return out;
+	}
 	
 	private QuestionType(String FQDN,String uiString){
 		this.setFQDN(FQDN);

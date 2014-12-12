@@ -32,6 +32,8 @@ import domain.DomainException;
 import domain.Exercise;
 import domain.Feedback;
 import domain.Question;
+import domain.enums.QuestionType;
+import domain.factory.QuestionFactory;
 
 public class ExerciseDetailPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +41,7 @@ public class ExerciseDetailPanel extends JPanel {
 	private JButton btnSelectCorrectOption, btnRemoveOption, btnAddOption,
 			btnRemoveExercise, btnAddToCategory, btnSave, btnCancel;
 	private JTextField question, answer, scoreDisplay, newOption;
-	private JSpinner score;
+	private JSpinner score,time;
 	private JTable categories;
 	private ExerciseDetailTableModel exerciseDetailTableModel;
 	private JComboBox<String> typeQuestion, yesOrNoAnswer, categoryOptions,
@@ -64,6 +66,7 @@ public class ExerciseDetailPanel extends JPanel {
 		initQuestionType(++rij, action5);
 		initQuestionTitle(++rij);
 		initAnswerTitle(++rij);
+		initTime(++rij);
 		initOptionPanel(++rij);
 		initOptionSelector(++rij);
 		rij = rij + 3;
@@ -228,6 +231,17 @@ public class ExerciseDetailPanel extends JPanel {
 		initConstraints();
 	}
 
+	protected void initTime(int rij){
+		changeConstraints(1, 1, 0, rij);
+		addToPanel(new JLabel("Time: "));
+		changeConstraints(1, 2, 1, rij);
+		time = new JSpinner();
+		time.setModel(new SpinnerNumberModel(5, 5, 60, 5));
+		((DefaultEditor) time.getEditor()).getTextField().setEditable(false);
+		addToPanel(time);
+	}
+	
+	
 	protected void initQuestionType(int rij, ActionListener a) {
 		changeConstraints(1, 1, 0, rij);
 		addToPanel(new JLabel("Type: "));
@@ -287,6 +301,14 @@ public class ExerciseDetailPanel extends JPanel {
 					.getAnswer());
 		} else {
 			setAnswerText(ex.getQuestion().getRightAnswer().getAnswer());
+		}
+	}
+	
+	private String getAnswer(){
+		if (isYesNoType) {
+			return (String)this.yesOrNoAnswer.getSelectedItem();
+		} else {
+			return answer.getText();
 		}
 	}
 
@@ -451,6 +473,10 @@ public class ExerciseDetailPanel extends JPanel {
 		question.setText(text);
 		question.setEditable(false);
 	}
+	
+	public String getQuestion(){
+		return question.getText();
+	}
 
 	public String getNewOption() {
 		return newOption.getText();
@@ -468,6 +494,9 @@ public class ExerciseDetailPanel extends JPanel {
 		return (Integer)this.score.getValue();
 	}
 
+	public int getTimeValue(){
+		return (Integer)this.time.getValue();
+	}
 	public Feedback getSelectedFeedback() {
 		for (Feedback feedback : feedbacks) {
 			if (feedback.getText().equals(feedbackOptions.getSelectedItem()))
@@ -484,5 +513,15 @@ public class ExerciseDetailPanel extends JPanel {
 		}
 		getCommonExercises().add(ex);
 		
+	}
+	
+	public List<Exercise> getCreatedExercises() throws DomainException{
+		List<Exercise> exercises=this.getCommonExercises();
+		
+		if(QuestionType.getQuestionTypeByDescription(getSelectedType()) == QuestionType.YesNoQuestions){
+			Question q=QuestionFactory.create(QuestionType.getQuestionTypeByDescription(getSelectedType()),getQuestion(),getAnswer(),getTimeValue());
+		}
+		
+		return null;
 	}
 }

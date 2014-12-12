@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import domain.enums.QuestionType;
 import view.panels.ExerciseDetailPanel;
 
 public class ExerciseTypeListener implements ActionListener {
@@ -17,7 +18,7 @@ public class ExerciseTypeListener implements ActionListener {
 		
 		String type=this.getExerciseDetailpanel().getSelectedType();
 		
-		if(type.equals("Yes Or No Question")){
+		if(QuestionType.getQuestionTypeByDescription(type) == QuestionType.YesNoQuestions){
 			this.getExerciseDetailpanel().lockForYesNo();
 
 		}

@@ -221,6 +221,9 @@ public class ExerciseDetailPanel extends JPanel {
 		addToInnerPanel(btnRemoveOption);
 		changeConstraints(1, 1, 2, rij);
 		btnSelectCorrectOption = new JButton("Select Correct");
+		btnSelectCorrectOption.setAction(a);
+		btnSelectCorrectOption.setActionCommand("SelectOption");
+		btnSelectCorrectOption.setText("Select Correct");
 		addToInnerPanel(btnSelectCorrectOption);
 	}
 
@@ -282,7 +285,7 @@ public class ExerciseDetailPanel extends JPanel {
 		Exercise ex = commonExercises.get(0);
 		Question q = ex.getQuestion();
 
-		ArrayList<Answer> options = new ArrayList(commonExercises.get(0)
+		ArrayList<Answer> options = new ArrayList<Answer>(commonExercises.get(0)
 				.getQuestion().getOptions());
 		String[] opt = new String[options.size()];
 
@@ -327,7 +330,7 @@ public class ExerciseDetailPanel extends JPanel {
 		return out;
 	}
 
-	private void setAnswerText(String text) {
+	public void setAnswerText(String text) {
 		this.answer.setText(text);
 	}
 
@@ -349,6 +352,7 @@ public class ExerciseDetailPanel extends JPanel {
 		int index = getComboBoxIndex(selectList, current);
 		this.yesOrNoAnswer.setSelectedIndex(index);
 	}
+
 
 	public void setTypeList(String[] selectList, String current) {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
@@ -410,7 +414,17 @@ public class ExerciseDetailPanel extends JPanel {
 		populateCategoryList(getCategorieList());
 		updateFeedback();
 	}
-
+	
+	public void updateforNew(){
+		this.commonExercises=new ArrayList<Exercise>();
+		this.setOptionSelector(this.getOptions());
+		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
+		populateCategoryList(getCategorieList());
+		updateFeedback();
+		setDefaultCategory();
+	}
+	
+	
 	public void updateFeedback() {
 		if(getFeedbacks() != null)
 		populateFeedbackField(getFeedbacks());

@@ -30,6 +30,7 @@ import controller.EvaluationTimerAction;
 import controller.ExerciseCategoryRemoveAction;
 import controller.ExerciseDoneAction;
 import controller.ExerciseEditAction;
+import controller.ExerciseNewAction;
 import controller.ExerciseOverviewAction;
 import controller.ExerciseRemoveAction;
 import controller.ExerciseTypeListener;
@@ -67,12 +68,13 @@ public class CompetentieTesterApp {
 		ExerciseCategoryRemoveAction exerciseCategoryRemoveAction = new ExerciseCategoryRemoveAction(service);
 		AddExercise addExercise=new AddExercise(service);
 		ExerciseDoneAction exerciseDoneAction=new ExerciseDoneAction(service);
+		ExerciseNewAction exerciseNewAction=new ExerciseNewAction(service);
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,addExercise,exerciseDoneAction,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
-		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,null,exerciseRemoveAction);
+		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,exerciseNewAction,exerciseRemoveAction);
 		
 		categorySelectionListener.setExerciseDetailPanel(exerciseDetailPanel);
 		answerActionManager.setExerciseDetailPanel(exerciseDetailPanel);
@@ -96,7 +98,7 @@ public class CompetentieTesterApp {
 		exerciseDoneAction.setExercisedetailPanel(exerciseDetailPanel);
 		exerciseDoneAction.setExerciseOverviewPanel(exererciseOverviewPanel);
 		exerciseDoneAction.setExerOverviewAction(exerciseOverviewAction);
-		
+		exerciseNewAction.setExerciseDetailPanel(exerciseDetailPanel);
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
 		
 
@@ -108,6 +110,7 @@ public class CompetentieTesterApp {
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
+		exerciseNewAction.setView(admin);
 		exerciseDoneAction.setView(admin);
 		addExercise.setView(admin);
 		exerciseOverviewAction.setView(admin);

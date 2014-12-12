@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import view.panels.ExerciseDetailPanel;
 import view.panels.ExerciseOverviewPanel;
+import domain.DomainException;
 import domain.Exercise;
 import domain.FacadeActionManager;
 
@@ -25,12 +26,16 @@ public class ExerciseDoneAction extends AbstractTestAction {
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("SaveNewExercise")){
 			try{
+				if(this.getExercisedetailPanel().getNumberOfExercises()<1){
+					throw new DomainException("Select at least one category!");
+				}
+				
 				ArrayList<Exercise> ex=getExercisedetailPanel().getCreatedExercises();
 				this.getService().updateExercises(ex);
 				updateOverview();
 			}
 			catch (Exception ex){
-				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(super.getView(),getRootCause(ex).getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
 		}
@@ -82,6 +87,13 @@ public class ExerciseDoneAction extends AbstractTestAction {
 	}
 	
 	
+	//http://stackoverflow.com/questions/9017820/exception-getmessage-output-with-class-name
+	public static Throwable getRootCause(Throwable throwable) {
+	    if (throwable.getCause() != null)
+	        return getRootCause(throwable.getCause());
+
+	    return throwable;
+	}
 	
 
 }

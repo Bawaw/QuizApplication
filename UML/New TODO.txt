@@ -1,6 +1,8 @@
+new question maken!!
+
 excel reader + excel gui
 
-new question maken!!
+serializable (all pools)
 
 verslag
 

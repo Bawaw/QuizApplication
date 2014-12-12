@@ -7,7 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -48,7 +50,7 @@ public class ExerciseDetailPanel extends JPanel {
 			feedbackOptions;
 	private CheckBoxList optionSelector;
 	private ArrayList<JCheckBox> optionModel;
-	private List<Exercise> commonExercises;
+	private ArrayList<Exercise> commonExercises;
 	private List<Answer> options;
 	private List<Category> categorieList;
 	private List<Feedback> feedbacks;
@@ -115,7 +117,7 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(new JLabel("Score: "));
 		changeConstraints(1, 2, 1, rij);
 		score = new JSpinner();
-		score.setModel(new SpinnerNumberModel(1, 1, 10, 1));
+		score.setModel(new SpinnerNumberModel(3, 1, 10, 1));
 		((DefaultEditor) score.getEditor()).getTextField().setEditable(false);
 		addToPanel(score);
 
@@ -236,7 +238,7 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(new JLabel("Time: "));
 		changeConstraints(1, 2, 1, rij);
 		time = new JSpinner();
-		time.setModel(new SpinnerNumberModel(5, 5, 60, 5));
+		time.setModel(new SpinnerNumberModel(20, 5, 60, 5));
 		((DefaultEditor) time.getEditor()).getTextField().setEditable(false);
 		addToPanel(time);
 	}
@@ -271,11 +273,11 @@ public class ExerciseDetailPanel extends JPanel {
 		addToPanel(yesOrNoAnswer);
 	}
 
-	public List<Exercise> getCommonExercises() {
+	public ArrayList<Exercise> getCommonExercises() {
 		return commonExercises;
 	}
 
-	public void setCommonExercises(List<Exercise> commonExercises) {
+	public void setCommonExercises(ArrayList<Exercise> commonExercises) {
 		this.commonExercises = commonExercises;
 		Exercise ex = commonExercises.get(0);
 		Question q = ex.getQuestion();
@@ -310,6 +312,19 @@ public class ExerciseDetailPanel extends JPanel {
 		} else {
 			return answer.getText();
 		}
+	}
+	
+	private Set<Answer> getAnswers() throws DomainException{
+		Set<Answer> out=new HashSet<Answer>();
+		
+		
+			for(JCheckBox box:optionModel){
+					if (box.isSelected()){
+						out.add(new Answer(box.getText()));
+				}
+			  }
+			
+		return out;
 	}
 
 	private void setAnswerText(String text) {
@@ -515,13 +530,21 @@ public class ExerciseDetailPanel extends JPanel {
 		
 	}
 	
-	public List<Exercise> getCreatedExercises() throws DomainException{
-		List<Exercise> exercises=this.getCommonExercises();
-		
-		if(QuestionType.getQuestionTypeByDescription(getSelectedType()) == QuestionType.YesNoQuestions){
-			Question q=QuestionFactory.create(QuestionType.getQuestionTypeByDescription(getSelectedType()),getQuestion(),getAnswer(),getTimeValue());
+	public ArrayList<Exercise> getCreatedExercises() throws DomainException{
+		ArrayList<Exercise> exercises=this.getCommonExercises();
+		Question q=null;
+		QuestionType qt=QuestionType.getQuestionTypeByDescription(getSelectedType());
+		if(qt == QuestionType.YesNoQuestions){
+			 q=QuestionFactory.create(qt,getQuestion(),new Answer(getAnswer()),getTimeValue());
+		}
+		else{
+			q=QuestionFactory.create(qt,getQuestion(),new Answer(getAnswer()),getAnswers(),getTimeValue());
+		}
+	
+		for(Exercise ex:exercises){
+			ex.setQuestion(q);
 		}
 		
-		return null;
+		return exercises;
 	}
 }

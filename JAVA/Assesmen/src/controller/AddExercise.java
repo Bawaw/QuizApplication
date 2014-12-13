@@ -36,7 +36,7 @@ public class AddExercise extends AbstractTestAction {
 		try{
 		Exercise ex=new Exercise(this.getSafeDummy(), c, f, score);
 		this.getExerciseDetailPanel().addExerciseLocally(ex);
-		this.getExerciseDetailPanel().updateForEdit();
+		this.getExerciseDetailPanel().update();
 		}
 		catch(Exception ex){
 			JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);

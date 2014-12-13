@@ -25,13 +25,17 @@ public class ExerciseNewAction extends AbstractTestAction {
 		
 		String[] qt=this.getService().getAllQuestionTypes();
 		
+		getExerciseDetailPanel().setNew();
+		
 		getExerciseDetailPanel().setTypeList(this.getService().getAllQuestionTypes(), qt[0]);
 		getExerciseDetailPanel().setCategorieList(this.getService().getCategoryList());
 		getExerciseDetailPanel().setOptionSelector(new ArrayList<Answer>(getService().getAnswerPool().getAnswers()));
+		
 
-		getExerciseDetailPanel().updateforNew();
+		getExerciseDetailPanel().update();
 		setPanelAsContentForView(getExerciseDetailPanel());
 
+		
 	}
 
 

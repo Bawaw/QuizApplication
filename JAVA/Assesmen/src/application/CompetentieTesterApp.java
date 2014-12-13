@@ -70,11 +70,13 @@ public class CompetentieTesterApp {
 		ExerciseDoneAction exerciseDoneAction=new ExerciseDoneAction(service);
 		ExerciseNewAction exerciseNewAction=new ExerciseNewAction(service);
 		
+		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,addExercise,exerciseDoneAction,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
 		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,exerciseNewAction,exerciseRemoveAction);
+		
 		
 		categorySelectionListener.setExerciseDetailPanel(exerciseDetailPanel);
 		answerActionManager.setExerciseDetailPanel(exerciseDetailPanel);

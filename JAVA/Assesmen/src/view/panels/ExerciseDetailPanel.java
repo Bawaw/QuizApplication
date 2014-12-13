@@ -56,12 +56,15 @@ public class ExerciseDetailPanel extends JPanel {
 	private List<Feedback> feedbacks;
 	private JPanel optionPanel;
 	private boolean isYesNoType;
+	private boolean isEdit;
+
 
 	public ExerciseDetailPanel(Action action,
 			CategorySelectionListener categorySelectionListener,
 			Action action3, Action action4, ActionListener action5,
 			Action action6) {
-		// setCommonExercises(commonExercises);
+
+		
 		setLayout(new GridBagLayout());
 		initConstraints();
 		int rij = 0;
@@ -284,7 +287,6 @@ public class ExerciseDetailPanel extends JPanel {
 		this.commonExercises = commonExercises;
 		Exercise ex = commonExercises.get(0);
 		Question q = ex.getQuestion();
-
 		ArrayList<Answer> options = new ArrayList<Answer>(commonExercises.get(0)
 				.getQuestion().getOptions());
 		String[] opt = new String[options.size()];
@@ -388,11 +390,34 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	public void setEdit() {
+		isEdit=true;
 		//duid antwoorden voor deze vraag aan!
 		this.setCheckedOptions();
 		this.typeQuestion.setEnabled(false);
 	}
 
+	public void setNew(){
+		this.commonExercises=new ArrayList<Exercise>();
+		isEdit=false;
+		this.typeQuestion.setEnabled(true);
+		answer.setText("");
+		question.setText("");
+		initYesNoDropdown();
+		question.setEditable(true);
+		
+	}
+	
+	public void initYesNoDropdown(){
+		String[] options=new String[2];
+		options[0]="No";
+		options[1]="Yes";
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(
+				options);
+		this.yesOrNoAnswer.setModel(model);
+		int index = 0;
+		this.yesOrNoAnswer.setSelectedIndex(index);
+	}
+	
 	public String getSelectedType() {
 		return (String) this.typeQuestion.getSelectedItem();
 	}
@@ -405,7 +430,7 @@ public class ExerciseDetailPanel extends JPanel {
 		isYesNoType = true;
 	}
 
-	public void updateForEdit() {
+	private void updateForEdit() {
 		//laadt alle antwoorden in in de lijst
 		this.setOptionSelector(this.getOptions());
 		//duid antwoorden aan die bij de vraag horen
@@ -415,8 +440,7 @@ public class ExerciseDetailPanel extends JPanel {
 		updateFeedback();
 	}
 	
-	public void updateforNew(){
-		this.commonExercises=new ArrayList<Exercise>();
+	private void updateforNew(){
 		this.setOptionSelector(this.getOptions());
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
@@ -424,6 +448,14 @@ public class ExerciseDetailPanel extends JPanel {
 		setDefaultCategory();
 	}
 	
+	public void update(){
+		if(isEdit){
+			updateForEdit();
+		}
+		else{
+			updateforNew();
+		}
+	}
 	
 	public void updateFeedback() {
 		if(getFeedbacks() != null)
@@ -482,6 +514,9 @@ public class ExerciseDetailPanel extends JPanel {
 		  }
 		}
 	}
+	
+
+
 
 	public List<Answer> getOptions() {
 		return options;
@@ -560,5 +595,9 @@ public class ExerciseDetailPanel extends JPanel {
 		}
 		
 		return exercises;
+	}
+
+	public void addOptionLocally(String s) {
+		
 	}
 }

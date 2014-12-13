@@ -13,6 +13,10 @@ import java.util.Set;
 
 import config.ConfigException;
 import config.InitConfigHandler;
+import database.DBDataHandler;
+import database.DBHandler;
+import database.ExcelReader;
+import database.ExerciseDataHandler;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.QuestionType;

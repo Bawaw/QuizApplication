@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import view.panels.ExcelPanel;
 import domain.FacadeActionManager;
@@ -15,7 +16,9 @@ public class ReadExcelController extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("read selected file !!!!");
+		
+		File fileToRead=getExcelPanel().getSelectedFile();
+		System.out.println(fileToRead.getAbsolutePath());
 
 	}
 

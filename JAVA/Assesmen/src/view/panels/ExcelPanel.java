@@ -68,7 +68,7 @@ public class ExcelPanel extends JPanel {
 
 
 	public File getSelectedFile(){
-		return null;
+		return this.fileChooser.getSelectedFile();
 	}
 	
 	

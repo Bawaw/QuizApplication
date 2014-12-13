@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
+import view.MainViewAdmin;
 import view.panels.ExerciseDetailPanel;
 import view.panels.ExerciseTableModel;
 import domain.Answer;
@@ -39,7 +40,8 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 			getExerciseDetailPanel().setEdit();
 			
 			setPanelAsContentForView(getExerciseDetailPanel());
-			
+			this.getView().pack();
+			((MainViewAdmin)this.getView()).center();
 			evt.consume();
 		}
 	}

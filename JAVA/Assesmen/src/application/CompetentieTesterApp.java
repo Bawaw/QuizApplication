@@ -115,6 +115,7 @@ public class CompetentieTesterApp {
 		exerciseNewAction.setView(admin);
 		exerciseDoneAction.setView(admin);
 		addExercise.setView(admin);
+		exerciseTypeListener.setView(admin);
 		exerciseOverviewAction.setView(admin);
 		exerciseEditAction.setView(admin);
 		categoryOverviewAction.setView(admin);

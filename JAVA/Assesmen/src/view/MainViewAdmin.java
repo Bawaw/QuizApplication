@@ -20,8 +20,12 @@ public class MainViewAdmin extends JFrame {
 		this.setTitle("ADMIN");
 		Dimension d=new Dimension(600,400);
 		this.setMinimumSize(d);
-    	this.setLocationRelativeTo(null);
+		center();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void center(){
+    	this.setLocationRelativeTo(null);
 	}
 	
 	private void createMenuBar(List<AbstractTestAction> actions) {

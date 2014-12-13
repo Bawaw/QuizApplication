@@ -1,5 +1,3 @@
-new question maken!!
-
 excel reader + excel gui
 
 serializable (all pools)

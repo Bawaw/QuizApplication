@@ -20,7 +20,6 @@ public class ExerciseNewAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("open new window");
 		//START WITH UNLOCKING GUI AND CLEARING ALL FIELDS THAT NEED TO BE CLEARED!
 		
 		String[] qt=this.getService().getAllQuestionTypes();

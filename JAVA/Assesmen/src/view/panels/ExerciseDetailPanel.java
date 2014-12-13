@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -404,7 +405,7 @@ public class ExerciseDetailPanel extends JPanel {
 		question.setText("");
 		initYesNoDropdown();
 		question.setEditable(true);
-		
+		this.setOptionSelector(this.getOptions());
 	}
 	
 	public void initYesNoDropdown(){
@@ -431,17 +432,14 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	private void updateForEdit() {
-		//laadt alle antwoorden in in de lijst
-		this.setOptionSelector(this.getOptions());
 		//duid antwoorden aan die bij de vraag horen
-		setCheckedOptions();
+		//setCheckedOptions();
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
 		updateFeedback();
 	}
 	
 	private void updateforNew(){
-		this.setOptionSelector(this.getOptions());
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
 		updateFeedback();
@@ -598,6 +596,21 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	public void addOptionLocally(String s) {
-		
+		JCheckBox box = new JCheckBox(s);
+		optionModel.add(box);
+		optionSelector.setListData(optionModel.toArray());
+	}
+	
+	public void removeOptionlocally(String s){
+		Iterator<JCheckBox> it = optionModel.iterator();
+		boolean continu=true;
+		while(it.hasNext() && continu){
+			JCheckBox c=it.next();
+			if(c.getText().equals(s)){
+				it.remove();
+				continu=false;
+			}
+		}
+		optionSelector.setListData(optionModel.toArray());
 	}
 }

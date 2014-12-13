@@ -35,7 +35,7 @@ public class AnswerActionManager extends AbstractTestAction{
 			try {
 				String s=this.getExerciseDetailPanel().getSelectedValueOption();
 				this.getService().removeAnswer(s);
-				this.getExerciseDetailPanel().setOptions(new ArrayList<Answer> (this.getService().getAnswerPool().getAnswers()));
+				this.getExerciseDetailPanel().removeOptionlocally(s);
 				this.getExerciseDetailPanel().update();
 			} catch (DomainException e) {
 				// TODO Auto-generated catch block

@@ -11,6 +11,7 @@ import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
 import view.panels.EvaluationPanel;
+import view.panels.ExcelPanel;
 import view.panels.ExerciseDetailPanel;
 import view.panels.ExerciseOverviewPanel;
 import view.panels.ParticipationPanel;
@@ -27,6 +28,7 @@ import controller.CategorySelectionListener;
 import controller.CheckCategoryNameAction;
 import controller.EvaluationController;
 import controller.EvaluationTimerAction;
+import controller.ExcelOverviewController;
 import controller.ExerciseCategoryRemoveAction;
 import controller.ExerciseDoneAction;
 import controller.ExerciseEditAction;
@@ -37,9 +39,11 @@ import controller.ExerciseTypeListener;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.ParticipationAction;
+import controller.ReadExcelController;
 import controller.SettingsOverviewAction;
 import controller.SettingsSaveAction;
 import controller.SettingsSelectionListener;
+import database.ExcelReader;
 import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
@@ -69,6 +73,8 @@ public class CompetentieTesterApp {
 		AddExercise addExercise=new AddExercise(service);
 		ExerciseDoneAction exerciseDoneAction=new ExerciseDoneAction(service);
 		ExerciseNewAction exerciseNewAction=new ExerciseNewAction(service);
+		ExcelOverviewController excelController=new ExcelOverviewController(service);
+		ReadExcelController readExcelController=new ReadExcelController(service);
 		
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
@@ -76,6 +82,7 @@ public class CompetentieTesterApp {
 		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,addExercise,exerciseDoneAction,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
 		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,exerciseNewAction,exerciseRemoveAction);
+		ExcelPanel excelPanel=new ExcelPanel(readExcelController);
 		
 		
 		categorySelectionListener.setExerciseDetailPanel(exerciseDetailPanel);
@@ -102,22 +109,27 @@ public class CompetentieTesterApp {
 		exerciseDoneAction.setExerOverviewAction(exerciseOverviewAction);
 		exerciseNewAction.setExerciseDetailPanel(exerciseDetailPanel);
 		settingsOverviewAction.setOverviewPanel(settingsOverviewPanel);
+		excelController.setExcelPanel(excelPanel);
+		readExcelController.setExcelPanel(excelPanel);
 		
 
 		List<AbstractTestAction> actions = new ArrayList<AbstractTestAction>();
 		actions.add(categoryOverviewAction);
 		actions.add(exerciseOverviewAction);
+		actions.add(excelController);
 		actions.add(settingsOverviewAction);
 
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
+		readExcelController.setView(admin);
 		exerciseNewAction.setView(admin);
 		exerciseDoneAction.setView(admin);
 		addExercise.setView(admin);
 		exerciseTypeListener.setView(admin);
 		exerciseOverviewAction.setView(admin);
 		exerciseEditAction.setView(admin);
+		excelController.setView(admin);
 		categoryOverviewAction.setView(admin);
 		categoryEditAction.setView(admin);
 		categoryNewAction.setView(admin);

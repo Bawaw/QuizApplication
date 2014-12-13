@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="domain.QuestionSelectionFactory"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
-<fullyQualifiedTypeName name="domain.Participation"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.lang.reflect.Constructor"/>
-<fullyQualifiedTypeName name="java.util.Properties"/>
-<fullyQualifiedTypeName name="domain.strategy.score.ScoreBehaviour"/>
-<fullyQualifiedTypeName name="domain.strategy.score.MaxScoreCalculator"/>
-<fullyQualifiedTypeName name="config.ConfigException"/>
-<fullyQualifiedTypeName name="domain.enums.QuestionType"/>
-<fullyQualifiedTypeName name="domain.TestService"/>
-<fullyQualifiedTypeName name="domain.ExercisePool"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="view.panels.CategoryOverviewPanel"/>
 <fullyQualifiedTypeName name="controller.QuestionOverviewAction"/>
 <fullyQualifiedTypeName name="view.panels.JComboCheckBox"/>
@@ -43,21 +30,34 @@
 <fullyQualifiedTypeName name="java.awt.Checkbox"/>
 <fullyQualifiedTypeName name="javax.swing.ListModel"/>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="controller.FeedBackActionManager"/>
 <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
 <fullyQualifiedTypeName name="domain.Exercise"/>
-<fullyQualifiedTypeName name="domain.Feedback"/>
 <fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
-<fullyQualifiedTypeName name="domain.Category"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="javax.swing.event.DocumentListener"/>
 <fullyQualifiedTypeName name="view.panels.CategoryDetailPanel"/>
 <fullyQualifiedTypeName name="controller.CheckCategoryNameAction"/>
 <fullyQualifiedTypeName name="controller.AbstractTestAction"/>
-<fullyQualifiedTypeName name="domain.FacadeActionManager"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Workbook"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Sheet"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Row"/>
+<fullyQualifiedTypeName name="org.apache.poi.ss.usermodel.Cell"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="domain.DBHandler"/>
+<fullyQualifiedTypeName name="domain.ExcelReader"/>
+<fullyQualifiedTypeName name="controller.DBDataHandler"/>
+<fullyQualifiedTypeName name="domain.ExerciseDataHandler"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="domain.enums.QuestionType"/>
+<fullyQualifiedTypeName name="domain.Feedback"/>
+<fullyQualifiedTypeName name="domain.Category"/>
+<fullyQualifiedTypeName name="domain.FacadeActionManager"/>
 </qualifiedTypeNameHistroy>

@@ -48,7 +48,7 @@ import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
 	public static void main(String[] args) throws ViewException{
-		FacadeActionManager service = FacadeActionManager.getInstance();
+		FacadeActionManager service = new FacadeActionManager();
 		
 		//###########################################ADMINSIDE##############################################
 		

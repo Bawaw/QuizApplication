@@ -8,18 +8,24 @@ import domain.FacadeActionManager;
 
 public class ReadExcelController extends AbstractTestAction {
 	private ExcelPanel excelPanel;
-	
+	private FacadeActionManager service;
 	public ReadExcelController(FacadeActionManager service) {
 		super(service);
-		// TODO Auto-generated constructor stub
+		setService(service);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
 		File fileToRead=getExcelPanel().getSelectedFile();
-		System.out.println(fileToRead.getAbsolutePath());
+		getService().readFromExcel(fileToRead.getAbsoluteFile());
+	}
+	
+	public FacadeActionManager getService() {
+		return service;
+	}
 
+	public void setService(FacadeActionManager service) {
+		this.service = service;
 	}
 
 	public ExcelPanel getExcelPanel() {

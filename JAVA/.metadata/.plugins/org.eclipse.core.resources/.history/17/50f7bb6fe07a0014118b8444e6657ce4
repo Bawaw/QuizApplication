@@ -1,9 +1,0 @@
-package view;
-
-public class CheckBoxList {
-
-	public CheckBoxList() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

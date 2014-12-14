@@ -22,6 +22,7 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 	
 	public void mouseClicked(MouseEvent evt) {
 		if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+			try{
 			JTable table = (JTable) (evt.getSource());
 			ExerciseTableModel tablem = (ExerciseTableModel) (table.getModel());
 			
@@ -43,6 +44,10 @@ public class ExerciseEditAction extends AbstractTestMouseAdapter {
 			this.getView().pack();
 			((MainViewAdmin)this.getView()).center();
 			evt.consume();
+			}
+			catch(Exception ex){
+				ex.printStackTrace();
+			}
 		}
 	}
 	public ExerciseDetailPanel getExerciseDetailPanel() {

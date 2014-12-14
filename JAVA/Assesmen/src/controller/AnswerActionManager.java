@@ -37,7 +37,7 @@ public class AnswerActionManager extends AbstractTestAction{
 				this.getService().removeAnswer(s);
 				this.getExerciseDetailPanel().removeOptionlocally(s);
 				this.getExerciseDetailPanel().update();
-			} catch (DomainException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

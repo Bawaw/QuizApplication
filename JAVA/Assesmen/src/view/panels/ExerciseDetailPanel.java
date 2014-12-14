@@ -288,6 +288,9 @@ public class ExerciseDetailPanel extends JPanel {
 		this.commonExercises = commonExercises;
 		Exercise ex = commonExercises.get(0);
 		Question q = ex.getQuestion();
+
+		
+		this.time.setValue(new Integer(q.getTime()));
 		ArrayList<Answer> options = new ArrayList<Answer>(commonExercises.get(0)
 				.getQuestion().getOptions());
 		String[] opt = new String[options.size()];
@@ -432,21 +435,19 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	private void updateForEdit() {
-		//duid antwoorden aan die bij de vraag horen
-		//setCheckedOptions();
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
 		updateFeedback();
 	}
 	
-	private void updateforNew(){
+	private void updateforNew() throws ViewException{
 		categories.setModel(new ExerciseDetailTableModel(getCommonExercises()));
 		populateCategoryList(getCategorieList());
 		updateFeedback();
 		setDefaultCategory();
 	}
 	
-	public void update(){
+	public void update() throws ViewException{
 		if(isEdit){
 			updateForEdit();
 		}
@@ -460,7 +461,10 @@ public class ExerciseDetailPanel extends JPanel {
 		populateFeedbackField(getFeedbacks());
 	}
 	
-	public void setDefaultCategory(){
+	public void setDefaultCategory() throws ViewException{
+		if (categoryOptions.getItemCount()==0){
+			throw new ViewException("You need at least one category to create a question!");
+		}
 		categoryOptions.setSelectedIndex(0);
 	}
 

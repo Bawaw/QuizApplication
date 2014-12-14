@@ -78,7 +78,7 @@ public class ExerciseDataHandler implements DBDataHandler {
 				getFacadeActionManager().addExercise(e);
 			}
 		} catch (DomainException e) {
-			throw new DBException();
+			throw new DBException(e);
 		}
 	}
 

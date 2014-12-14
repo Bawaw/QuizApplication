@@ -16,7 +16,7 @@ public class ExcelReader implements DBHandler {
 	}
 
 	@Override
-	public void read(File path, DBDataHandler dataHandler) {
+	public void read(File path, DBDataHandler dataHandler) throws DBException {
 		ArrayList<String> retList = new ArrayList<String>();
 		try {
 			FileInputStream file = new FileInputStream(path);
@@ -40,7 +40,7 @@ public class ExcelReader implements DBHandler {
 			}
 			dataHandler.handleData(retList);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new DBException(e);
 		}
 	}
 

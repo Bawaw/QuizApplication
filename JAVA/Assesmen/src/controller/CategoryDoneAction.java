@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import view.ViewException;
 import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
 import domain.Category;
 import domain.FacadeActionManager;
+import domain.Feedback;
 
 public class CategoryDoneAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;
@@ -33,10 +33,12 @@ public class CategoryDoneAction extends AbstractTestAction {
 				if(!getDetailPanel().isEditScreen()){
 					getService().addCategory(c);
 				}
+				
 				List<Category> categories = getService().getCategoryList();
 				getOverviewPanel().setCategories(categories);
 				getOverviewPanel().update();
 				setPanelAsContentForView(getOverviewPanel());	
+				
 			}
 			catch (Exception ex){
 				JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);

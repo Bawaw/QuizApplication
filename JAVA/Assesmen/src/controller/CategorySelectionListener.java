@@ -5,12 +5,14 @@ import java.awt.event.ActionListener;
 
 import domain.Category;
 import domain.FacadeActionManager;
+import view.MainViewAdmin;
 import view.panels.ExerciseDetailPanel;
 import view.panels.SettingsOverviewPanel;
 
 public class CategorySelectionListener implements ActionListener {
 	private ExerciseDetailPanel exerciseDetailPanel;
 	private FacadeActionManager service;
+	private MainViewAdmin view;
 
 	public CategorySelectionListener(FacadeActionManager service) {
 		setService(service);
@@ -25,7 +27,18 @@ public class CategorySelectionListener implements ActionListener {
 			getExerciseDetailPanel().setFeedbacks(
 					selectedCategory.getFeedbacks());
 			getExerciseDetailPanel().updateFeedback();
+			this.getView().pack();
 		}
+	}
+
+	
+	
+	public MainViewAdmin getView() {
+		return view;
+	}
+
+	public void setView(MainViewAdmin view) {
+		this.view = view;
 	}
 
 	public ExerciseDetailPanel getExerciseDetailPanel() {

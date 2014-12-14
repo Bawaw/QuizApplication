@@ -49,7 +49,7 @@ public class Category {
 		return feedbacks;
 	}
 
-	public void setFeedbacks(ArrayList<Feedback> feedbacks) throws DomainException {
+	public void setFeedbacks(ArrayList<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
 	

@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Action;
@@ -19,6 +20,7 @@ import javax.swing.ListModel;
 import javax.swing.event.DocumentListener;
 
 import view.CheckBoxList;
+import view.ViewException;
 import domain.Category;
 import domain.DomainException;
 import domain.Feedback;
@@ -31,6 +33,7 @@ public class CategoryDetailPanel extends JPanel {
 	private JLabel alreadyExist;
 	private JTextField titleField, descriptionField,newFeedbackField; 
 	private CheckBoxList feedbackField;
+	private ArrayList<JCheckBox> feebackModel;
 	private Category category;
 	private List<Category> categories;
 	private List<Feedback> feedbacks;
@@ -180,15 +183,21 @@ public class CategoryDetailPanel extends JPanel {
 		update();
 	}
 	
-	public Category getCreatedCategory() throws DomainException{
-
+	public Category getCreatedCategory() throws DomainException, ViewException{
+			ArrayList<Feedback> selectedFeedbacks = new ArrayList<Feedback>();
+		
+			
 			getCategory().setName(titleField.getText());
 			getCategory().setDescription(descriptionField.getText());
 			ListModel<JCheckBox> boxes = feedbackField.getModel();
-			ArrayList<Feedback> selectedFeedbacks = new ArrayList<Feedback>();
+			
 			for (int i = 0; i < boxes.getSize(); i++) {
 				if(boxes.getElementAt(i).isSelected())
 					selectedFeedbacks.add(getFeedbackByName(boxes.getElementAt(i).getText()));
+			}
+			
+			if(selectedFeedbacks.size()==0){
+				throw new ViewException("You need at least one feedback!");
 			}
 			getCategory().setFeedbacks(selectedFeedbacks);
 				
@@ -221,21 +230,24 @@ public class CategoryDetailPanel extends JPanel {
 		update();
 	}
 
-	
-	private void update() {
+	private void updateFeedback(){
 		if (getFeedbacks() != null) {
-			ArrayList<JCheckBox> feedModel = new ArrayList<JCheckBox>();
+			feebackModel = new ArrayList<JCheckBox>();
 			for (Feedback f : getFeedbacks()) {
 				JCheckBox box = new JCheckBox(f.getText());
-
+				
 				if(getCategory().getFeedbacks().contains(f))
 					box.setSelected(true);
-				feedModel.add(box);
+				feebackModel.add(box);
 					
 			}
-			feedbackField.setListData(feedModel.toArray());;
+			feedbackField.setListData(feebackModel.toArray());;
 		}
-
+	}
+	
+	
+	private void update() {
+		updateFeedback();
 		if (getCategory() != null) {
 			titleField.setText(getCategory().getName());
 			descriptionField.setText(getCategory().getDescription());
@@ -273,4 +285,38 @@ public class CategoryDetailPanel extends JPanel {
 		setEditScreen(false);
 		unlockTitleField();
 	}
+	
+	
+	public void addFeedLocally(String f) throws DomainException {
+		boolean alreadyAdded=false;
+		
+		for(int i=0;i<feebackModel.size() && !alreadyAdded;i++){
+			if(feebackModel.get(i).getText().equals(f)){
+				alreadyAdded=true;
+			}
+		}
+		if(!alreadyAdded){
+			JCheckBox box = new JCheckBox(f);
+			feebackModel.add(box);
+			feedbackField.setListData(feebackModel.toArray());
+			
+			this.getFeedbacks().add(new Feedback(f));
+		
+		}
+	}
+	
+	public void removeFeedbackLocally(String f){
+		Iterator<JCheckBox> it = feebackModel.iterator();
+		boolean continu=true;
+		while(it.hasNext() && continu){
+			JCheckBox c=it.next();
+			if(c.getText().equals(f)){
+				it.remove();
+				continu=false;
+			}
+		}
+		feedbackField.setListData(feebackModel.toArray());
+	}
+	
+	
 }

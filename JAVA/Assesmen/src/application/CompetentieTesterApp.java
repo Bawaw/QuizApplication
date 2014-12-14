@@ -122,6 +122,7 @@ public class CompetentieTesterApp {
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
+		categorySelectionListener.setView(admin);
 		readExcelController.setView(admin);
 		exerciseNewAction.setView(admin);
 		exerciseDoneAction.setView(admin);

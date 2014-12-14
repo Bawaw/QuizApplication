@@ -5,8 +5,3 @@ verslag
 UML genereren
 
 code wat opkuisen
-
-
-
-
-!!!!Mss deze vraag heeft geen feedbak deleten!!! <- werkt en veroorzaakt geen probleme, dus mss toch niet weg doen

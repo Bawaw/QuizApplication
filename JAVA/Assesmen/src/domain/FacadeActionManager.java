@@ -14,6 +14,7 @@ import java.util.Set;
 import config.ConfigException;
 import config.InitConfigHandler;
 import database.DBDataHandler;
+import database.DBException;
 import database.DBHandler;
 import database.ExcelReader;
 import database.ExerciseDataHandler;
@@ -168,7 +169,7 @@ public class FacadeActionManager {
 		*/
 	}
 	
-	public void readFromExcel(File file){
+	public void readFromExcel(File file) throws DBException{
 		dbHandler.read(file, dataHandler);
 	}
 	

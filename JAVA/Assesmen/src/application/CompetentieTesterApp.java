@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import controller.ExerciseRemoveAction;
 import controller.ExerciseTypeListener;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
+import controller.MainWindowCloseListener;
 import controller.ParticipationAction;
 import controller.ReadExcelController;
 import controller.SettingsOverviewAction;
@@ -75,6 +77,7 @@ public class CompetentieTesterApp {
 		ExerciseNewAction exerciseNewAction=new ExerciseNewAction(service);
 		ExcelOverviewController excelController=new ExcelOverviewController(service);
 		ReadExcelController readExcelController=new ReadExcelController(service);
+		MainWindowCloseListener mainWindowCloseListener = new MainWindowCloseListener(service);
 		
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
@@ -119,8 +122,8 @@ public class CompetentieTesterApp {
 		actions.add(excelController);
 		actions.add(settingsOverviewAction);
 
-		MainViewAdmin admin = new MainViewAdmin(actions);
-		MainViewUser user = new MainViewUser();
+		MainViewAdmin admin = new MainViewAdmin(actions,mainWindowCloseListener);
+		MainViewUser user = new MainViewUser(mainWindowCloseListener);
 	
 		readExcelController.setView(admin);
 		exerciseNewAction.setView(admin);

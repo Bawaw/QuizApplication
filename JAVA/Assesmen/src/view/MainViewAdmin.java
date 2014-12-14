@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -15,7 +16,8 @@ public class MainViewAdmin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
 
-	public MainViewAdmin(List<AbstractTestAction> actions){
+	public MainViewAdmin(List<AbstractTestAction> actions, WindowListener windowListener){
+		addWindowListener(windowListener);
 		createMenuBar(actions);
 		this.setTitle("ADMIN");
 		Dimension d=new Dimension(600,400);

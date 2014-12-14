@@ -1,8 +1,11 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
-public abstract class Question {
+public abstract class Question implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String question;
 	private HashSet<Answer> options;
 	private Answer rightAnswer;

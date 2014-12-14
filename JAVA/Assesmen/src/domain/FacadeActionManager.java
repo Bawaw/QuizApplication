@@ -1,6 +1,11 @@
 package domain;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,65 +43,70 @@ public class FacadeActionManager {
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
 	private int timer;
-	
+
 	private DBHandler dbHandler;
 	private DBDataHandler dataHandler;
 
-	public FacadeActionManager() {		
-		LinkedList<Participation> participations=new LinkedList<Participation>();
-		try{
-			HashMap<String,PointCouple> mp=new HashMap<String,PointCouple>();
-			PointCouple pt=new PointCouple();
+	public FacadeActionManager() {
+		
+		LinkedList<Participation> participations = new LinkedList<Participation>();
+		try {
+			HashMap<String, PointCouple> mp = new HashMap<String, PointCouple>();
+			PointCouple pt = new PointCouple();
 			pt.setCorrectQ(3);
 			pt.setTotalQ(5);
 			mp.put("Category 1", pt);
-			pt=new PointCouple();
+			pt = new PointCouple();
 			pt.setCorrectQ(1);
 			pt.setTotalQ(3);
 			mp.put("Category 2", pt);
 			participations.add(new Participation(10, mp));
-		}
-		catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		this.setParticipations(new ParticipationPool(participations));
-		
+
 		setAnswerPool(new AnswerPool());
 		setExercisePool(new ExercisePool());
-		setCategoryPool( new CategoryPool());
+		setCategoryPool(new CategoryPool());
 		setFeedbackPool(new FeedbackPool());
 		setInitConfigHandler(InitConfigHandler.getInstance());
-		
+
 		dataHandler = new ExerciseDataHandler(this);
 		dbHandler = new ExcelReader();
-		/*
-		// temp
+
+		deserialize();
+		
 		try {
 			Category cat1 = new Category();
 			Category cat2 = new Category();
 			Category cat3 = new Category();
 			Category cat4 = new Category();
-			
+
 			Feedback feed = new Feedback("Feedback 1");
 			Feedback feed2 = new Feedback("Feedback 2");
 			Feedback feed3 = new Feedback("Feedback 3");
 			Feedback feed4 = new Feedback("Feedback 4");
 			Feedback feed5 = new Feedback("Feedback 5");
-			
-			Question q1=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 1", new Answer("Yes"), 30);
-			Question q2=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 2", new Answer("Yes"), 30);
-			Question q3=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 3", new Answer("Yes"), 30);
-			Question q4=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 4", new Answer("Yes"), 30);
-			Question q5=QuestionFactory.create(QuestionType.YesNoQuestions, "Question 5", new Answer("Yes"), 30);
-			
-			
-			HashSet<Answer> a=new HashSet<Answer>();
-			Answer a1=new Answer("no");
-			Answer a2=new Answer("nooooo");
-			Answer a3=new Answer("noonononon");
-			Answer a4=new Answer("ba");
-			Answer a5=new Answer("none");
+
+			Question q1 = QuestionFactory.create(QuestionType.YesNoQuestions,
+					"Question 1", new Answer("Yes"), 30);
+			Question q2 = QuestionFactory.create(QuestionType.YesNoQuestions,
+					"Question 2", new Answer("Yes"), 30);
+			Question q3 = QuestionFactory.create(QuestionType.YesNoQuestions,
+					"Question 3", new Answer("Yes"), 30);
+			Question q4 = QuestionFactory.create(QuestionType.YesNoQuestions,
+					"Question 4", new Answer("Yes"), 30);
+			Question q5 = QuestionFactory.create(QuestionType.YesNoQuestions,
+					"Question 5", new Answer("Yes"), 30);
+
+			HashSet<Answer> a = new HashSet<Answer>();
+			Answer a1 = new Answer("no");
+			Answer a2 = new Answer("nooooo");
+			Answer a3 = new Answer("noonononon");
+			Answer a4 = new Answer("ba");
+			Answer a5 = new Answer("none");
 			addAnswer(a1);
 			addAnswer(a2);
 			addAnswer(a3);
@@ -108,26 +118,30 @@ public class FacadeActionManager {
 			a.add(a3);
 			a.add(a4);
 			a.add(a5);
-			Question q6=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
-			Question q7=QuestionFactory.create(QuestionType.MultipleChoiceQuestions, "my multiplechoicequestion is very very very long lalalalala", a4,a, 30);
-			
-			
-			
+			Question q6 = QuestionFactory
+					.create(QuestionType.MultipleChoiceQuestions,
+							"my multiplechoicequestion is very very very long lalalalala",
+							a4, a, 30);
+			Question q7 = QuestionFactory
+					.create(QuestionType.MultipleChoiceQuestions,
+							"my multiplechoicequestion is very very very long lalalalala",
+							a4, a, 30);
+
 			feedbackPool.addFeedback(feed);
 			feedbackPool.addFeedback(feed2);
 			feedbackPool.addFeedback(feed3);
 			feedbackPool.addFeedback(feed4);
 			feedbackPool.addFeedback(feed5);
-			
+
 			cat1.setName("Test Cat 1");
 			cat1.setDescription("Description test 1");
 			cat1.addFeedback(feed);
 			cat1.addFeedback(feed2);
-			
+
 			cat2.setName("Test Cat 2");
 			cat2.addFeedback(feed3);
 			cat2.setDescription("Description test 2");
-			
+
 			cat3.setName("Test Cat 3");
 			cat3.setDescription("Description test 3");
 			cat3.addFeedback(feed);
@@ -135,28 +149,25 @@ public class FacadeActionManager {
 			cat3.addFeedback(feed3);
 			cat3.addFeedback(feed4);
 			cat3.addFeedback(feed5);
-			
+
 			cat4.setName("Test Cat 4");
 			cat4.setDescription("Description test 4");
 			cat4.addFeedback(feed4);
 			cat4.addFeedback(feed5);
-			
-			
+
 			categoryPool.AddCategory(cat1);
 			categoryPool.AddCategory(cat2);
 			categoryPool.AddCategory(cat3);
 			categoryPool.AddCategory(cat4);
-			
-			
-			
-			Exercise e1=new Exercise(q1, cat1, feed, 3);
-			Exercise e2=new Exercise(q2, cat1, feed2, 2);
-			Exercise e3=new Exercise(q3, cat3, feed2, 1);
-			Exercise e4=new Exercise(q4, cat4, feed4, 4);
-			Exercise e5=new Exercise(q5, cat4, feed5, 6);
-			Exercise e6= new Exercise(q6, cat4, feed4, 3);
-			Exercise e7= new Exercise(q7, cat3, feed2, 3);
-			
+
+			Exercise e1 = new Exercise(q1, cat1, feed, 3);
+			Exercise e2 = new Exercise(q2, cat1, feed2, 2);
+			Exercise e3 = new Exercise(q3, cat3, feed2, 1);
+			Exercise e4 = new Exercise(q4, cat4, feed4, 4);
+			Exercise e5 = new Exercise(q5, cat4, feed5, 6);
+			Exercise e6 = new Exercise(q6, cat4, feed4, 3);
+			Exercise e7 = new Exercise(q7, cat3, feed2, 3);
+
 			this.getExercisePool().addExercise(e1);
 			this.getExercisePool().addExercise(e2);
 			this.getExercisePool().addExercise(e3);
@@ -167,58 +178,95 @@ public class FacadeActionManager {
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
-		*/
 	}
 	
-	public void readFromExcel(File file){
+	public void serialize() {
+		System.out.println("method called");
+		try {
+			FileOutputStream fileOut = new FileOutputStream("data.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			for (Answer a : getAnswerPool().getAnswers()) {
+				out.writeObject(a);
+			}
+			out.close();
+			fileOut.close();
+			System.out.printf("Serialized data is saved in /tmp/employee.ser");
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
+
+	public void deserialize() {
+		Answer a = null;
+		try {
+			FileInputStream fileIn = new FileInputStream("data.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			Object obj;
+			while ((obj = in.readObject()) != null) {
+				a = (Answer) obj;
+				addAnswer(a);
+			}
+			in.close();
+			fileIn.close();
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			System.out.println("Employee class not found");
+			c.printStackTrace();
+		}
+	}
+
+	public void readFromExcel(File file) {
 		dbHandler.read(file, dataHandler);
 	}
-	
-	public Question createQuestion(QuestionType qt, Object... args) throws DomainException{
+
+	public Question createQuestion(QuestionType qt, Object... args)
+			throws DomainException {
 		return QuestionFactory.create(qt, args);
 	}
-	
-	public void addAnswer(String s) throws DomainException{
-		Answer a=new Answer(s);
+
+	public void addAnswer(String s) throws DomainException {
+		Answer a = new Answer(s);
 		addAnswer(a);
 	}
-	
-	public void addAnswer(Answer answer){
+
+	public void addAnswer(Answer answer) {
 		this.getAnswerPool().AddAnswer(answer);
 	}
-	
-	
-	public void removeAnswer(String s) throws DomainException{
-		Answer a =new Answer(s);
+
+	public void removeAnswer(String s) throws DomainException {
+		Answer a = new Answer(s);
 		this.getAnswerPool().removeAnswer(a);
 	}
-	
-	public void removeCategory(Category c) throws DomainException{
+
+	public void removeCategory(Category c) throws DomainException {
 		categoryPool.removeCategory(c);
 		exercisePool.removeWithCategory(c);
 	}
-	
-	public void removeFeedback(String s) throws DomainException{
+
+	public void removeFeedback(String s) throws DomainException {
 		Feedback feedback = new Feedback(s);
-		//remove feedback from feedbackpool
+		// remove feedback from feedbackpool
 		getFeedbackPool().removeFeedback(feedback);
-		//unlink feedback from all categories
+		// unlink feedback from all categories
 		getCategoryPool().removeFeedbackFromAllCat(feedback);
-		//remove feedback from all questions
+		// remove feedback from all questions
 		getExercisePool().removeFeedback(feedback);
 	}
-	
-	public ArrayList<Exercise> getExercisesByQuestion(Exercise exercise){
-		return getExercisePool().getExerciseByQuestion(exercise.getQuestion().getQuestion());
+
+	public ArrayList<Exercise> getExercisesByQuestion(Exercise exercise) {
+		return getExercisePool().getExerciseByQuestion(
+				exercise.getQuestion().getQuestion());
 	}
 
 	public void removeExercise(Exercise exercise) {
 
 	}
 
-	public boolean doesCatExist(String name){
+	public boolean doesCatExist(String name) {
 		return this.getCategoryPool().catNameAlreadyInPool(name);
 	}
+
 	public void addCategory(Category category) throws DomainException {
 		categoryPool.AddCategory(category);
 	}
@@ -255,10 +303,10 @@ public class FacadeActionManager {
 		return exercisePool;
 	}
 
-	public Set<Exercise> getUniqueExercises(){
+	public Set<Exercise> getUniqueExercises() {
 		return this.getExercisePool().getUniqueExerciseSet();
 	}
-	
+
 	public InitConfigHandler getInitConfigHandler() {
 		return initConfigHandler;
 	}
@@ -280,26 +328,31 @@ public class FacadeActionManager {
 	}
 
 	public void addFeedback(String text) throws DomainException {
-		feedbackPool.addFeedback(new Feedback(text));	
+		feedbackPool.addFeedback(new Feedback(text));
 	}
 
-	public void addExercise(Exercise e) throws DomainException{
+	public void addExercise(Exercise e) throws DomainException {
 		exercisePool.addExercise(e);
 	}
-	
-	public void createEvaluation() throws DomainException, ConfigException{
-		QuestionSelectionBehaviour questionSelector =QuestionSelectAlgFactory.createStandard(this.getExercisePool());
-		HashSet<Exercise> exerciseList=questionSelector.selectQuestions(this.getInitConfigHandler().getDefaultEvaluationSize());
-		ArrayList<Entry<Exercise, Answer>> exercises=new ArrayList<Entry<Exercise, Answer>>(exerciseList.size());
-		for(Exercise e:exerciseList){
-			Entry<Exercise, Answer> entry=new AbstractMap.SimpleEntry<Exercise, Answer>(e,null);
+
+	public void createEvaluation() throws DomainException, ConfigException {
+		QuestionSelectionBehaviour questionSelector = QuestionSelectAlgFactory
+				.createStandard(this.getExercisePool());
+		HashSet<Exercise> exerciseList = questionSelector.selectQuestions(this
+				.getInitConfigHandler().getDefaultEvaluationSize());
+		ArrayList<Entry<Exercise, Answer>> exercises = new ArrayList<Entry<Exercise, Answer>>(
+				exerciseList.size());
+		for (Exercise e : exerciseList) {
+			Entry<Exercise, Answer> entry = new AbstractMap.SimpleEntry<Exercise, Answer>(
+					e, null);
 			exercises.add(entry);
 		}
-		
-		Evaluation eval=EvaluationFactory.create(exercises, ScoreBehaviourType.valueOf(this.getInitConfigHandler().getScoreBehaviour()));
+
+		Evaluation eval = EvaluationFactory.create(exercises,
+				ScoreBehaviourType.valueOf(this.getInitConfigHandler()
+						.getScoreBehaviour()));
 		this.setActiveEvaluation(eval);
 	}
-
 
 	public QuestionSelectionFactory getQuestionSelectionFactory() {
 		return questionSelectionFactory;
@@ -317,61 +370,64 @@ public class FacadeActionManager {
 	private void setTimer(int timer) {
 		this.timer = timer;
 	}
-	
-	public void addParticipation(EvaluationReport eval) throws DomainException{
-		Participation p = new Participation(eval.getScore(),eval.getCatScore());
+
+	public void addParticipation(EvaluationReport eval) throws DomainException {
+		Participation p = new Participation(eval.getScore(), eval.getCatScore());
 		this.getParticipations().addParticipation(p);
 	}
 
-	public String[] getAllScoreBehaviours(){
+	public String[] getAllScoreBehaviours() {
 		return ScoreBehaviourType.toStringArray();
 	}
-	
-	public String[] getAllQuestionSelectionBehaviours(){
+
+	public String[] getAllQuestionSelectionBehaviours() {
 		return QuestionSelectionBehaviourType.toStringArray();
 	}
-	
-	public String[] getAllEvaluationTypes(){
+
+	public String[] getAllEvaluationTypes() {
 		return EvaluationType.toStringArray();
 	}
-	
-	public int getNumberofQuestionForEvaluation() throws ConfigException{
+
+	public int getNumberofQuestionForEvaluation() throws ConfigException {
 		return initConfigHandler.getDefaultEvaluationSize();
 	}
-	
-	public String currentScoreBehaviourName() throws ConfigException{
+
+	public String currentScoreBehaviourName() throws ConfigException {
 		return initConfigHandler.getScoreBehaviour();
 	}
-	
-	public String currentQuestionSelectionBehaviour() throws ConfigException{
+
+	public String currentQuestionSelectionBehaviour() throws ConfigException {
 		return initConfigHandler.getQuestionSelectionBehaviour();
 	}
-	
-	public String currentEvaluationType() throws ConfigException{
+
+	public String currentEvaluationType() throws ConfigException {
 		return initConfigHandler.getEvaluationType();
 	}
-	
-	public String currentQuestionType() throws ConfigException{
+
+	public String currentQuestionType() throws ConfigException {
 		return initConfigHandler.getQuestionType();
 	}
-	
-	public void saveQuestionType(String questionType) throws ConfigException{
+
+	public void saveQuestionType(String questionType) throws ConfigException {
 		this.initConfigHandler.saveQuestionType(questionType);
 	}
-	
-	public void saveScoreBehaviour(String scoreBehaviour) throws ConfigException{
+
+	public void saveScoreBehaviour(String scoreBehaviour)
+			throws ConfigException {
 		this.initConfigHandler.saveScoreBehaviour(scoreBehaviour);
 	}
-	
-	public void saveSelectionBehaviour(String selectionBehaviour) throws ConfigException{
-		this.initConfigHandler.saveQuestionSelectionBehaviour(selectionBehaviour);
+
+	public void saveSelectionBehaviour(String selectionBehaviour)
+			throws ConfigException {
+		this.initConfigHandler
+				.saveQuestionSelectionBehaviour(selectionBehaviour);
 	}
-	
-	public void saveNumberofQuestions(int number) throws ConfigException{
+
+	public void saveNumberofQuestions(int number) throws ConfigException {
 		this.initConfigHandler.saveDefaultEvaluationSize(number);
 	}
-	
-	public void saveEvaluationType(String evaluation) throws ConfigException{
+
+	public void saveEvaluationType(String evaluation) throws ConfigException {
 		this.initConfigHandler.saveEvaluationType(evaluation);
 	}
 
@@ -390,87 +446,86 @@ public class FacadeActionManager {
 	public String[] getAllQuestionTypes() {
 		return QuestionType.toStringArrayUI();
 	}
-	
-	public String[] getAllQuestionTypesAdmin(){
+
+	public String[] getAllQuestionTypesAdmin() {
 		return QuestionType.toStringArray();
 	}
-
 
 	public void removeSimilarExercises(Exercise clickedExercise) {
 		this.getExercisePool().removeSimilarExercise(clickedExercise);
 	}
-	
-	public int getTotalTimeEvaluation(){
+
+	public int getTotalTimeEvaluation() {
 		return this.getActiveEvaluation().getTimeAllowed();
 	}
-	
-	public int getRemainingTime(){
+
+	public int getRemainingTime() {
 		return this.getActiveEvaluation().getRemainingTime();
 	}
-	
-	public void decreaseRemainingTime(){
+
+	public void decreaseRemainingTime() {
 		this.getActiveEvaluation().decreaseRemainingTime();
 	}
-
 
 	public QuestionFactory getQuestionFactory() {
 		return questionFactory;
 	}
 
-
 	public void setQuestionFactory(QuestionFactory questionFactory) {
 		this.questionFactory = questionFactory;
 	}
-	
-	
-	
-	public void updateExercises(List<Exercise> newExercises) throws DomainException{
-		Question q=null;
-		if(newExercises.size()>0){
-		
-			q=newExercises.get(0).getQuestion();
-		}
-		else{
+
+	public void updateExercises(List<Exercise> newExercises)
+			throws DomainException {
+		Question q = null;
+		if (newExercises.size() > 0) {
+
+			q = newExercises.get(0).getQuestion();
+		} else {
 			System.out.println("trololol");
 		}
-		ArrayList<Exercise> oldExercises=this.getExercisePool().getExerciseByQuestion(q.getQuestion());
-		boolean continu=true;
-		
-		Iterator<Exercise> itOld=oldExercises.iterator();
-		Iterator<Exercise> itNew=newExercises.iterator();
-		
-		while(itOld.hasNext()){
-			Exercise currentEx=itOld.next();
-			
-			while(itNew.hasNext() && continu){
-				Exercise ex=itNew.next();
-				//if we still want the "old" exercise, update the fields and remove it from the oldExercises-array. (at the end the
-				//oldExercises-array will have only exercises that we no longer want.
-				
-				//Remove the similar question also from th newExercise-array. In the end the newExercise array will contain exercises we still
-				//need to add.
-				if(currentEx.uniqueEquals(ex)){
+		ArrayList<Exercise> oldExercises = this.getExercisePool()
+				.getExerciseByQuestion(q.getQuestion());
+		boolean continu = true;
+
+		Iterator<Exercise> itOld = oldExercises.iterator();
+		Iterator<Exercise> itNew = newExercises.iterator();
+
+		while (itOld.hasNext()) {
+			Exercise currentEx = itOld.next();
+
+			while (itNew.hasNext() && continu) {
+				Exercise ex = itNew.next();
+				// if we still want the "old" exercise, update the fields and
+				// remove it from the oldExercises-array. (at the end the
+				// oldExercises-array will have only exercises that we no longer
+				// want.
+
+				// Remove the similar question also from th newExercise-array.
+				// In the end the newExercise array will contain exercises we
+				// still
+				// need to add.
+				if (currentEx.uniqueEquals(ex)) {
 					currentEx.setQuestion(ex.getQuestion());
 					currentEx.setScore(ex.getScore());
 					currentEx.setCategory(ex.getCategory());
 					currentEx.setFeedback(ex.getFeedback());
 					itOld.remove();
 					itNew.remove();
-					continu=false;
+					continu = false;
 				}
 			}
-			continu=true;
+			continu = true;
 		}
-		
-		//remove from exercisePool all exercises still in oldExercises
-		for(Exercise ex:oldExercises){
+
+		// remove from exercisePool all exercises still in oldExercises
+		for (Exercise ex : oldExercises) {
 			this.getExercisePool().removeExercise(ex);
 		}
-		//add to exercisePool all exercises still in newexercise
-		for(Exercise ex:newExercises){
+		// add to exercisePool all exercises still in newexercise
+		for (Exercise ex : newExercises) {
 			this.getExercisePool().addExercise(ex);
 		}
 	}
 
 }
-

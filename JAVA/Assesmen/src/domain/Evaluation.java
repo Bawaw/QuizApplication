@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -8,7 +9,9 @@ import domain.enums.ScoreBehaviourType;
 import domain.factory.ScoreBehaviourFactory;
 import domain.strategy.score.ScoreBehaviour;
 
-public abstract class Evaluation {
+public abstract class Evaluation implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Entry<Exercise, Answer>> exercises;
 	private int indexCurrentExercise;
 	private int timeAllowed;

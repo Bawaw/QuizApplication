@@ -1,6 +1,10 @@
 package domain;
 
-public class Exercise implements Comparable<Exercise> {
+import java.io.Serializable;
+
+public class Exercise implements Comparable<Exercise>, Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int score;
 	private Question question;
 	private Category category;

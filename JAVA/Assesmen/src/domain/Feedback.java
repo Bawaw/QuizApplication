@@ -1,8 +1,10 @@
 package domain;
 
-import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
+import java.io.Serializable;
 
-public class Feedback {
+public class Feedback implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private String text;
 	public static final String STANDARD_FEEDBACK = "no feedback";
 	

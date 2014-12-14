@@ -1,12 +1,14 @@
 package domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Participation {
+public class Participation implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private Date date;
 	private int score;
 	private Map<String, PointCouple> errors;

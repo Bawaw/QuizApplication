@@ -20,7 +20,7 @@ public class ReadExcelController extends AbstractTestAction {
 	public void actionPerformed(ActionEvent arg0) {
 		try{
 		File fileToRead=getExcelPanel().getSelectedFile();
-		getService().read(fileToRead.getAbsoluteFile());
+		getService().readFromExcel(fileToRead.getAbsoluteFile());
 		JOptionPane.showMessageDialog(super.getView(),"Reading done.");
 		}
 		catch(Exception ex){

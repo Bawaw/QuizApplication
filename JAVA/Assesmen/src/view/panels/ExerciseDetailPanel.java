@@ -596,9 +596,18 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	public void addOptionLocally(String s) {
-		JCheckBox box = new JCheckBox(s);
-		optionModel.add(box);
-		optionSelector.setListData(optionModel.toArray());
+		boolean alreadyAdded=false;
+		
+		for(int i=0;i<optionModel.size() && !alreadyAdded;i++){
+			if(optionModel.get(i).getText().equals(s)){
+				alreadyAdded=true;
+			}
+		}
+		if(!alreadyAdded){
+			JCheckBox box = new JCheckBox(s);
+			optionModel.add(box);
+			optionSelector.setListData(optionModel.toArray());
+		}
 	}
 	
 	public void removeOptionlocally(String s){

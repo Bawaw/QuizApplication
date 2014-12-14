@@ -4,7 +4,7 @@ import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
 
 public class Feedback {
 	private String text;
-	public static final String STANDARD_FEEDBACK = "no feedback";
+	public static final String STANDARD_FEEDBACK = "No feedback";
 	
 	public Feedback(String text)throws DomainException{
 		this.setText(text);

@@ -1,13 +1,12 @@
-excel reader
-
 serializable (all pools)
 
 verslag
-
-JUnit
 
 UML genereren
 
 code wat opkuisen
 
-!!!!Mss deze vraag heeft geen feedbak deleten!!! <- werkt precies niet eens
+
+
+
+!!!!Mss deze vraag heeft geen feedbak deleten!!! <- werkt en veroorzaakt geen probleme, dus mss toch niet weg doen

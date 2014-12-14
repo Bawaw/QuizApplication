@@ -25,7 +25,6 @@ import domain.factory.EvaluationFactory;
 import domain.factory.QuestionFactory;
 import domain.factory.QuestionSelectAlgFactory;
 import domain.strategy.questionSelection.QuestionSelectionBehaviour;
-import domain.strategy.questionSelection.QuestionSelectionFactory;
 
 public class FacadeActionManager {
 	private FeedbackPool feedbackPool;
@@ -34,7 +33,6 @@ public class FacadeActionManager {
 	private QuestionFactory questionFactory;
 	private AnswerPool answerPool;
 	private Evaluation activeEvaluation;
-	private QuestionSelectionFactory questionSelectionFactory;
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
 	private int timer;
@@ -301,14 +299,7 @@ public class FacadeActionManager {
 	}
 
 
-	public QuestionSelectionFactory getQuestionSelectionFactory() {
-		return questionSelectionFactory;
-	}
 
-	private void setQuestionSelectionFactory(
-			QuestionSelectionFactory questionSelectionFactory) {
-		this.questionSelectionFactory = questionSelectionFactory;
-	}
 
 	public int getTimer() {
 		return timer;
@@ -425,51 +416,7 @@ public class FacadeActionManager {
 	
 	
 	public void updateExercises(List<Exercise> newExercises) throws DomainException{
-		Question q=null;
-		if(newExercises.size()>0){
-		
-			q=newExercises.get(0).getQuestion();
-		}
-		else{
-			System.out.println("trololol");
-		}
-		ArrayList<Exercise> oldExercises=this.getExercisePool().getExerciseByQuestion(q.getQuestion());
-		boolean continu=true;
-		
-		Iterator<Exercise> itOld=oldExercises.iterator();
-		Iterator<Exercise> itNew=newExercises.iterator();
-		
-		while(itOld.hasNext()){
-			Exercise currentEx=itOld.next();
-			
-			while(itNew.hasNext() && continu){
-				Exercise ex=itNew.next();
-				//if we still want the "old" exercise, update the fields and remove it from the oldExercises-array. (at the end the
-				//oldExercises-array will have only exercises that we no longer want.
-				
-				//Remove the similar question also from th newExercise-array. In the end the newExercise array will contain exercises we still
-				//need to add.
-				if(currentEx.uniqueEquals(ex)){
-					currentEx.setQuestion(ex.getQuestion());
-					currentEx.setScore(ex.getScore());
-					currentEx.setCategory(ex.getCategory());
-					currentEx.setFeedback(ex.getFeedback());
-					itOld.remove();
-					itNew.remove();
-					continu=false;
-				}
-			}
-			continu=true;
-		}
-		
-		//remove from exercisePool all exercises still in oldExercises
-		for(Exercise ex:oldExercises){
-			this.getExercisePool().removeExercise(ex);
-		}
-		//add to exercisePool all exercises still in newexercise
-		for(Exercise ex:newExercises){
-			this.getExercisePool().addExercise(ex);
-		}
+		this.getExercisePool().updateExercise(newExercises);
 	}
 
 }

@@ -16,7 +16,6 @@ public class ExcelOverviewController extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
 		setPanelAsContentForView(getExcelPanel());
 	}
 

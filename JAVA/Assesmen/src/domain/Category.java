@@ -16,6 +16,12 @@ public class Category {
 		this.setDescription(description);
 		this.setName(name);
 	}
+	
+	public Category(String name) throws DomainException{
+		setFeedbacks(new ArrayList<Feedback>());
+		setDescription("No description");
+		setName(name);
+	}
 
 	public String getName() {
 		return name;
@@ -43,12 +49,10 @@ public class Category {
 		return feedbacks;
 	}
 
-	public void setFeedbacks(ArrayList<Feedback> feedbacks) throws DomainException {
-		if(feedbacks.size() ==0){
-			throw new DomainException("Category needs at least 1 feedback!");
-		}
+	public void setFeedbacks(ArrayList<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
 	}
+	
 
 	@Override
 	public boolean equals(Object o) {

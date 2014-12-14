@@ -1,8 +1,8 @@
 package database;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public interface DBHandler {
-	public void read(File file,DataParser dataparser);
-	
+	void read(File path, DBDataHandler dataHandler) throws DBException;
 }

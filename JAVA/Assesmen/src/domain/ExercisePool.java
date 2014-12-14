@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
@@ -11,12 +12,51 @@ public class ExercisePool {
 		exercises = new ArrayList<Exercise>();
 	}
 	
-	//nodig?
-	public void editExercise(Exercise oldExercise,Exercise newExercise) throws DomainException{
-		if(newExercise == null)
-			throw new DomainException("value can not be null");
-		removeExercise(oldExercise);
-		addExercise(newExercise);
+	
+	public void updateExercise(List<Exercise> newExercises) throws DomainException{
+		Question q=null;
+		if(newExercises.size()>0){
+		
+			q=newExercises.get(0).getQuestion();
+		}
+	
+		ArrayList<Exercise> oldExercises=this.getExerciseByQuestion(q.getQuestion());
+		boolean continu=true;
+		
+		Iterator<Exercise> itOld=oldExercises.iterator();
+		Iterator<Exercise> itNew=newExercises.iterator();
+		
+		while(itOld.hasNext()){
+			Exercise currentEx=itOld.next();
+			
+			while(itNew.hasNext() && continu){
+				Exercise ex=itNew.next();
+				//if we still want the "old" exercise, update the fields and remove it from the oldExercises-array. (at the end the
+				//oldExercises-array will have only exercises that we no longer want.
+				
+				//Remove the similar question also from th newExercise-array. In the end the newExercise array will contain exercises we still
+				//need to add.
+				if(currentEx.uniqueEquals(ex)){
+					currentEx.setQuestion(ex.getQuestion());
+					currentEx.setScore(ex.getScore());
+					currentEx.setCategory(ex.getCategory());
+					currentEx.setFeedback(ex.getFeedback());
+					itOld.remove();
+					itNew.remove();
+					continu=false;
+				}
+			}
+			continu=true;
+		}
+		
+		//remove from exercisePool all exercises still in oldExercises
+		for(Exercise ex:oldExercises){
+			this.removeExercise(ex);
+		}
+		//add to exercisePool all exercises still in newexercise
+		for(Exercise ex:newExercises){
+			this.addExercise(ex);
+		}
 	}
 	
 	public void removeWithCategory(Category category) throws DomainException{

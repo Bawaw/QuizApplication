@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.File;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,11 @@ import java.util.Set;
 
 import config.ConfigException;
 import config.InitConfigHandler;
+import database.DBDataHandler;
+import database.DBException;
+import database.DBHandler;
+import database.ExcelReader;
+import database.ExerciseDataHandler;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.QuestionType;
@@ -20,7 +26,6 @@ import domain.factory.EvaluationFactory;
 import domain.factory.QuestionFactory;
 import domain.factory.QuestionSelectAlgFactory;
 import domain.strategy.questionSelection.QuestionSelectionBehaviour;
-import domain.strategy.questionSelection.QuestionSelectionFactory;
 
 public class FacadeActionManager {
 	private FeedbackPool feedbackPool;
@@ -29,21 +34,14 @@ public class FacadeActionManager {
 	private QuestionFactory questionFactory;
 	private AnswerPool answerPool;
 	private Evaluation activeEvaluation;
-	private QuestionSelectionFactory questionSelectionFactory;
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
 	private int timer;
-	private static FacadeActionManager singleton;
 	
-	public static synchronized FacadeActionManager getInstance(){
-		if(singleton == null){
-			singleton=new FacadeActionManager();
-		}
-		return singleton;
-	}
-	
+	private DBHandler dbHandler;
+	private DBDataHandler dataHandler;
 
-	private FacadeActionManager() {
+	public FacadeActionManager() {		
 		LinkedList<Participation> participations=new LinkedList<Participation>();
 		try{
 			HashMap<String,PointCouple> mp=new HashMap<String,PointCouple>();
@@ -63,12 +61,15 @@ public class FacadeActionManager {
 		
 		this.setParticipations(new ParticipationPool(participations));
 		
-		
 		setAnswerPool(new AnswerPool());
 		setExercisePool(new ExercisePool());
 		setCategoryPool( new CategoryPool());
 		setFeedbackPool(new FeedbackPool());
 		setInitConfigHandler(InitConfigHandler.getInstance());
+		
+		dataHandler = new ExerciseDataHandler(this);
+		dbHandler = new ExcelReader();
+		/*
 		// temp
 		try {
 			Category cat1 = new Category();
@@ -165,18 +166,21 @@ public class FacadeActionManager {
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
-
-	// public void edit("vraagstelling",[] cat,[] feedbavk,score[]){
-	// ArrayList<Exercise>
-	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
-	// }
+	
+	public void readFromExcel(File file) throws DBException{
+		dbHandler.read(file, dataHandler);
+	}
+	
+	public Question createQuestion(QuestionType qt, Object... args) throws DomainException{
+		return QuestionFactory.create(qt, args);
+	}
 	
 	public void addAnswer(String s) throws DomainException{
 		Answer a=new Answer(s);
 		addAnswer(a);
 	}
-	
 	
 	public void addAnswer(Answer answer){
 		this.getAnswerPool().AddAnswer(answer);
@@ -278,7 +282,9 @@ public class FacadeActionManager {
 		feedbackPool.addFeedback(new Feedback(text));	
 	}
 
-	
+	public void addExercise(Exercise e) throws DomainException{
+		exercisePool.addExercise(e);
+	}
 	
 	public void createEvaluation() throws DomainException, ConfigException{
 		QuestionSelectionBehaviour questionSelector =QuestionSelectAlgFactory.createStandard(this.getExercisePool());
@@ -294,14 +300,7 @@ public class FacadeActionManager {
 	}
 
 
-	public QuestionSelectionFactory getQuestionSelectionFactory() {
-		return questionSelectionFactory;
-	}
 
-	private void setQuestionSelectionFactory(
-			QuestionSelectionFactory questionSelectionFactory) {
-		this.questionSelectionFactory = questionSelectionFactory;
-	}
 
 	public int getTimer() {
 		return timer;
@@ -418,51 +417,7 @@ public class FacadeActionManager {
 	
 	
 	public void updateExercises(List<Exercise> newExercises) throws DomainException{
-		Question q=null;
-		if(newExercises.size()>0){
-		
-			q=newExercises.get(0).getQuestion();
-		}
-		else{
-			System.out.println("trololol");
-		}
-		ArrayList<Exercise> oldExercises=this.getExercisePool().getExerciseByQuestion(q.getQuestion());
-		boolean continu=true;
-		
-		Iterator<Exercise> itOld=oldExercises.iterator();
-		Iterator<Exercise> itNew=newExercises.iterator();
-		
-		while(itOld.hasNext()){
-			Exercise currentEx=itOld.next();
-			
-			while(itNew.hasNext() && continu){
-				Exercise ex=itNew.next();
-				//if we still want the "old" exercise, update the fields and remove it from the oldExercises-array. (at the end the
-				//oldExercises-array will have only exercises that we no longer want.
-				
-				//Remove the similar question also from th newExercise-array. In the end the newExercise array will contain exercises we still
-				//need to add.
-				if(currentEx.uniqueEquals(ex)){
-					currentEx.setQuestion(ex.getQuestion());
-					currentEx.setScore(ex.getScore());
-					currentEx.setCategory(ex.getCategory());
-					currentEx.setFeedback(ex.getFeedback());
-					itOld.remove();
-					itNew.remove();
-					continu=false;
-				}
-			}
-			continu=true;
-		}
-		
-		//remove from exercisePool all exercises still in oldExercises
-		for(Exercise ex:oldExercises){
-			this.getExercisePool().removeExercise(ex);
-		}
-		//add to exercisePool all exercises still in newexercise
-		for(Exercise ex:newExercises){
-			this.getExercisePool().addExercise(ex);
-		}
+		this.getExercisePool().updateExercise(newExercises);
 	}
 
 }

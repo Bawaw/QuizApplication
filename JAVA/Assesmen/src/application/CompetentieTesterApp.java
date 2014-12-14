@@ -48,7 +48,7 @@ import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
 	public static void main(String[] args) throws ViewException{
-		FacadeActionManager service = FacadeActionManager.getInstance();
+		FacadeActionManager service = new FacadeActionManager();
 		
 		//###########################################ADMINSIDE##############################################
 		
@@ -122,6 +122,7 @@ public class CompetentieTesterApp {
 		MainViewAdmin admin = new MainViewAdmin(actions);
 		MainViewUser user = new MainViewUser();
 	
+		categorySelectionListener.setView(admin);
 		readExcelController.setView(admin);
 		exerciseNewAction.setView(admin);
 		exerciseDoneAction.setView(admin);

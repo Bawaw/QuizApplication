@@ -30,7 +30,7 @@ public class FeedBackActionManager extends AbstractTestAction {
 				String newFeedback = getCategoryDetailPanel().getNewFeedbackFieldText();
 				getService().addFeedback(newFeedback);
 				getCategoryDetailPanel().clearfeedbackFieldText();
-				updateFeedbackList();
+				getCategoryDetailPanel().addFeedLocally(newFeedback);
 			} catch (DomainException e1) {
 				e1.printStackTrace();
 			}
@@ -44,7 +44,7 @@ public class FeedBackActionManager extends AbstractTestAction {
 					if(confirm == JOptionPane.YES_OPTION)
 						{
 					getService().removeFeedback(oldFeedback);
-					updateFeedbackList();
+					getCategoryDetailPanel().removeFeedbackLocally(oldFeedback);
 						}
 			} catch (Exception e1) {
 				e1.printStackTrace();

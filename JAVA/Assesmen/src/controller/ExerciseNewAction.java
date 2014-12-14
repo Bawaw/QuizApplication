@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import view.panels.ExerciseDetailPanel;
 import domain.Answer;
 import domain.FacadeActionManager;
@@ -21,7 +23,7 @@ public class ExerciseNewAction extends AbstractTestAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//START WITH UNLOCKING GUI AND CLEARING ALL FIELDS THAT NEED TO BE CLEARED!
-		
+		try{
 		String[] qt=this.getService().getAllQuestionTypes();
 		
 		getExerciseDetailPanel().setNew();
@@ -33,7 +35,10 @@ public class ExerciseNewAction extends AbstractTestAction {
 
 		getExerciseDetailPanel().update();
 		setPanelAsContentForView(getExerciseDetailPanel());
-
+		}
+		catch(Exception ex){
+			JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 

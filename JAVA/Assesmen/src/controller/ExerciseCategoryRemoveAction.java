@@ -27,12 +27,17 @@ public class ExerciseCategoryRemoveAction extends AbstractTestAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		try{
 		if(this.getExerciseDetailPanel().getNumberOfExercises()>1){
 		getExerciseDetailPanel().removeExerciseLocally(getExerciseDetailPanel().getSelectedExerciseIndex());
 		getExerciseDetailPanel().update();
 		}
 		else{
 			JOptionPane.showMessageDialog(super.getView(),"You need at least one exercise!","Error",JOptionPane.ERROR_MESSAGE);
+		}
+		}
+		catch(Exception ex){
+			JOptionPane.showMessageDialog(super.getView(),ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

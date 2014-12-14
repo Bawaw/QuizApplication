@@ -169,7 +169,7 @@ public class FacadeActionManager {
 		*/
 	}
 	
-	public void readFromExcel(File file) throws DBException{
+	public void read(File file) throws DBException{
 		dbHandler.read(file, dataHandler);
 	}
 	

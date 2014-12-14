@@ -3,10 +3,18 @@ package domain;
 import java.util.HashSet;
 
 public class AnswerPool {
+	private static AnswerPool singleton;
 	private HashSet<Answer> answers;
 
 	public AnswerPool() {
 		answers = new HashSet<Answer>();
+	}
+
+	public synchronized static AnswerPool getInstance() {
+		if (singleton == null) {
+			singleton = new AnswerPool();
+		}
+		return singleton;
 	}
 
 	public HashSet<Answer> getAnswers() {

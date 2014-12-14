@@ -1,6 +1,5 @@
 package domain;
 
-import java.io.File;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +12,6 @@ import java.util.Set;
 
 import config.ConfigException;
 import config.InitConfigHandler;
-import database.DBDataHandler;
-import database.DBHandler;
-import database.ExcelReader;
-import database.ExerciseDataHandler;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.QuestionType;
@@ -38,11 +33,17 @@ public class FacadeActionManager {
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
 	private int timer;
+	private static FacadeActionManager singleton;
 	
-	private DBHandler dbHandler;
-	private DBDataHandler dataHandler;
+	public static synchronized FacadeActionManager getInstance(){
+		if(singleton == null){
+			singleton=new FacadeActionManager();
+		}
+		return singleton;
+	}
+	
 
-	public FacadeActionManager() {		
+	private FacadeActionManager() {
 		LinkedList<Participation> participations=new LinkedList<Participation>();
 		try{
 			HashMap<String,PointCouple> mp=new HashMap<String,PointCouple>();
@@ -62,15 +63,12 @@ public class FacadeActionManager {
 		
 		this.setParticipations(new ParticipationPool(participations));
 		
+		
 		setAnswerPool(new AnswerPool());
 		setExercisePool(new ExercisePool());
 		setCategoryPool( new CategoryPool());
 		setFeedbackPool(new FeedbackPool());
 		setInitConfigHandler(InitConfigHandler.getInstance());
-		
-		dataHandler = new ExerciseDataHandler(this);
-		dbHandler = new ExcelReader();
-		/*
 		// temp
 		try {
 			Category cat1 = new Category();
@@ -167,21 +165,18 @@ public class FacadeActionManager {
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
-		*/
 	}
-	
-	public void readFromExcel(File file){
-		dbHandler.read(file, dataHandler);
-	}
-	
-	public Question createQuestion(QuestionType qt, Object... args) throws DomainException{
-		return QuestionFactory.create(qt, args);
-	}
+
+	// public void edit("vraagstelling",[] cat,[] feedbavk,score[]){
+	// ArrayList<Exercise>
+	// questions=exercisePool.getExerciseByQuestion(vraagstelling);
+	// }
 	
 	public void addAnswer(String s) throws DomainException{
 		Answer a=new Answer(s);
 		addAnswer(a);
 	}
+	
 	
 	public void addAnswer(Answer answer){
 		this.getAnswerPool().AddAnswer(answer);
@@ -283,9 +278,7 @@ public class FacadeActionManager {
 		feedbackPool.addFeedback(new Feedback(text));	
 	}
 
-	public void addExercise(Exercise e) throws DomainException{
-		exercisePool.addExercise(e);
-	}
+	
 	
 	public void createEvaluation() throws DomainException, ConfigException{
 		QuestionSelectionBehaviour questionSelector =QuestionSelectAlgFactory.createStandard(this.getExercisePool());

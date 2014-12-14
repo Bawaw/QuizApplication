@@ -54,7 +54,7 @@ public abstract class Question {
 		if (rightAnswer == null) {
 			throw new DomainException("Answer is null...");
 		}
-		if (!getOptions().contains(rightAnswer)) {
+		if (!this.getOptions().contains(rightAnswer)) {
 			throw new DomainException(
 					"Include the right answer in the options!");
 		}

@@ -2,11 +2,5 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/dom4j-1.6.jar"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/poi-3.9.jar"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/poi-ooxml-3.9.jar"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/poi-ooxml-schemas-3.9.jar"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/localRepository/LaboOOO/JAVA/Assesmen/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

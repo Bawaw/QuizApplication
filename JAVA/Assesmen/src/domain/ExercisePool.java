@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
@@ -154,7 +155,20 @@ public class ExercisePool {
 	}
 	
 	public HashSet<Exercise> getUniqueExerciseSet(){
-		return new HashSet<Exercise>(getExercisePool());
+		HashSet<Exercise> out=new HashSet<Exercise>(getExercisePool());
+		return out;
 	} 
+	
+	public HashSet<Exercise> getUniqueExerciseSetWithCategory(Category c){
+		HashSet<Exercise> output=new HashSet<Exercise>();
+		for(Exercise ex:this.getExercisePool()){
+			if(ex.hasCategory(c)){
+				output.add(ex);
+			}
+		}
+		return output;
+	}
+	
+
 	
 }

@@ -20,7 +20,7 @@ public class AddExercise extends AbstractTestAction {
 	public AddExercise(FacadeActionManager service) {
 		super(service);
 		try{
-			this.setSafeDummy(this.getService().getQuestionFactory().create(QuestionType.YesNoQuestions, "dummy", new Answer("Yes"), 30));
+			this.setSafeDummy(this.getService().createQuestion(QuestionType.YesNoQuestions, "dummy", new Answer("Yes"), 30));
 			}
 			catch(Exception ex){
 				

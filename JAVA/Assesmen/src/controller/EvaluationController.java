@@ -95,6 +95,7 @@ public class EvaluationController extends AbstractTestAction {
 		int totalQ=e.getNumberOfQuestions();
 		
 		this.getEvaluationPanel().update(question,answers,currentAnswer,hasNext,hasPrev,currentIndex,totalQ,category,points);
+		this.getView().pack();
 	}
 	
 	private void setAnswerForCurrentQuestion(){

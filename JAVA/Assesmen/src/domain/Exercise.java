@@ -102,6 +102,11 @@ public class Exercise implements Comparable<Exercise> {
 	
 	@Override
 	public int hashCode(){
-		return score;
+		return this.getQuestion().getQuestion().hashCode();
+	}
+	
+	public boolean hasCategory(Category c){
+		boolean output=this.getCategory().equals(c);
+		return output;
 	}
 }

@@ -69,9 +69,9 @@ public class FacadeActionManager {
 		
 		dataHandler = new ExerciseDataHandler(this);
 		dbHandler = new ExcelReader();
-		/*
+		
 		// temp
-		try {
+		/*try {
 			Category cat1 = new Category();
 			Category cat2 = new Category();
 			Category cat3 = new Category();
@@ -165,8 +165,8 @@ public class FacadeActionManager {
 			this.getExercisePool().addExercise(e7);
 		} catch (DomainException e) {
 			e.printStackTrace();
-		}
-		*/
+		}*/
+		
 	}
 	
 	public void readFromExcel(File file) throws DBException{
@@ -256,6 +256,11 @@ public class FacadeActionManager {
 
 	public Set<Exercise> getUniqueExercises(){
 		return this.getExercisePool().getUniqueExerciseSet();
+	}
+	
+	public Set<Exercise> getUniqueExercisesByCategory(String catName) throws DomainException{
+	Category c=new Category(catName);
+	return this.getExercisePool().getUniqueExerciseSetWithCategory(c);
 	}
 	
 	public InitConfigHandler getInitConfigHandler() {

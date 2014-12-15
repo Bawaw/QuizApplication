@@ -39,7 +39,6 @@ public class SettingsOverviewAction extends AbstractTestAction {
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-			System.out.println(ex.getMessage());
 		}
 		setPanelAsContentForView(getOverviewPanel());
 

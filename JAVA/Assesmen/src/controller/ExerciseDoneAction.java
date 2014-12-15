@@ -48,8 +48,10 @@ public class ExerciseDoneAction extends AbstractTestAction {
 
 	private void updateOverview(){
 		try{
-		this.getExerOverviewAction().actionPerformed(null);	
-		this.getExerciseOverviewPanel().update();
+		//this.getExerOverviewAction().setExercisesBasedOnSelector();
+		//this.getExerOverviewAction().update();
+		//this.setPanelAsContentForView(this.getExerciseOverviewPanel());
+			this.getExerOverviewAction().actionPerformed(null);
 		}
 		catch(Exception ex){
 			JOptionPane.showMessageDialog(super.getView(),"Reloading exercises failed!","Error",JOptionPane.ERROR_MESSAGE);

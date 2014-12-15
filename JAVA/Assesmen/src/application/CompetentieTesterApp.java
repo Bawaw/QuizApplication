@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ import controller.ExerciseNewAction;
 import controller.ExerciseOverviewAction;
 import controller.ExerciseRemoveAction;
 import controller.ExerciseTypeListener;
+import controller.ExerciseoverviewCategoryListener;
 import controller.FeedBackActionManager;
 import controller.JsliderAmountAction;
 import controller.ParticipationAction;
@@ -43,7 +45,7 @@ import controller.ReadExcelController;
 import controller.SettingsOverviewAction;
 import controller.SettingsSaveAction;
 import controller.SettingsSelectionListener;
-import database.ExcelReader;
+import database.DBException;
 import domain.FacadeActionManager;
 
 public class CompetentieTesterApp {
@@ -75,16 +77,18 @@ public class CompetentieTesterApp {
 		ExerciseNewAction exerciseNewAction=new ExerciseNewAction(service);
 		ExcelOverviewController excelController=new ExcelOverviewController(service);
 		ReadExcelController readExcelController=new ReadExcelController(service);
+		ExerciseoverviewCategoryListener exerciseoverviewCategoryListener=new ExerciseoverviewCategoryListener();
 		
 		
 		CategoryOverviewPanel categoryOverviewPanel = new CategoryOverviewPanel(categoryEditAction, categoryNewAction,categoryRemoveAction);
 		CategoryDetailPanel categoryDetailPanel = new CategoryDetailPanel(categoryDoneAction,feedbackActionManager,checkCategoryNameAction);
 		ExerciseDetailPanel exerciseDetailPanel=new ExerciseDetailPanel(exerciseCategoryRemoveAction,categorySelectionListener,addExercise,exerciseDoneAction,exerciseTypeListener,answerActionManager);
 		SettingsOverviewPanel settingsOverviewPanel = new SettingsOverviewPanel(settingsSaveAction,jsliderAmountAction,settingsSelectionListener);
-		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,exerciseNewAction,exerciseRemoveAction);
+		ExerciseOverviewPanel exererciseOverviewPanel=new ExerciseOverviewPanel(exerciseEditAction,exerciseNewAction,exerciseRemoveAction,exerciseoverviewCategoryListener);
 		ExcelPanel excelPanel=new ExcelPanel(readExcelController);
 		
-		
+		exerciseRemoveAction.setExerciseOverviewAction(exerciseOverviewAction);
+		exerciseoverviewCategoryListener.setExerciseOverviewAction(exerciseOverviewAction);
 		categorySelectionListener.setExerciseDetailPanel(exerciseDetailPanel);
 		answerActionManager.setExerciseDetailPanel(exerciseDetailPanel);
 		settingsSelectionListener.setSettingsOverviewPanel(settingsOverviewPanel);

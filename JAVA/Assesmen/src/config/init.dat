@@ -1,7 +1,7 @@
 #Admin Settings
-#Wed Dec 10 11:46:51 CET 2014
+#Mon Dec 15 14:47:17 CET 2014
 questionBehaviour=RandomQuestions
 questionType=YesNoQuestions
-evaluationSize=2
+evaluationSize=3
 evaluationType=ScoreEvaluation
-scoreBehaviour=TimeWeightedScoreCalculator
+scoreBehaviour=MaxScoreCalculator

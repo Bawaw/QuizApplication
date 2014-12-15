@@ -50,6 +50,7 @@ public class ExerciseDataHandler implements DBDataHandler {
 					}
 				}
 				answers.add(correctAnswer);
+				getFacadeActionManager().addAnswer(correctAnswer);
 				question = getFacadeActionManager().createQuestion(qt,
 						questionString, correctAnswer, answers, 30);
 			} else {

@@ -14,6 +14,7 @@ import domain.FacadeActionManager;
 public class ExerciseRemoveAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;
 	private ExerciseOverviewPanel exerciseOverviewPanel;
+	private ExerciseOverviewAction exerciseOverviewAction;
 
 	public ExerciseRemoveAction(FacadeActionManager service) {
 		super(service,"Remove");
@@ -24,18 +25,12 @@ public class ExerciseRemoveAction extends AbstractTestAction {
 	public void actionPerformed(ActionEvent e) {
 		ExerciseTableModel tablem = getExerciseOverviewPanel().getModel();
 		Exercise clickedExercise = (Exercise) tablem.getExerciseAt(getExerciseOverviewPanel().getSelectedRow());
-		try {
+	
 			getService().removeSimilarExercises(clickedExercise);
-			
-			List<Exercise> exercises = new ArrayList<Exercise>(getService().getUniqueExercises());
-			
-			getExerciseOverviewPanel().setExercises(exercises);
-			getExerciseOverviewPanel().update();
-		}
-		 catch (ViewException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			this.getExerciseOverviewAction().setExercisesBasedOnSelector();
+			this.getExerciseOverviewAction().update();
+		
+		
 		
 	}
 
@@ -47,6 +42,16 @@ public class ExerciseRemoveAction extends AbstractTestAction {
 		this.exerciseOverviewPanel = exerciseOverviewPanel;
 	}
 
+	public ExerciseOverviewAction getExerciseOverviewAction() {
+		return exerciseOverviewAction;
+	}
+
+	public void setExerciseOverviewAction(
+			ExerciseOverviewAction exerciseOverviewAction) {
+		this.exerciseOverviewAction = exerciseOverviewAction;
+	}
+
+	
 	
 	
 

@@ -1,7 +1,5 @@
 serializable (all pools)
 
-verslag
-
-UML genereren
+UML genereren (3 UMLs 1 clean + 1 speciale topics + 1 patterns)
 
 code wat opkuisen

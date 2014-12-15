@@ -13,20 +13,24 @@ import domain.Feedback;
 import domain.Question;
 import domain.enums.QuestionType;
 
-public class ExerciseDataHandler implements DBDataHandler {
+public class ExcelExerciseDataHandler implements DBDataHandler {
 	FacadeActionManager facadeActionManager;
 
-	public ExerciseDataHandler(FacadeActionManager facadeActionManager) {
+	public ExcelExerciseDataHandler(FacadeActionManager facadeActionManager) {
 		setFacadeActionManager(facadeActionManager);
 	}
 
 	@Override
-	public void handleData(ArrayList<String> dataLists) throws DBException {
-		ArrayList<Integer> questionStarts = getNextQuestionStarts(dataLists);
+	public void handleData(ArrayList<Object> dataLists) throws DBException {
+		ArrayList<String> dataStringList = new ArrayList<String>();
+		for (Object object : dataLists) {
+			dataStringList.add((String)object);
+		}
+		ArrayList<Integer> questionStarts = getNextQuestionStarts(dataStringList);
 		for (int i = 0; i < questionStarts.size(); i++) {
 			int l = (i + 1 < questionStarts.size()) ? questionStarts.get(i + 1)
-					: dataLists.size();
-			handleSingleExercise(dataLists.subList(questionStarts.get(i), l));
+					: dataStringList.size();
+			handleSingleExercise(dataStringList.subList(questionStarts.get(i), l));
 		}
 	}
 
@@ -96,5 +100,19 @@ public class ExerciseDataHandler implements DBDataHandler {
 
 	public void setFacadeActionManager(FacadeActionManager facadeActionManager) {
 		this.facadeActionManager = facadeActionManager;
+	}
+
+	
+	//for write Implementation
+	@Override
+	public ArrayList<Object> getData(String data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getDataTypes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

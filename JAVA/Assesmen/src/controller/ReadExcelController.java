@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import view.panels.ExcelPanel;
+import database.ExcelReader;
 import domain.FacadeActionManager;
 
 public class ReadExcelController extends AbstractTestAction {
@@ -17,7 +18,9 @@ public class ReadExcelController extends AbstractTestAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		File fileToRead=getExcelPanel().getSelectedFile();
-		getService().readFromExcel(fileToRead.getAbsoluteFile());
+		getService().ExcelReadStrategy(true);
+		getService().read(fileToRead.getAbsolutePath());
+		getService().ExcelReadStrategy(false);
 	}
 	
 	public FacadeActionManager getService() {

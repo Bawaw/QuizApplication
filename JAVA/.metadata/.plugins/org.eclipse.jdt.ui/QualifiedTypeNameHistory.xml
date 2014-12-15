@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="controller.QuestionOverviewAction"/>
-<fullyQualifiedTypeName name="view.panels.JComboCheckBox"/>
-<fullyQualifiedTypeName name="javax.swing.JList"/>
-<fullyQualifiedTypeName name="domain.FeedbackPool"/>
-<fullyQualifiedTypeName name="domain.CategoryPool"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
-<fullyQualifiedTypeName name="java.sql.Array"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter"/>
 <fullyQualifiedTypeName name="controller.SettingsOverviewController"/>
 <fullyQualifiedTypeName name="controller.SettingsOverviewAction"/>
@@ -33,7 +25,6 @@
 <fullyQualifiedTypeName name="java.awt.ScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
-<fullyQualifiedTypeName name="domain.Exercise"/>
 <fullyQualifiedTypeName name="domain.DomainException"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
@@ -53,11 +44,20 @@
 <fullyQualifiedTypeName name="domain.ExcelReader"/>
 <fullyQualifiedTypeName name="controller.DBDataHandler"/>
 <fullyQualifiedTypeName name="domain.ExerciseDataHandler"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="domain.enums.QuestionType"/>
-<fullyQualifiedTypeName name="domain.Feedback"/>
-<fullyQualifiedTypeName name="domain.Category"/>
 <fullyQualifiedTypeName name="domain.FacadeActionManager"/>
+<fullyQualifiedTypeName name="database.DBDataHandler"/>
+<fullyQualifiedTypeName name="domain.enums.EvaluationType"/>
+<fullyQualifiedTypeName name="database.DBWriteHandler"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="domain.Feedback"/>
+<fullyQualifiedTypeName name="domain.Answer"/>
+<fullyQualifiedTypeName name="domain.Category"/>
 <fullyQualifiedTypeName name="database.DBException"/>
+<fullyQualifiedTypeName name="domain.Exercise"/>
+<fullyQualifiedTypeName name="javax.activation.DataHandler"/>
+<fullyQualifiedTypeName name="database.SerializableExerciseDataHandler"/>
+<fullyQualifiedTypeName name="database.ExcelReader"/>
 </qualifiedTypeNameHistroy>

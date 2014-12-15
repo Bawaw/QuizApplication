@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ParticipationPool {
@@ -22,5 +21,4 @@ public class ParticipationPool {
 		if(!participationPool.contains(participation))
 			participationPool.add(0,participation);
 	}
-
 }

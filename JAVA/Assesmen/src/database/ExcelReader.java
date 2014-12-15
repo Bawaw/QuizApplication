@@ -10,14 +10,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelReader implements DBHandler {
+public class ExcelReader implements DBReadHandler {
 
 	public ExcelReader() {
 	}
 
 	@Override
-	public void read(File path, DBDataHandler dataHandler) {
-		ArrayList<String> retList = new ArrayList<String>();
+	public void read(String path, DBDataHandler dataHandler) {
+		ArrayList<Object> retList = new ArrayList<Object>();
 		try {
 			FileInputStream file = new FileInputStream(path);
 			Workbook wb = new XSSFWorkbook(file);

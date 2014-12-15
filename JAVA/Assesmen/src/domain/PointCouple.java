@@ -1,6 +1,8 @@
 package domain;
 
-public class PointCouple {
+import java.io.Serializable;
+
+public class PointCouple implements Serializable {
 	private int totalQ;
 	private int correctQ;
 	

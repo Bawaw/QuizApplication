@@ -16,12 +16,18 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.activation.DataHandler;
+
 import config.ConfigException;
 import config.InitConfigHandler;
 import database.DBDataHandler;
-import database.DBHandler;
+import database.DBReadHandler;
+import database.DBWriteHandler;
 import database.ExcelReader;
-import database.ExerciseDataHandler;
+import database.ExcelExerciseDataHandler;
+import database.SerializableExerciseDataHandler;
+import database.SerializableReader;
+import database.SerializableWriter;
 import domain.enums.EvaluationType;
 import domain.enums.QuestionSelectionBehaviourType;
 import domain.enums.QuestionType;
@@ -44,11 +50,14 @@ public class FacadeActionManager {
 	private InitConfigHandler initConfigHandler;
 	private int timer;
 
-	private DBHandler dbHandler;
+	private DBReadHandler dbReadHandler;
+	private DBWriteHandler dbWriteHandler;
 	private DBDataHandler dataHandler;
 
+	private String dataSource;
+
 	public FacadeActionManager() {
-		
+		setDataSource("data.ser");
 		LinkedList<Participation> participations = new LinkedList<Participation>();
 		try {
 			HashMap<String, PointCouple> mp = new HashMap<String, PointCouple>();
@@ -73,151 +82,127 @@ public class FacadeActionManager {
 		setFeedbackPool(new FeedbackPool());
 		setInitConfigHandler(InitConfigHandler.getInstance());
 
-		dataHandler = new ExerciseDataHandler(this);
-		dbHandler = new ExcelReader();
-
-		deserialize();
-		
-		try {
-			Category cat1 = new Category();
-			Category cat2 = new Category();
-			Category cat3 = new Category();
-			Category cat4 = new Category();
-
-			Feedback feed = new Feedback("Feedback 1");
-			Feedback feed2 = new Feedback("Feedback 2");
-			Feedback feed3 = new Feedback("Feedback 3");
-			Feedback feed4 = new Feedback("Feedback 4");
-			Feedback feed5 = new Feedback("Feedback 5");
-
-			Question q1 = QuestionFactory.create(QuestionType.YesNoQuestions,
-					"Question 1", new Answer("Yes"), 30);
-			Question q2 = QuestionFactory.create(QuestionType.YesNoQuestions,
-					"Question 2", new Answer("Yes"), 30);
-			Question q3 = QuestionFactory.create(QuestionType.YesNoQuestions,
-					"Question 3", new Answer("Yes"), 30);
-			Question q4 = QuestionFactory.create(QuestionType.YesNoQuestions,
-					"Question 4", new Answer("Yes"), 30);
-			Question q5 = QuestionFactory.create(QuestionType.YesNoQuestions,
-					"Question 5", new Answer("Yes"), 30);
-
-			HashSet<Answer> a = new HashSet<Answer>();
-			Answer a1 = new Answer("no");
-			Answer a2 = new Answer("nooooo");
-			Answer a3 = new Answer("noonononon");
-			Answer a4 = new Answer("ba");
-			Answer a5 = new Answer("none");
-			addAnswer(a1);
-			addAnswer(a2);
-			addAnswer(a3);
-			addAnswer(a4);
-			addAnswer(a5);
-			addAnswer(new Answer("nog een answer"));
-			a.add(a1);
-			a.add(a2);
-			a.add(a3);
-			a.add(a4);
-			a.add(a5);
-			Question q6 = QuestionFactory
-					.create(QuestionType.MultipleChoiceQuestions,
-							"my multiplechoicequestion is very very very long lalalalala",
-							a4, a, 30);
-			Question q7 = QuestionFactory
-					.create(QuestionType.MultipleChoiceQuestions,
-							"my multiplechoicequestion is very very very long lalalalala",
-							a4, a, 30);
-
-			feedbackPool.addFeedback(feed);
-			feedbackPool.addFeedback(feed2);
-			feedbackPool.addFeedback(feed3);
-			feedbackPool.addFeedback(feed4);
-			feedbackPool.addFeedback(feed5);
-
-			cat1.setName("Test Cat 1");
-			cat1.setDescription("Description test 1");
-			cat1.addFeedback(feed);
-			cat1.addFeedback(feed2);
-
-			cat2.setName("Test Cat 2");
-			cat2.addFeedback(feed3);
-			cat2.setDescription("Description test 2");
-
-			cat3.setName("Test Cat 3");
-			cat3.setDescription("Description test 3");
-			cat3.addFeedback(feed);
-			cat3.addFeedback(feed2);
-			cat3.addFeedback(feed3);
-			cat3.addFeedback(feed4);
-			cat3.addFeedback(feed5);
-
-			cat4.setName("Test Cat 4");
-			cat4.setDescription("Description test 4");
-			cat4.addFeedback(feed4);
-			cat4.addFeedback(feed5);
-
-			categoryPool.AddCategory(cat1);
-			categoryPool.AddCategory(cat2);
-			categoryPool.AddCategory(cat3);
-			categoryPool.AddCategory(cat4);
-
-			Exercise e1 = new Exercise(q1, cat1, feed, 3);
-			Exercise e2 = new Exercise(q2, cat1, feed2, 2);
-			Exercise e3 = new Exercise(q3, cat3, feed2, 1);
-			Exercise e4 = new Exercise(q4, cat4, feed4, 4);
-			Exercise e5 = new Exercise(q5, cat4, feed5, 6);
-			Exercise e6 = new Exercise(q6, cat4, feed4, 3);
-			Exercise e7 = new Exercise(q7, cat3, feed2, 3);
-
-			this.getExercisePool().addExercise(e1);
-			this.getExercisePool().addExercise(e2);
-			this.getExercisePool().addExercise(e3);
-			this.getExercisePool().addExercise(e4);
-			this.getExercisePool().addExercise(e5);
-			this.getExercisePool().addExercise(e6);
-			this.getExercisePool().addExercise(e7);
-		} catch (DomainException e) {
-			e.printStackTrace();
-		}
+		// dataHandler = new ExcelExerciseDataHandler(this);
+		// dbReadHandler = new ExcelReader();
+		setDBReadStrategy(new SerializableReader());
+		setDBWriteStrategy(new SerializableWriter());
+		setDataHandler(new SerializableExerciseDataHandler(this));
+		read();
+		/*
+		 * try { Category cat1 = new Category(); Category cat2 = new Category();
+		 * Category cat3 = new Category(); Category cat4 = new Category();
+		 * 
+		 * Feedback feed = new Feedback("Feedback 1"); Feedback feed2 = new
+		 * Feedback("Feedback 2"); Feedback feed3 = new Feedback("Feedback 3");
+		 * Feedback feed4 = new Feedback("Feedback 4"); Feedback feed5 = new
+		 * Feedback("Feedback 5");
+		 * 
+		 * Question q1 = QuestionFactory.create(QuestionType.YesNoQuestions,
+		 * "Question 1", new Answer("Yes"), 30); Question q2 =
+		 * QuestionFactory.create(QuestionType.YesNoQuestions, "Question 2", new
+		 * Answer("Yes"), 30); Question q3 =
+		 * QuestionFactory.create(QuestionType.YesNoQuestions, "Question 3", new
+		 * Answer("Yes"), 30); Question q4 =
+		 * QuestionFactory.create(QuestionType.YesNoQuestions, "Question 4", new
+		 * Answer("Yes"), 30); Question q5 =
+		 * QuestionFactory.create(QuestionType.YesNoQuestions, "Question 5", new
+		 * Answer("Yes"), 30);
+		 * 
+		 * HashSet<Answer> a = new HashSet<Answer>(); Answer a1 = new
+		 * Answer("no"); Answer a2 = new Answer("nooooo"); Answer a3 = new
+		 * Answer("noonononon"); Answer a4 = new Answer("ba"); Answer a5 = new
+		 * Answer("none"); addAnswer(a1); addAnswer(a2); addAnswer(a3);
+		 * addAnswer(a4); addAnswer(a5); addAnswer(new
+		 * Answer("nog een answer")); a.add(a1); a.add(a2); a.add(a3);
+		 * a.add(a4); a.add(a5); Question q6 = QuestionFactory
+		 * .create(QuestionType.MultipleChoiceQuestions,
+		 * "my multiplechoicequestion is very very very long lalalalala", a4, a,
+		 * 30); Question q7 = QuestionFactory
+		 * .create(QuestionType.MultipleChoiceQuestions,
+		 * "my multiplechoicequestion is very very very long lalalalala", a4, a,
+		 * 30);
+		 * 
+		 * feedbackPool.addFeedback(feed); feedbackPool.addFeedback(feed2);
+		 * feedbackPool.addFeedback(feed3); feedbackPool.addFeedback(feed4);
+		 * feedbackPool.addFeedback(feed5);
+		 * 
+		 * cat1.setName("Test Cat 1");
+		 * cat1.setDescription("Description test 1"); cat1.addFeedback(feed);
+		 * cat1.addFeedback(feed2);
+		 * 
+		 * cat2.setName("Test Cat 2"); cat2.addFeedback(feed3);
+		 * cat2.setDescription("Description test 2");
+		 * 
+		 * cat3.setName("Test Cat 3");
+		 * cat3.setDescription("Description test 3"); cat3.addFeedback(feed);
+		 * cat3.addFeedback(feed2); cat3.addFeedback(feed3);
+		 * cat3.addFeedback(feed4); cat3.addFeedback(feed5);
+		 * 
+		 * cat4.setName("Test Cat 4");
+		 * cat4.setDescription("Description test 4"); cat4.addFeedback(feed4);
+		 * cat4.addFeedback(feed5);
+		 * 
+		 * categoryPool.AddCategory(cat1); categoryPool.AddCategory(cat2);
+		 * categoryPool.AddCategory(cat3); categoryPool.AddCategory(cat4);
+		 * 
+		 * Exercise e1 = new Exercise(q1, cat1, feed, 3); Exercise e2 = new
+		 * Exercise(q2, cat1, feed2, 2); Exercise e3 = new Exercise(q3, cat3,
+		 * feed2, 1); Exercise e4 = new Exercise(q4, cat4, feed4, 4); Exercise
+		 * e5 = new Exercise(q5, cat4, feed5, 6); Exercise e6 = new Exercise(q6,
+		 * cat4, feed4, 3); Exercise e7 = new Exercise(q7, cat3, feed2, 3);
+		 * 
+		 * this.getExercisePool().addExercise(e1);
+		 * this.getExercisePool().addExercise(e2);
+		 * this.getExercisePool().addExercise(e3);
+		 * this.getExercisePool().addExercise(e4);
+		 * this.getExercisePool().addExercise(e5);
+		 * this.getExercisePool().addExercise(e6);
+		 * this.getExercisePool().addExercise(e7); } catch (DomainException e) {
+		 * e.printStackTrace(); }
+		 */
 	}
-	
-	public void serialize() {
-		System.out.println("method called");
-		try {
-			FileOutputStream fileOut = new FileOutputStream("data.ser");
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			for (Answer a : getAnswerPool().getAnswers()) {
-				out.writeObject(a);
-			}
-			out.close();
-			fileOut.close();
-			System.out.printf("Serialized data is saved in /tmp/employee.ser");
-		} catch (IOException i) {
-			i.printStackTrace();
+
+	public void ExcelReadStrategy(Boolean t) {
+		if (t) {
+			setDBReadStrategy(new ExcelReader());
+			setDataHandler(new ExcelExerciseDataHandler(this));
+		}
+		else{
+			setDBReadStrategy(new SerializableReader());
+			setDataHandler(new SerializableExerciseDataHandler(this));
 		}
 	}
 
-	public void deserialize() {
-		Answer a = null;
-		try {
-			FileInputStream fileIn = new FileInputStream("data.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			Object obj;
-			while ((obj = in.readObject()) != null) {
-				a = (Answer) obj;
-				addAnswer(a);
-			}
-			in.close();
-			fileIn.close();
-		} catch (IOException i) {
-			i.printStackTrace();
-		} catch (ClassNotFoundException c) {
-			System.out.println("Employee class not found");
-			c.printStackTrace();
-		}
+	public void setDBWriteStrategy(DBWriteHandler dbWriteStrategy) {
+		this.dbWriteHandler = dbWriteStrategy;
 	}
 
-	public void readFromExcel(File file) {
-		dbHandler.read(file, dataHandler);
+	public void setDBReadStrategy(DBReadHandler dbReadStrategy) {
+		this.dbReadHandler = dbReadStrategy;
+	}
+
+	public void setDataHandler(DBDataHandler dataHandler) {
+		this.dataHandler = dataHandler;
+	}
+
+	public void write() {
+		dbWriteHandler.write(getDataSource(), this.dataHandler);
+	}
+
+	public void read(String file) {
+		dbReadHandler.read(file, dataHandler);
+	}
+
+	public void read() {
+		dbReadHandler.read(getDataSource(), dataHandler);
+	}
+
+	public String getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(String dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public Question createQuestion(QuestionType qt, Object... args)
@@ -287,7 +272,7 @@ public class FacadeActionManager {
 		return feedbackPool;
 	}
 
-	private void setFeedbackPool(FeedbackPool feedbackPool) {
+	public void setFeedbackPool(FeedbackPool feedbackPool) {
 		this.feedbackPool = feedbackPool;
 	}
 
@@ -295,7 +280,7 @@ public class FacadeActionManager {
 		return participations;
 	}
 
-	private void setParticipations(ParticipationPool participations) {
+	public void setParticipations(ParticipationPool participations) {
 		this.participations = participations;
 	}
 

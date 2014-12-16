@@ -6,10 +6,10 @@ import java.io.File;
 import javax.swing.JOptionPane;
 
 import view.panels.ExcelPanel;
-import database.ExcelReader;
 import domain.FacadeActionManager;
 
 public class ReadExcelController extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
 	private ExcelPanel excelPanel;
 	private FacadeActionManager service;
 	public ReadExcelController(FacadeActionManager service) {
@@ -36,6 +36,7 @@ public class ReadExcelController extends AbstractTestAction {
 
 	}
 	
+	@Override
 	public FacadeActionManager getService() {
 		return service;
 	}

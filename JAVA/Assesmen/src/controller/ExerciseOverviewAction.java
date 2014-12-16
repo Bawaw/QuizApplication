@@ -6,7 +6,6 @@ import java.util.List;
 
 import view.ViewException;
 import view.panels.ExerciseOverviewPanel;
-import domain.Category;
 import domain.DomainException;
 import domain.Exercise;
 import domain.FacadeActionManager;

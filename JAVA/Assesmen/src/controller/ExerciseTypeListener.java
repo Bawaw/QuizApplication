@@ -3,8 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import view.MainViewAdmin;
 import view.panels.ExerciseDetailPanel;
 import domain.enums.QuestionType;

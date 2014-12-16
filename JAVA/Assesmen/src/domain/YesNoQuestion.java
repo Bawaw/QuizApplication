@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class YesNoQuestion extends Question {
+	private static final long serialVersionUID = 1L;
+	
 	private static final String type = "Yes Or No Question";
 	//Hier MOET Integer staan ipv int, als we willen werken met de factory met variabel aantal parameters
 	//(nodig omdat YesNoQuestion een andere constructor heeft als MultipleChoiceQuestions);

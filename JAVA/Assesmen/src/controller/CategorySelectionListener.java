@@ -3,11 +3,10 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import domain.Category;
-import domain.FacadeActionManager;
 import view.MainViewAdmin;
 import view.panels.ExerciseDetailPanel;
-import view.panels.SettingsOverviewPanel;
+import domain.Category;
+import domain.FacadeActionManager;
 
 public class CategorySelectionListener implements ActionListener {
 	private ExerciseDetailPanel exerciseDetailPanel;

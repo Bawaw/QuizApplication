@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import domain.Category;
 import domain.Exercise;
 
 public class ExerciseDetailTableModel extends AbstractTableModel {
-
+	private static final long serialVersionUID = 1L;
 	private List<Exercise> exercises;
 	private String[] columnNames = { "Category", "Feedback","Score" };
 

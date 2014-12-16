@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.Enumeration;
 import java.util.List;
 
-import javafx.event.ActionEvent;
-
 import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.BoxLayout;
@@ -22,9 +20,9 @@ import javax.swing.Timer;
 
 import view.ViewException;
 import domain.Answer;
-import domain.DomainException;
 
 public class EvaluationPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JLabel questionText,index,category,score;
 	private JPanel optionPanel;
 	private JLabel timeLabel;

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class ExercisePool {
 	private ArrayList<Exercise> exercises;
@@ -35,7 +34,7 @@ public class ExercisePool {
 				//if we still want the "old" exercise, update the fields and remove it from the oldExercises-array. (at the end the
 				//oldExercises-array will have only exercises that we no longer want.
 				
-				//Remove the similar question also from th newExercise-array. In the end the newExercise array will contain exercises we still
+				//Remove the similar question also from the newExercise-array. In the end the newExercise array will contain exercises we still
 				//need to add.
 				if(currentEx.uniqueEquals(ex)){
 					currentEx.setQuestion(ex.getQuestion());

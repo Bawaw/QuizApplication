@@ -9,7 +9,8 @@ public class TimeWeightedScoreCalculator extends ScoreBehaviour {
 		super(test);
 		
 	}
-
+	
+	@Override
 	public int bonusPoints(){
 		int output=0;
 		if (super.getTest().getRemainingTime() > (super.getTest().getTimeAllowed()/2)){

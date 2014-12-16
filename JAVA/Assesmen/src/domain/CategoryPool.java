@@ -8,7 +8,7 @@ public class CategoryPool {
 	HashSet<Category> categoryPool;
 
 	public CategoryPool() {
-		categoryPool = new LinkedHashSet<Category>();
+		setCategoryPool(new LinkedHashSet<Category>());
 	}
 
 	public HashSet<Category> getCategoryPool() {

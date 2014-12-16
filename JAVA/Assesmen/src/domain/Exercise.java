@@ -67,12 +67,7 @@ public class Exercise implements Comparable<Exercise>, Serializable{
 		return timesPicked;
 	}
 
-	private void setTimesPicked(int timesPicked) throws DomainException {
-		if (timesPicked < 0) {
-			throw new DomainException("timesPicked has to be positive");
-		}
-		this.timesPicked = timesPicked;
-	}
+
 
 	public void increaseTimesPicked() {
 		timesPicked++;
@@ -94,7 +89,7 @@ public class Exercise implements Comparable<Exercise>, Serializable{
 		return o.getTimesPicked() - this.getTimesPicked();
 	}
 
-	
+	//2 exercises zijn gelijk als vraag en cat gelijk zijn
 	public boolean uniqueEquals(Object o){
 		boolean output = false;
 		if (o instanceof Exercise) {

@@ -1,19 +1,13 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JTable;
 
 import view.ViewException;
-import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
 import view.panels.CategoryTableModel;
 import domain.Category;
 import domain.DomainException;
 import domain.FacadeActionManager;
-import domain.Feedback;
 
 public class CategoryRemoveAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;

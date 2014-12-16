@@ -3,6 +3,7 @@ package domain;
 import java.util.HashSet;
 
 public class MultipleChoiceQuestion extends Question {
+	private static final long serialVersionUID = 1L;
 	private static final String type = "Multiple Choice Question";
 
 	// Hier MOET Integer staan ipv int, als we willen werken met de factory met

@@ -7,7 +7,7 @@ public class FeedbackPool {
 private HashSet<Feedback> feedbacks;
 
 	public FeedbackPool() {
-		feedbacks = new LinkedHashSet<Feedback>();
+		setFeedbacks(new LinkedHashSet<Feedback>());
 	}
 	
 	public HashSet<Feedback> getAllStandardFeedbacks(){

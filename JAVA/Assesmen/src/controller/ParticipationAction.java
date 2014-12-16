@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import view.ViewException;
 import view.panels.ParticipationPanel;
-import domain.Category;
 import domain.FacadeActionManager;
 import domain.Participation;
 

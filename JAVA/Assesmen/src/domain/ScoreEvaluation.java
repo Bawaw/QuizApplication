@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import domain.enums.ScoreBehaviourType;
 
 public class ScoreEvaluation extends Evaluation {
+	private static final long serialVersionUID = 1L;
 
 	public ScoreEvaluation(ArrayList<Entry<Exercise, Answer>> exercises,
 			ScoreBehaviourType scoreBehaviourType) throws DomainException {

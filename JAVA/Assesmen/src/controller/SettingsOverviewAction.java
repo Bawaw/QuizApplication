@@ -2,9 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JPanel;
-
-import view.panels.CategoryOverviewPanel;
 import view.panels.SettingsOverviewPanel;
 import domain.FacadeActionManager;
 

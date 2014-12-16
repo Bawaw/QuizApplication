@@ -134,16 +134,7 @@ public abstract class Evaluation implements Serializable{
 
 	public int calculateScore() {
 
-		return scoreBehaviour.calculateScore(); // lokaal handelen (params mee
-												// geven) of in controller? Ik
-												// zou vanuit de controller
-												// op de test roepen:
-												// checkTest(), en de test
-												// genereert dan een objectje
-												// met daarin
-												// de score, de feedback, het
-												// aantal juiste vragen op
-												// bepaalde category etc.
+		return scoreBehaviour.calculateScore(); 									
 	}
 
 	
@@ -166,7 +157,6 @@ public abstract class Evaluation implements Serializable{
 		this.setEvaluationReport(generateReport());
 	}
 	
-	// generateResult
 
 	
 	@Override

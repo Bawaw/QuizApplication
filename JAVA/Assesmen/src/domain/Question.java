@@ -19,8 +19,6 @@ public abstract class Question implements Serializable{
 		this.setTime(time);
 	}
 
-	// TODO antwoordopties mogen niet dubbel voorkomen, dus mss voor een set
-	// opteren? een set laat ook geen null toe (DONE)
 
 	public String getQuestion() {
 		return question;

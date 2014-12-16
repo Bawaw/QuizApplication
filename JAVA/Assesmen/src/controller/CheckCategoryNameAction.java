@@ -17,19 +17,16 @@ public class CheckCategoryNameAction implements DocumentListener {
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		print();
-
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		print();
-
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		print();
-
 	}
 
 	public CategoryDetailPanel getCategoryDetailPanel() {

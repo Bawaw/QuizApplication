@@ -1,14 +1,13 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 import view.panels.ExerciseDetailPanel;
-import domain.Answer;
-import domain.DomainException;
 import domain.FacadeActionManager;
 
 public class AnswerActionManager extends AbstractTestAction{
+	private static final long serialVersionUID = 1L;
+	
 	private ExerciseDetailPanel exerciseDetailPanel;
 	
 	

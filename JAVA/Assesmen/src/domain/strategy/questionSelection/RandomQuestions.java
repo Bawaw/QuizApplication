@@ -24,7 +24,7 @@ public class RandomQuestions extends ExercisePoolHandler implements
 		for (int i = 0; i < amount; i++){
 			boolean valid = false;
 			for (int j = 0; j < QuestionSelectionBehaviour.iterations && !valid; j++) {
-				int index = r.nextInt(getExercisePool().getExercisePool().size()); //not sure if works since internal clock 
+				int index = r.nextInt(getExercisePool().getExercisePool().size()); 
 				Exercise e = getExercisePool().getExercisePool().get(index);
 				if(!retSet.contains(e)){
 					retSet.add(e);

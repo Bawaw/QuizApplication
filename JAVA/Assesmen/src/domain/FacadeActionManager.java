@@ -37,7 +37,6 @@ public class FacadeActionManager {
 	private Evaluation activeEvaluation;
 	private CategoryPool categoryPool;
 	private InitConfigHandler initConfigHandler;
-	private int timer;
 
 	private DBReadHandler dbReadHandler;
 	private DBWriteHandler dbWriteHandler;
@@ -71,8 +70,6 @@ public class FacadeActionManager {
 		setFeedbackPool(new FeedbackPool());
 		setInitConfigHandler(InitConfigHandler.getInstance());
 
-		// dataHandler = new ExcelExerciseDataHandler(this);
-		// dbReadHandler = new ExcelReader();
 		setDBReadStrategy(new SerializableReader());
 		setDBWriteStrategy(new SerializableWriter());
 		setDataHandler(new SerializableExerciseDataHandler(this));
@@ -330,14 +327,6 @@ public class FacadeActionManager {
 				ScoreBehaviourType.valueOf(this.getInitConfigHandler()
 						.getScoreBehaviour()));
 		this.setActiveEvaluation(eval);
-	}
-
-	public int getTimer() {
-		return timer;
-	}
-
-	private void setTimer(int timer) {
-		this.timer = timer;
 	}
 
 	public void addParticipation(EvaluationReport eval) throws DomainException {

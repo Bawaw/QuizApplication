@@ -17,6 +17,7 @@ import view.ViewException;
 import domain.Participation;
 
 public class ParticipationPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private List<Participation> participations;
 	private JTable table;
@@ -93,7 +94,7 @@ public class ParticipationPanel extends JPanel {
 		this.participations = participations;
 	}
 
-	//http://stackoverflow.com/questions/1783607/auto-adjust-the-height-of-rows-in-a-jtable
+
 		private void updateRowHeights()
 		{
 		    try

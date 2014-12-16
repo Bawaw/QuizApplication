@@ -19,6 +19,7 @@ public class CategoryEditAction extends AbstractTestMouseAdapter {
 		super(service);
 	}
 	
+	@Override
 	public void mouseClicked(MouseEvent evt) {
 		if (evt.getClickCount() == 2 && !evt.isConsumed()) {
 			JTable table = (JTable) (evt.getSource());

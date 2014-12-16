@@ -19,7 +19,7 @@ public class SettingsSaveAction  extends AbstractTestAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//Info uit panel lezen en opslaan in model!!!
+		//Read info from model and save to panel
 		String selectionBehaviour = this.getDetailPanel().getSelectionBehaviour();
 		String scoreBehaviour =this.getDetailPanel().getScoreBehaviour();
 		String evalType=this.getDetailPanel().getEvalType();

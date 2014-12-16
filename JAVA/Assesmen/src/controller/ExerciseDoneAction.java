@@ -12,6 +12,7 @@ import domain.Exercise;
 import domain.FacadeActionManager;
 
 public class ExerciseDoneAction extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
 	private ExerciseDetailPanel exercisedetailPanel;
 	private ExerciseOverviewPanel exerciseOverviewPanel;
 	private ExerciseOverviewAction exerOverviewAction;

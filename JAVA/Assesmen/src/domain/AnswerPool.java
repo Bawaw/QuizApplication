@@ -6,7 +6,7 @@ public class AnswerPool {
 	private HashSet<Answer> answers;
 
 	public AnswerPool() {
-		answers = new HashSet<Answer>();
+		setAnswers(new HashSet<Answer>());
 	}
 
 	public HashSet<Answer> getAnswers() {

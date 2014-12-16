@@ -1,13 +1,9 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 
-import view.ViewException;
 import view.panels.ExerciseOverviewPanel;
 import view.panels.ExerciseTableModel;
-import domain.DomainException;
 import domain.Exercise;
 import domain.FacadeActionManager;
 
@@ -17,28 +13,28 @@ public class ExerciseRemoveAction extends AbstractTestAction {
 	private ExerciseOverviewAction exerciseOverviewAction;
 
 	public ExerciseRemoveAction(FacadeActionManager service) {
-		super(service,"Remove");
-	
+		super(service, "Remove");
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ExerciseTableModel tablem = getExerciseOverviewPanel().getModel();
-		Exercise clickedExercise = (Exercise) tablem.getExerciseAt(getExerciseOverviewPanel().getSelectedRow());
-	
-			getService().removeSimilarExercises(clickedExercise);
-			this.getExerciseOverviewAction().setExercisesBasedOnSelector();
-			this.getExerciseOverviewAction().update();
-		
-		
-		
+		Exercise clickedExercise = (Exercise) tablem
+				.getExerciseAt(getExerciseOverviewPanel().getSelectedRow());
+
+		getService().removeSimilarExercises(clickedExercise);
+		this.getExerciseOverviewAction().setExercisesBasedOnSelector();
+		this.getExerciseOverviewAction().update();
+
 	}
 
 	public ExerciseOverviewPanel getExerciseOverviewPanel() {
 		return exerciseOverviewPanel;
 	}
 
-	public void setExerciseOverviewPanel(ExerciseOverviewPanel exerciseOverviewPanel) {
+	public void setExerciseOverviewPanel(
+			ExerciseOverviewPanel exerciseOverviewPanel) {
 		this.exerciseOverviewPanel = exerciseOverviewPanel;
 	}
 
@@ -50,9 +46,5 @@ public class ExerciseRemoveAction extends AbstractTestAction {
 			ExerciseOverviewAction exerciseOverviewAction) {
 		this.exerciseOverviewAction = exerciseOverviewAction;
 	}
-
-	
-	
-	
 
 }

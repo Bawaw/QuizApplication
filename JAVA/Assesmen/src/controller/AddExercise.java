@@ -14,6 +14,8 @@ import domain.Question;
 import domain.enums.QuestionType;
 
 public class AddExercise extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
+	
 	private Question safeDummy;
 	private ExerciseDetailPanel exerciseDetailPanel;
 	

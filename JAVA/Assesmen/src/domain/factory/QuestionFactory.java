@@ -13,8 +13,8 @@ public class QuestionFactory {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Variabel aantal params, nodig omdat YesNo niet zlefde constrctor heeft
-	// asl MultipleChoice.
+	// Variabel aantal params, nodig omdat YesNo niet zelfde constructor heeft
+	// als MultipleChoice.
 	// Gebruik altijd non-primitive types in QuestionConstructor!!!
 	public static Question create(QuestionType type, Object... args)
 			throws DomainException {

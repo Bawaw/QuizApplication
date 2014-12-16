@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -10,7 +9,7 @@ import domain.DomainException;
 import domain.FacadeActionManager;
 
 public class FeedBackActionManager extends AbstractTestAction {
-
+	private static final long serialVersionUID = 1L;
 	private CategoryDetailPanel categoryDetailPanel;
 
 	public FeedBackActionManager(FacadeActionManager service) {
@@ -53,9 +52,7 @@ public class FeedBackActionManager extends AbstractTestAction {
 		}
 	}
 
-	private void updateFeedbackList(){
-		getCategoryDetailPanel().setFeedbacks(new ArrayList(getService().getFeedbackPool().getAllStandardFeedbacks()));
-	}
+
 	
 	public CategoryDetailPanel getCategoryDetailPanel() {
 		return categoryDetailPanel;

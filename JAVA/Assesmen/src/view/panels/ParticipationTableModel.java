@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import domain.Evaluation;
 import domain.Participation;
 
 public class ParticipationTableModel extends AbstractTableModel {

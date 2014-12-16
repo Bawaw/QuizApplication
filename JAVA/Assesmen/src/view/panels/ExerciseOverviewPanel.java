@@ -23,6 +23,7 @@ import domain.Category;
 import domain.Exercise;
 
 public class ExerciseOverviewPanel extends JPanel{
+	private static final long serialVersionUID = 1L;
 	private JButton btnNew,btnRemove;
 	private JTable table;
 	private JComboBox<String> categories;
@@ -129,7 +130,7 @@ public class ExerciseOverviewPanel extends JPanel{
 		for (int i = 0; i < AllCat.size(); i++) {
 			catNames[i+1] = AllCat.get(i).getName();
 		}
-		DefaultComboBoxModel model = new DefaultComboBoxModel(catNames);
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(catNames);
 		this.categories.setModel(model);
 		this.categories.setSelectedIndex(index);
 	}

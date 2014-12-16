@@ -43,10 +43,9 @@ public class ExerciseDetailPanel extends JPanel {
 	private GridBagConstraints constraints = new GridBagConstraints();
 	private JButton btnSelectCorrectOption, btnRemoveOption, btnAddOption,
 			btnRemoveExercise, btnAddToCategory, btnSave, btnCancel;
-	private JTextField question, answer, scoreDisplay, newOption;
+	private JTextField question, answer, newOption;
 	private JSpinner score,time;
 	private JTable categories;
-	private ExerciseDetailTableModel exerciseDetailTableModel;
 	private JComboBox<String> typeQuestion, yesOrNoAnswer, categoryOptions,
 			feedbackOptions;
 	private CheckBoxList optionSelector;
@@ -85,12 +84,10 @@ public class ExerciseDetailPanel extends JPanel {
 		setInitScore(++rij);
 		addCatButton(++rij, action3);
 		cancelAndSaveButtons(++rij, action4);
-		// hideNewElements();
 	}
 
 	public void setExerciseDetailTableModel(
 			ExerciseDetailTableModel exerciseDetailTableModel) {
-		this.exerciseDetailTableModel = exerciseDetailTableModel;
 	}
 
 	private void cancelAndSaveButtons(int rij, Action a) {
@@ -487,7 +484,7 @@ public class ExerciseDetailPanel extends JPanel {
 	}
 
 	
-	//SetOptionSelector opgesplitst in setOptionSelector en setCheckedOptions, zodat deze herbruikbaar is bij niet-edit
+	
 	public void setOptionSelector(List<Answer> options) {  
 		if (options != null) {
 			optionModel = new ArrayList<JCheckBox>();

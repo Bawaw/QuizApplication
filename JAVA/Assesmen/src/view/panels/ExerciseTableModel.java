@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import domain.Exercise;
 
 public class ExerciseTableModel extends AbstractTableModel {
-
+	private static final long serialVersionUID = 1L;
 	private List<Exercise> exercises;
 	private String[] columnNames = { "QuestionType", "Question" };
 

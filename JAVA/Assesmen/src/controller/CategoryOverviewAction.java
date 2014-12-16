@@ -7,7 +7,6 @@ import view.ViewException;
 import view.panels.CategoryOverviewPanel;
 import domain.Category;
 import domain.FacadeActionManager;
-import domain.FacadeActionManager;
 
 public class CategoryOverviewAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;

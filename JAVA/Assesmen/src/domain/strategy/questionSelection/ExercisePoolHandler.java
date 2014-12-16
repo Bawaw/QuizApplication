@@ -5,7 +5,7 @@ import domain.ExercisePool;
 
 public class ExercisePoolHandler {
 	private ExercisePool exercisePool;
-	//nut?
+	
 	public ExercisePoolHandler(ExercisePool exercisePool) throws DomainException{
 		this.setExercisePool(exercisePool);
 	}

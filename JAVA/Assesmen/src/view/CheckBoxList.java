@@ -11,6 +11,8 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+
+
 public class CheckBoxList extends JList
 {
    protected static Border noFocusBorder =

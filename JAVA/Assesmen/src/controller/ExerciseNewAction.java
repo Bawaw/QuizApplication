@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import view.panels.ExerciseDetailPanel;
 import domain.Answer;
 import domain.FacadeActionManager;
-import domain.enums.QuestionType;
 
 public class ExerciseNewAction extends AbstractTestAction {
+	private static final long serialVersionUID = 1L;
 	private ExerciseDetailPanel exerciseDetailPanel;
 	
 	

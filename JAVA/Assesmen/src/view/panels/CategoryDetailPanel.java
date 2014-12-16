@@ -189,6 +189,7 @@ public class CategoryDetailPanel extends JPanel {
 			
 			getCategory().setName(titleField.getText());
 			getCategory().setDescription(descriptionField.getText());
+			@SuppressWarnings("unchecked")
 			ListModel<JCheckBox> boxes = feedbackField.getModel();
 			
 			for (int i = 0; i < boxes.getSize(); i++) {
@@ -212,9 +213,6 @@ public class CategoryDetailPanel extends JPanel {
 		return null;
 	}
 
-	private List<Category> getCategories() {
-		return categories;
-	}
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;

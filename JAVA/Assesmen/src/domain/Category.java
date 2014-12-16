@@ -86,6 +86,7 @@ public class Category implements Serializable{
 		return this.getFeedbacks().contains(feedback);
 	}
 	
+	@Override
 	public String toString(){
 		return this.getName() + " " +this.getDescription() +" "+this.getFeedbacks();
 	}

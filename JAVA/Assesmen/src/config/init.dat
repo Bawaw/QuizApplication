@@ -1,0 +1,7 @@
+#Admin Settings
+#Mon Dec 15 14:47:17 CET 2014
+questionBehaviour=RandomQuestions
+questionType=YesNoQuestions
+evaluationSize=3
+evaluationType=ScoreEvaluation
+scoreBehaviour=MaxScoreCalculator

@@ -23,7 +23,6 @@ public class AnswerActionManager extends AbstractTestAction{
 			String s=this.getExerciseDetailPanel().getNewOption();
 			this.getService().addAnswer(s);
 			this.getExerciseDetailPanel().addOptionLocally(s);
-			//this.getExerciseDetailPanel().setOptions(new ArrayList<Answer> (this.getService().getAnswerPool().getAnswers()));
 			this.getExerciseDetailPanel().update();
 			}
 			catch(Exception e){
@@ -38,7 +37,6 @@ public class AnswerActionManager extends AbstractTestAction{
 				this.getExerciseDetailPanel().removeOptionlocally(s);
 				this.getExerciseDetailPanel().update();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

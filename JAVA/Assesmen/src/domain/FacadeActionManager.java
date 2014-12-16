@@ -4,7 +4,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -34,7 +33,6 @@ public class FacadeActionManager {
 	private FeedbackPool feedbackPool;
 	private ParticipationPool participations;
 	private ExercisePool exercisePool;
-	private QuestionFactory questionFactory;
 	private AnswerPool answerPool;
 	private Evaluation activeEvaluation;
 	private CategoryPool categoryPool;
@@ -438,13 +436,6 @@ public class FacadeActionManager {
 		this.getActiveEvaluation().decreaseRemainingTime();
 	}
 
-	public QuestionFactory getQuestionFactory() {
-		return questionFactory;
-	}
-
-	public void setQuestionFactory(QuestionFactory questionFactory) {
-		this.questionFactory = questionFactory;
-	}
 	
 	public void updateExercises(List<Exercise> newExercises) throws DomainException{
 		this.getExercisePool().updateExercise(newExercises);

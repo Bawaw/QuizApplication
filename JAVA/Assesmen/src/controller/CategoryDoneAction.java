@@ -9,7 +9,6 @@ import view.panels.CategoryDetailPanel;
 import view.panels.CategoryOverviewPanel;
 import domain.Category;
 import domain.FacadeActionManager;
-import domain.Feedback;
 
 public class CategoryDoneAction extends AbstractTestAction {
 	private static final long serialVersionUID = 1L;
